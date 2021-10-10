@@ -3,6 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -10,7 +14,11 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatButtonModule,
+    MatCardModule,
+    MatToolbarModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
