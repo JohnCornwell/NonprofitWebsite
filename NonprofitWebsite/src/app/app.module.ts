@@ -8,11 +8,18 @@ import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
+import { EventAddComponent } from './event-add/event-add.component';
+import { EventGetComponent } from './event-get/event-get.component';
+import { EventEditComponent } from './event-edit/event-edit.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    EventAddComponent,
+    EventGetComponent,
+    EventEditComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +27,8 @@ import { LoginComponent } from './login/login.component';
     MatButtonModule,
     MatCardModule,
     MatToolbarModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
