@@ -9,8 +9,14 @@ import { EventEditComponent } from './event-edit/event-edit.component';
 import { EventGetComponent } from './event-get/event-get.component';
 
 const routes: Routes = [ 
-  { path: 'home', component: HomeComponent},
-  { path: 'login', component: LoginComponent},
+  { 
+    path: 'home', 
+    component: HomeComponent
+  },
+  { 
+    path: 'login', 
+    component: LoginComponent
+  },
   {
     path: 'event/create',
     component: EventAddComponent
@@ -23,7 +29,10 @@ const routes: Routes = [
     path: 'events',
     component: EventGetComponent
   },
-  { path: '**', component: PageNotFoundComponent}
+  { 
+    path: '**', 
+    component: PageNotFoundComponent
+  }
 ];
 
 @NgModule({
