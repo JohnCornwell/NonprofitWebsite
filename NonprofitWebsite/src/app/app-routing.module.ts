@@ -11,11 +11,7 @@ import { EventGetComponent } from './event-get/event-get.component';
 const routes: Routes = [ 
   { path: 'home', component: HomeComponent},
   { path: 'login', component: LoginComponent},
-  { path: '**', component: PageNotFoundComponent}
-  {
-    path: 'login',
-    component: LoginComponent
-  },
+  { path: '**', component: PageNotFoundComponent},
   {
     path: 'event/create',
     component: EventAddComponent

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {
+  FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl,
+  ValidationErrors
+} from '@angular/forms';
 
 @Component({
   selector: 'app-event-add',
@@ -14,14 +17,39 @@ export class EventAddComponent implements OnInit {
     this.createForm();
   }
 
-createForm(){
-  this.form = this.fb.group({
-    ProductName: ['', Validators.required],
-    ProductDescription: ['', Validators.required],
-    ProductPrice: ['', Validators.required]
-  });
+  //this assumes that this page is displayed after selecting an
+  //existing organization on the organization display page
+  createForm(){
+    this.form = this.fb.group({
+    EventName: ['', Validators.required],
+    MorningNeed: [0, Validators.required, Validators.min(0)],
+    AfternoonNeed: [0, Validators.required, Validators.min(0)],
+    NightNeed: [0, Validators.required, Validators.min(0)],
+    date: [new Date(), Validators.required, forbiddenDateValidator],
+    Start: [new Date(0, 0, 0, 0, 0, 0), Validators.required],
+    End: [new Date(0, 0, 0, 0, 0, 0), Validators.required],
+    Description: ['']
+    }, {validators: invalidTimeValidator});
 }
-
+  
   ngOnInit(): void {
   }
+}
+
+/* dates are invalid if they are within 24 hours of now */
+export function forbiddenDateValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    return control.value.getTime() < tomorrow.getTime() ? { forbiddenDate: { value: control.value } } : null;
+  };
+}
+
+/* End cannot be before Start */
+export function invalidTimeValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const start = new Date(); control.get('Start');
+    const end = new Date(); control.get('End');
+    return start.getTime() >= end.getTime() ? { forbiddenDate: { value: end } } : null;
+  };
 }
