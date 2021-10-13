@@ -11,28 +11,26 @@ import {
 })
 export class EventAddComponent implements OnInit {
 
-  form!: FormGroup;
+  form: FormGroup;
 
   constructor(private fb: FormBuilder) {
-    this.createForm();
+    this.form = this.fb.group({
+      EventName: ['', Validators.required],
+      MorningNeed: [0, [Validators.required, Validators.min(0)]],
+      AfternoonNeed: [0, [Validators.required, Validators.min(0)]],
+      NightNeed: [0, [Validators.required, Validators.min(0)]],
+      date: [new Date(), [Validators.required, forbiddenDateValidator]],
+      Start: [new Date(0, 0, 0, 0, 0, 0), Validators.required],
+      End: [new Date(0, 0, 0, 0, 0, 0), Validators.required],
+      Description: ['']
+    }, { validators: invalidTimeValidator });
   }
 
-  //this assumes that this page is displayed after selecting an
-  //existing organization on the organization display page
-  createForm(){
-    this.form = this.fb.group({
-    EventName: ['', Validators.required],
-    MorningNeed: [0, Validators.required, Validators.min(0)],
-    AfternoonNeed: [0, Validators.required, Validators.min(0)],
-    NightNeed: [0, Validators.required, Validators.min(0)],
-    date: [new Date(), Validators.required, forbiddenDateValidator],
-    Start: [new Date(0, 0, 0, 0, 0, 0), Validators.required],
-    End: [new Date(0, 0, 0, 0, 0, 0), Validators.required],
-    Description: ['']
-    }, {validators: invalidTimeValidator});
-}
   
   ngOnInit(): void {
+  }
+
+  onSubmit() {
   }
 }
 
