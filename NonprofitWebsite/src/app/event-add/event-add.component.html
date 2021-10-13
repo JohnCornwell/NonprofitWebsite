@@ -1,19 +1,14 @@
 <div class="card">
   <div class="card-body">
     <form [formGroup]="form" novalidate>
-      <!Section for Event Name>
+      <!-- Section for Event Name -->
       <div class="form-group">
         <label class="col-md-4">Event Name</label>
         <input type="text" class="form-control"
                formControlName="EventName"
                #EventName />
       </div>
-      <div *ngIf="form.controls['EventName'].invalid && (form.controls['EventName'].dirty || form.controls['EventName'].touched)" class="alert alert-danger">
-        <div *ngIf="form.controls.EventName.errors?.required">
-          Event Name is required.
-        </div>
-      </div>
-      <!Section for Morning Need>
+      <!-- Section for Morning Need -->
       <div class="form-group">
         <label class="col-md-4">Morning Need</label>
         <input type="number" class="form-control"
@@ -28,7 +23,7 @@
           Morning need cannot be negative.
         </div>
       </div>
-      <!Section for Afternoon Need>
+      <!-- Section for Afternoon Need -->
       <div class="form-group">
         <label class="col-md-4">Afternoon Need</label>
         <input type="number" class="form-control"
@@ -43,7 +38,7 @@
           Afternoon need cannot be negative.
         </div>
       </div>
-      <!Section for Night Need>
+      <!-- Section for Night Need -->
       <div class="form-group">
         <label class="col-md-4">Night Need</label>
         <input type="number" class="form-control"
@@ -58,7 +53,7 @@
           Night need cannot be negative.
         </div>
       </div>
-      <!Section for Date>
+      <!-- Section for Date -->
       <div class="form-group">
         <label class="col-md-4">Event Date</label>
         <input type="date" class="form-control"
@@ -73,7 +68,7 @@
           Events must be scheduled at leasst 24 hours in advance.
         </div>
       </div>
-      <!Section for Start>
+      <!-- Section for Start -->
       <div class="form-group">
         <label class="col-md-4">Start Time</label>
         <input type="time" class="form-control"
@@ -88,7 +83,7 @@
           Start time must be before end time.
         </div>
       </div>
-      <!Section for End>
+      <!-- Section for End -->
       <div class="form-group">
         <label class="col-md-4">End Time</label>
         <input type="time" class="form-control"
@@ -103,7 +98,7 @@
           End time must be after start time.
         </div>
       </div>
-      <!Section for submit button>
+      <!-- Section for submit button -->
       <div class="form-group">
         <button type="submit" class="btn btn-primary"
                 [disabled]="form.pristine || form.invalid">
