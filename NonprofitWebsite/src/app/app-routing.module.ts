@@ -10,7 +10,11 @@ import { EventGetComponent } from './event-get/event-get.component';
 
 const routes: Routes = [ 
   { 
-    path: 'home', 
+    path: '', 
+    component: EventAddComponent
+  },
+  {
+    path: 'home',
     component: HomeComponent
   },
   { 

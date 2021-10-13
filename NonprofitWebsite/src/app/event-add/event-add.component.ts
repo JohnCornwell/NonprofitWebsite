@@ -48,8 +48,10 @@ export function forbiddenDateValidator(): ValidatorFn {
 /* End cannot be before Start */
 export function invalidTimeValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
-    const start = new Date(); control.get('Start');
-    const end = new Date(); control.get('End');
-    return start.getTime() >= end.getTime() ? { forbiddenDate: { value: end } } : null;
+    const sTime = control.get('Start')?.value;
+    const eTime = control.get('End')?.value;
+    const start = new Date(sTime);
+    const end = new Date(eTime);
+    return start.getTime() > end.getTime() ? { forbiddenTime: {value: true} } : null;
   };
 }
