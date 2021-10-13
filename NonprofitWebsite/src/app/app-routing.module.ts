@@ -11,7 +11,7 @@ import { EventGetComponent } from './event-get/event-get.component';
 const routes: Routes = [ 
   { 
     path: '', 
-    component: EventAddComponent
+    component: HomeComponent
   },
   {
     path: 'home',

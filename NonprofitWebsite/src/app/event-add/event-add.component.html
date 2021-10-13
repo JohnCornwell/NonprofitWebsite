@@ -3,10 +3,15 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <!-- Section for Event Name -->
       <div class="form-group">
-        <label class="col-md-4">Event Name</label>
+        <label class="col-md-10">Event Name</label>
         <input type="text" class="form-control"
                formControlName="EventName"
                #EventName />
+      </div>
+      <div *ngIf="form.controls['EventName'].invalid && (form.controls['EventName'].dirty || form.controls['EventName'].touched)" class="alert alert-danger">
+        <div *ngIf="form.controls.EventName.errors?.required">
+          Event name is required.
+        </div>
       </div>
       <!-- Section for Morning Need -->
       <div class="form-group">
