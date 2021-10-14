@@ -25,8 +25,7 @@ import { EventsService } from './events.service';
     EventGetComponent,
     EventEditComponent,
     OrganizationAddComponent,
-    OrganizationGetComponent,
-    HttpClientModule
+    OrganizationGetComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +34,8 @@ import { EventsService } from './events.service';
     MatCardModule,
     MatToolbarModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [EventsService],
   bootstrap: [AppComponent]

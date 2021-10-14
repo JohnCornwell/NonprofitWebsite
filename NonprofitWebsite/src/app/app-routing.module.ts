@@ -7,6 +7,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { EventAddComponent } from './event-add/event-add.component';
 import { EventEditComponent } from './event-edit/event-edit.component';
 import { EventGetComponent } from './event-get/event-get.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [ 
   { 
@@ -40,7 +41,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes), ReactiveFormsModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
