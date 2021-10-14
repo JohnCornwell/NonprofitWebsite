@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +8,48 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  form: FormGroup;
 
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      Username: ['', Validators.required],
+      Password: ['', Validators.required]
+    });
+  }
+
+  
   ngOnInit(): void {
+  }
+
+  onSubmit() {
+    this.tryLogin(this.form.get('Username')?.value, this.form.get('Password')?.value);
+  }
+
+  tryLogin(Username: String, Password: String) {
+    // if user is in database
+    if(true)
+    {
+      var bcrypt = require('bcryptjs');
+      // TODO
+      // get salt from database
+      var salt = bcrypt.genSaltSync(10);//this is placeholder
+      if(bcrypt.compareSync(Password, salt))
+      { // password was right
+        this.login();
+      }
+      else
+      { // password was incorrrect
+        
+      }
+    }
+    else
+    {
+
+    }
+  }
+
+  login(){
+
   }
 
 }
