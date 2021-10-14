@@ -1,15 +1,17 @@
+
+
 <div class="card">
   <div class="card-body">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <!-- Section for Event Name -->
       <div class="form-group">
-        <label class="col-md-10">Event Name</label>
-        <input type="text" class="form-control"
+        <label class="col-md-4">Event Name</label>
+        <input type="text" class="form-control form-control-lg"
                formControlName="EventName"
                #EventName />
       </div>
       <div *ngIf="form.controls['EventName'].invalid && (form.controls['EventName'].dirty || form.controls['EventName'].touched)" class="alert alert-danger">
-        <div *ngIf="form.controls.EventName.errors?.required">
+        <div class ="invalid-feedback" *ngIf="form.controls.EventName.errors?.required">
           Event name is required.
         </div>
       </div>
@@ -21,10 +23,10 @@
                #MorningNeed />
       </div>
       <div *ngIf="form.controls['MorningNeed'].invalid && (form.controls['MorningNeed'].dirty || form.controls['MorningNeed'].touched)" class="alert alert-danger">
-        <div *ngIf="form.controls.MorningNeed.errors?.required">
+        <div class ="invalid-feedback" *ngIf="form.controls.MorningNeed.errors?.required">
           Morning need is required.
         </div>
-        <div *ngIf="form.controls.MorningNeed.errors?.min">
+        <div class ="invalid-feedback" *ngIf="form.controls.MorningNeed.errors?.min">
           Morning need cannot be negative.
         </div>
       </div>
@@ -36,10 +38,10 @@
                #AfternoonNeed />
       </div>
       <div *ngIf="form.controls['AfternoonNeed'].invalid && (form.controls['AfternoonNeed'].dirty || form.controls['AfternoonNeed'].touched)" class="alert alert-danger">
-        <div *ngIf="form.controls.AfternoonNeed.errors?.required">
+        <div class ="invalid-feedback" *ngIf="form.controls.AfternoonNeed.errors?.required">
           Afternoon need is required.
         </div>
-        <div *ngIf="form.controls.AfternoonNeed.errors?.min">
+        <div class ="invalid-feedback" *ngIf="form.controls.AfternoonNeed.errors?.min">
           Afternoon need cannot be negative.
         </div>
       </div>
@@ -51,10 +53,10 @@
                #NightNeed />
       </div>
       <div *ngIf="form.controls['NightNeed'].invalid && (form.controls['NightNeed'].dirty || form.controls['NightNeed'].touched)" class="alert alert-danger">
-        <div *ngIf="form.controls.NightNeed.errors?.required">
+        <div class ="invalid-feedback" *ngIf="form.controls.NightNeed.errors?.required">
           Night need is required.
         </div>
-        <div *ngIf="form.controls.NightNeed.errors?.min">
+        <div class ="invalid-feedback" *ngIf="form.controls.NightNeed.errors?.min">
           Night need cannot be negative.
         </div>
       </div>
@@ -66,11 +68,11 @@
                #date />
       </div>
       <div *ngIf="form.controls['date'].invalid && (form.controls['date'].dirty || form.controls['date'].touched)" class="alert alert-danger">
-        <div *ngIf="form.controls.date.errors?.required">
+        <div class ="invalid-feedback" *ngIf="form.controls.date.errors?.required">
           Event date is required.
         </div>
-        <div *ngIf="form.controls.date.errors?.forbiddenDateValidator">
-          Events must be scheduled at leasst 24 hours in advance.
+        <div class="invalid-feedback" *ngIf="form.controls.date.errors?.forbiddenDate">
+          Events cannot be scheduled for today or in the past.
         </div>
       </div>
       <!-- Section for Start -->
@@ -81,10 +83,10 @@
                #Start />
       </div>
       <div *ngIf="form.controls['Start'].invalid && (form.controls['Start'].dirty || form.controls['Start'].touched)" class="alert alert-danger">
-        <div *ngIf="form.controls.Start.errors?.required">
+        <div class ="invalid-feedback" *ngIf="form.controls.Start.errors?.required">
           Start time is required.
         </div>
-        <div *ngIf="form.errors?.invalidTimeValidator">
+        <div class ="invalid-feedback" *ngIf="form.errors?.invalidTime">
           Start time must be before end time.
         </div>
       </div>
@@ -96,10 +98,10 @@
                #End />
       </div>
       <div *ngIf="form.controls['End'].invalid && (form.controls['End'].dirty || form.controls['End'].touched)" class="alert alert-danger">
-        <div *ngIf="form.controls.End.errors?.required">
+        <div class ="invalid-feedback" *ngIf="form.controls.End.errors?.required">
           End time is required.
         </div>
-        <div *ngIf="form.errors?.invalidTimeValidator">
+        <div class ="invalid-feedback" *ngIf="form.errors?.invalidTimeValidator">
           End time must be after start time.
         </div>
       </div>

@@ -12,6 +12,10 @@ import { EventAddComponent } from './event-add/event-add.component';
 import { EventGetComponent } from './event-get/event-get.component';
 import { EventEditComponent } from './event-edit/event-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { OrganizationAddComponent } from './organization-add/organization-add.component';
+import { OrganizationGetComponent } from './organization-get/organization-get.component';
+import { HttpClientModule } from '@angular/common/http';
+import { EventsService } from './events.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +23,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoginComponent,
     EventAddComponent,
     EventGetComponent,
-    EventEditComponent
+    EventEditComponent,
+    OrganizationAddComponent,
+    OrganizationGetComponent,
+    HttpClientModule
   ],
   imports: [
     BrowserModule,
@@ -30,7 +37,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [EventsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

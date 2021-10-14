@@ -19,11 +19,11 @@ export class EventAddComponent implements OnInit {
       MorningNeed: [0, [Validators.required, Validators.min(0)]],
       AfternoonNeed: [0, [Validators.required, Validators.min(0)]],
       NightNeed: [0, [Validators.required, Validators.min(0)]],
-      date: [new Date(), [Validators.required, forbiddenDateValidator]],
+      date: [new Date(), [Validators.required, forbiddenDateValidator()]],
       Start: [new Date(0, 0, 0, 0, 0, 0), Validators.required],
       End: [new Date(0, 0, 0, 0, 0, 0), Validators.required],
       Description: ['']
-    }, { validators: invalidTimeValidator });
+    }, { validators: invalidTimeValidator() });
   }
 
   
@@ -34,22 +34,22 @@ export class EventAddComponent implements OnInit {
   }
 }
 
-/* dates are invalid if they are within 24 hours of now */
-export function forbiddenDateValidator(): ValidatorFn {
+/* Date must be tomorrow or in the future */
+function forbiddenDateValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    return control.value.getTime() < tomorrow.getTime() ? { forbiddenDate: { value: control.value } } : null;
+    const input: Date = new Date(control.value);
+    return input.getTime() < tomorrow.getTime() ? { forbiddenDate: { value: control.value } } : null;
   };
 }
 
 /* End cannot be before Start */
-export function invalidTimeValidator(): ValidatorFn {
+function invalidTimeValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const sTime = control.get('Start')?.value;
     const eTime = control.get('End')?.value;
     const start = new Date(sTime);
     const end = new Date(eTime);
-    return start.getTime() > end.getTime() ? { forbiddenTime: {value: true} } : null;
+    return start.getTime() > end.getTime() ? { forbiddenTime: { value: true } } : null;
   };
 }
