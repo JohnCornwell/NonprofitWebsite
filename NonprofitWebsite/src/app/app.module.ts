@@ -16,6 +16,7 @@ import { OrganizationAddComponent } from './organization-add/organization-add.co
 import { OrganizationGetComponent } from './organization-get/organization-get.component';
 import { HttpClientModule } from '@angular/common/http';
 import { EventsService } from './events.service';
+import { AccountCreateComponent } from './account-create/account-create.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { EventsService } from './events.service';
     EventGetComponent,
     EventEditComponent,
     OrganizationAddComponent,
-    OrganizationGetComponent
+    OrganizationGetComponent,
+    AccountCreateComponent
   ],
   imports: [
     BrowserModule,
