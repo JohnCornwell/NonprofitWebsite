@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
@@ -7,7 +8,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { EventAddComponent } from './event-add/event-add.component';
 import { EventEditComponent } from './event-edit/event-edit.component';
 import { EventGetComponent } from './event-get/event-get.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { AccountCreateComponent } from './account-create/account-create.component';
 
 const routes: Routes = [ 
   { 
@@ -25,6 +26,10 @@ const routes: Routes = [
   {
     path: 'event/create',
     component: EventAddComponent
+  },
+  {
+    path: 'account/create',
+    component: AccountCreateComponent
   },
   {
     path: 'edit/:id',
