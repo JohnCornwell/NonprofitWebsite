@@ -9,6 +9,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   form: FormGroup;
+  isExistingUser: boolean = false;
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
@@ -27,29 +28,37 @@ export class LoginComponent implements OnInit {
 
   tryLogin(Username: String, Password: String) {
     // if user is in database
-    if(true)
+    this.checkUserInDatabase(Username);
+    if(this.isExistingUser)
     {
       var bcrypt = require('bcryptjs');
-      // TODO
-      // get salt from database
+      // TODO get salt from database
       var salt = bcrypt.genSaltSync(10);//this is placeholder
       if(bcrypt.compareSync(Password, salt))
-      { // password was right
+      {
+        // password was right
         this.login();
       }
       else
-      { // password was incorrrect
+      {
+        // password was incorrrect
         
       }
     }
     else
     {
+      // not an existing user
 
     }
   }
 
-  login(){
+  checkUserInDatabase(Username: String){
+    //TODO
+    this.isExistingUser = true;
+  }
 
+  login(){
+    //TODO
   }
 
 }
