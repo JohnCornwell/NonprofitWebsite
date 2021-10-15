@@ -1,1 +1,43 @@
-<p>account-create works!</p>
+<div class="card">
+    <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <!-- Enter a Username -->
+        <div class="form-group">
+          <label class="col-md-4">Enter a Username</label>
+          <input type="text" class="form-control form-control-lg" 
+                 formControlName="Username"
+                 #Username />
+        </div>
+        <div *ngIf="form.controls.Username.errors?.usernameTaken" class="alert alert-danger">
+            <div class ="invalid-feedback">
+              Username already exists
+            </div>
+        </div>
+        <!-- Enter a Password -->
+        <div class="form-group">
+          <label class="col-md-4">Enter a Password</label>
+          <input type="password" class="form-control form-control-lg"
+                 formControlName="Password"
+                 #Password />
+        </div>
+        <!-- Confirm a Password -->
+        <div class="form-group">
+            <label class="col-md-4">Confirm Password</label>
+            <input type="password" class="form-control form-control-lg"
+                   formControlName="PasswordCheck"
+                   #PasswordCheck/>
+        </div>
+        <div *ngIf="passwordsDontMatch" class="alert alert-danger">
+            <div class ="invalid-feedback">
+              Passwords do not match
+            </div>
+        </div>
+        <!-- Submit Button -->
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary" [disabled]="form.pristine">
+            Create Account
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
