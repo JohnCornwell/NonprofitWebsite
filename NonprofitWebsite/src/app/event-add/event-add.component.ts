@@ -34,7 +34,7 @@ export class EventAddComponent implements OnInit {
     this.addEvent(this.form.get('EventName')?.value, this.form.get('MorningNeed')?.value,
       this.form.get('AfternoonNeed')?.value, this.form.get('NightNeed')?.value,
       this.form.get('date')?.value, this.form.get('Start')?.value, this.form.get('End')?.value,
-      this.form.get('Description')?.value);k
+      this.form.get('Description')?.value);
   }
 
   addEvent(EventName: String, MorningNeed: number, AfternoonNeed: number,
