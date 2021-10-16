@@ -10,7 +10,7 @@ export class EventsService {
 
   constructor(private http: HttpClient) { }
 
-  addProduct(EventName: String, MorningNeed: number, AfternoonNeed: number,
+  addEvent(EventName: String, MorningNeed: number, AfternoonNeed: number,
     NightNeed: number, date: Date, Start: Date, End: Date, Description: String) {
     const obj = {
       EventName,

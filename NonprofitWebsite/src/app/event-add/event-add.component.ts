@@ -3,6 +3,7 @@ import {
   FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl,
   ValidationErrors
 } from '@angular/forms';
+import { EventsService } from '../events.service';
 
 @Component({
   selector: 'app-event-add',
@@ -13,7 +14,7 @@ export class EventAddComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private es: EventsService) {
     this.form = this.fb.group({
       EventName: ['', Validators.required],
       MorningNeed: [0, [Validators.required, Validators.min(0)]],
@@ -31,15 +32,10 @@ export class EventAddComponent implements OnInit {
   }
 
   onSubmit() {
-    this.addEvent(this.form.get('EventName')?.value, this.form.get('MorningNeed')?.value,
+    this.es.addEvent(this.form.get('EventName')?.value, this.form.get('MorningNeed')?.value,
       this.form.get('AfternoonNeed')?.value, this.form.get('NightNeed')?.value,
       this.form.get('date')?.value, this.form.get('Start')?.value, this.form.get('End')?.value,
       this.form.get('Description')?.value);
-  }
-
-  addEvent(EventName: String, MorningNeed: number, AfternoonNeed: number,
-    NightNeed: number, date: Date, Start: Date, End: Date, Description: String) {
-    return false;
   }
 }
 

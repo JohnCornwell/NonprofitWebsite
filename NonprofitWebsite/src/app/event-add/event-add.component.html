@@ -86,7 +86,7 @@
         <div class ="invalid-feedback" *ngIf="form.controls.Start.errors?.required">
           Start time is required.
         </div>
-        <div class ="invalid-feedback" *ngIf="form.errors?.invalidTime">
+        <div class ="invalid-feedback" *ngIf="form.valid">
           Start time must be before end time.
         </div>
       </div>
@@ -101,7 +101,7 @@
         <div class ="invalid-feedback" *ngIf="form.controls.End.errors?.required">
           End time is required.
         </div>
-        <div class ="invalid-feedback" *ngIf="form.errors?.invalidTimeValidator">
+        <div class ="invalid-feedback" *ngIf="form.valid">
           End time must be after start time.
         </div>
       </div>
