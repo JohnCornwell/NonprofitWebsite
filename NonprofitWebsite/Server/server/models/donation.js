@@ -42,6 +42,10 @@ module.exports = function(sequelize, DataTypes) {
     Amount: {
       type: DataTypes.DOUBLE,
       allowNull: false
+    },
+    Description: {
+      type: DataTypes.BLOB,
+      allowNull: true
     }
   }, {
     sequelize,

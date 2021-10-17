@@ -11,6 +11,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(64),
       allowNull: false,
       unique: "Name"
+    },
+    About: {
+      type: DataTypes.BLOB,
+      allowNull: true,
     }
   }, {
     sequelize,

@@ -1,16 +1,23 @@
-const User = require('../models').User;
+const User = require('../models/user');
 
 /*The req parameter is the incoming request from the client. The res
  * parameter is the response we're preparing to eventually send back to
  * the client in response to their request */
 module.exports = {
+  findByUsername: function (username) {
+    return User.findAll({
+      where: {
+        Username: username
+      }
+    })
+  },
   create(req, res) {
     return User
       .create({
         Username: req.body.Username,
         Password: req.body.Password,
         FirstName: req.body.FirstName,
-        MiddleName: req.body.MiddleName,
+        MiddleName: req.body.MiddleName || '',
         LastName: req.body.LastName,
         UserType: req.body.UserType,
         Deleted: req.body.Deleted,
@@ -68,7 +75,7 @@ module.exports = {
   destroy(req, res) {
     return User
       .findByUsername(req.params.Username)
-      .then(Uaer => {
+      .then(User => {
         if (!User) {
           return res.status(400).send({
             message: 'User Not Found',
