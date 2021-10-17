@@ -1,4 +1,5 @@
-const Event = require('../models/event');
+const db = require('../models/index');
+const Event = db['event'];
 
 module.exports = {
   findByName: function (name) {

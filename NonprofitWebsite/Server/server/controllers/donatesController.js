@@ -1,4 +1,5 @@
-const Donates = require('../models/donates');
+const db = require('../models/index');
+const Donates = db['donates'];
 
 /*The req parameter is the incoming request from the client. The res
  * parameter is the response we're preparing to eventually send back to

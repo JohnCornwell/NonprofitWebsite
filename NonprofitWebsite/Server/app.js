@@ -1,12 +1,28 @@
 const express = require('express');
+const cookieParser = require("cookie-parser");
+const sessions = require('express-session');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
-const mysql = require('mysql');
+//database connection defined in models
 
 // Set up the express app
 const app = express();
 
+// Set up session info
+const oneDay = 1000 * 60 * 60 * 24;
+app.use(sessions({
+  secret: "n0r0kvjnoi0lnfifnj9824n09hon209f",
+  saveUninitialized: true,
+  cookie: { maxAge: oneDay },
+  resave: false
+}));
 
+// parsing the incoming data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+//serving public file
+app.use(express.static(__dirname));
 
 // Log requests to the console.
 app.use(logger('dev'));

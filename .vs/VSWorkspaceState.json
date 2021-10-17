@@ -2,11 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\NonprofitWebsite",
-    "\\NonprofitWebsite\\Server",
-    "\\NonprofitWebsite\\Server\\bin",
-    "\\NonprofitWebsite\\Server\\server",
-    "\\NonprofitWebsite\\Server\\server\\config",
-    "\\NonprofitWebsite\\Server\\server\\models"
+    "\\NonprofitWebsite\\Server"
   ],
+  "SelectedNode": "\\NonprofitWebsite\\Server\\app.js",
   "PreviewInSolutionExplorer": false
 }

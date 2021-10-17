@@ -1,4 +1,5 @@
-const Hosts = require('../models/hosts');
+const db = require('../models/index');
+const Hosts = db['hosts'];
 
 /*The req parameter is the incoming request from the client. The res
  * parameter is the response we're preparing to eventually send back to

@@ -1,4 +1,5 @@
-const Organization = require('../models/organization');
+const db = require('../models/index');
+const Organization = db['organization'];
 
 /*The req parameter is the incoming request from the client. The res
  * parameter is the response we're preparing to eventually send back to

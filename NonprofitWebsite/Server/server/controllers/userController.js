@@ -1,4 +1,5 @@
-const User = require('../models/user');
+const db = require('../models/index');
+const User = db['user'];
 
 /*The req parameter is the incoming request from the client. The res
  * parameter is the response we're preparing to eventually send back to

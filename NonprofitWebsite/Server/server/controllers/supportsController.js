@@ -1,4 +1,5 @@
-const Supports = require('../models/supports');
+const db = require('../models/index');
+const Supports = db['supports'];
 
 /*The req parameter is the incoming request from the client. The res
  * parameter is the response we're preparing to eventually send back to
