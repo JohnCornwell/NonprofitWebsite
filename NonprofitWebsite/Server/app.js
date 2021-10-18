@@ -3,7 +3,11 @@ const cookieParser = require("cookie-parser");
 const sessions = require('express-session');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
+const db = require('models/index');
+const User = db['user'];
 //database connection defined in models
+// a variable to save a session
+var session; //WE NEED A SESSION STORE
 
 // Set up the express app
 const app = express();
@@ -13,6 +17,7 @@ const oneDay = 1000 * 60 * 60 * 24;
 app.use(sessions({
   secret: "n0r0kvjnoi0lnfifnj9824n09hon209f",
   saveUninitialized: true,
+  //store: 
   cookie: { maxAge: oneDay },
   resave: false
 }));
@@ -23,6 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 
 //serving public file
 app.use(express.static(__dirname));
+app.use(cookieParser());
 
 // Log requests to the console.
 app.use(logger('dev'));
@@ -31,10 +37,56 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Setup a default catch-all route that sends back a welcome message in JSON format.
+app.get('/logout', (req, res) => {
+  req.session.destroy();
+  res.redirect('/');
+});
+
+app.post('/signup', function (req, res) {
+  if (!req.body.id || !req.body.password) {
+    res.status("400");
+    res.send("Invalid details!");
+  } else {
+    //see if user exists
+    User = null;
+    User
+      .findByUsername(req.params.Username)
+      .then(User => {
+        if (!User) {
+          // user does not exitst, so create it
+          User.create({
+            Username: req.body.Username,
+            Password: req.body.Password,
+            FirstName: req.body.FirstName,
+            MiddleName: req.body.MiddleName || '',
+            LastName: req.body.LastName,
+            UserType: req.body.UserType,
+            Deleted: req.body.Deleted,
+          })
+            .then(User => req.session.user = User)
+            .then(User => res.redirect('/'))
+            .catch(error => res.status(400).send(error));
+        } else {
+          // user exists, so give error
+        }
+      });
+  }
+});
+
+/* authenticate user before fufilling request */
+app.all('/*', (req, res, next) => {
+  if (!req.session || !req.session.user) {
+    res.status(401).send();
+  } else {
+    next();
+  }
+});
+
 require('./server/routes')(app);
-app.get('*', (req, res) => res.status(200).send({
-  message: 'Invalid request.',
-}));
+
+// Setup a default catch-all route
+app.get('*', (req, res) => {
+  res.redirect('/');
+});
 
 module.exports = app;
