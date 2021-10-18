@@ -15,9 +15,13 @@ export class AccountCreateComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
+      Name: ['', Validators.required],
+      Lastname: ['', Validators.required],
+      Middlename: [''],
       Username: ['', Validators.required],
       Password: ['', Validators.required],
-      PasswordCheck: ['', Validators.required]
+      PasswordCheck: ['', Validators.required],
+      Type: ['',Validators.required]
     });
   }
 
@@ -27,17 +31,29 @@ export class AccountCreateComponent implements OnInit {
 
   onSubmit() {
     this.createAccount(
+      this.form.get('Name')?.value,
+      this.form.get('Lastname')?.value,
+      this.form.get('Middlename')?.value,
       this.form.get('Username')?.value,
       this.form.get('Password')?.value,
-      this.form.get('PasswordCheck')?.value
+      this.form.get('PasswordCheck')?.value,
+      this.form.get('Type')?.value
     );
   }
 
-  createAccount(Username: String, Password: String, PasswordCheck: String){
+  createAccount(Name: String, Lastname: String, Middlename: String, Username: String, Password: String, PasswordCheck: String, Type: String){
+    if(this.validateAccount(Username, Password, PasswordCheck)){
+      //TODO add info into database
+    }
+  }
+  
+  validateAccount(Username: String, Password: String, PasswordCheck: String){
+  let returnValue = true;
     // Username check
     //TODO query database for username
     if(false){
       this.isUsernameTaken = true;
+      returnValue = false;
     }
     else{
       this.isUsernameTaken = false;
@@ -55,7 +71,8 @@ export class AccountCreateComponent implements OnInit {
     else
     {
       this.passwordsDontMatch = true;
-      return;
+      returnValue = false;
     }
+    return returnValue;
   }
 }
