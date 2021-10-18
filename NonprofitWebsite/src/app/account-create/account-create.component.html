@@ -1,6 +1,40 @@
 <div class="card">
     <div class="card-body">
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <!-- First Name -->
+         <div class="form-group">
+          <label class="col-md-4">First Name</label>
+          <input type="text" class="form-control form-control-lg" 
+              required
+              formControlName="Name"
+              #Name />
+        </div>
+        <div *ngIf="form.controls['Name'].invalid && (form.controls['Name'].dirty || form.controls['Name'].touched)" class="alert alert-danger">
+          <div class ="invalid-feedback" *ngIf="form.controls.Name.errors?.required">
+            Name is required.
+          </div>
+        </div>
+        <!-- Last Name -->
+        <div class="form-group">
+          <label class="col-md-4">First Name</label>
+          <input type="text" class="form-control form-control-lg" 
+              required
+              formControlName="Lastname"
+              #Lastname />
+        </div>
+        <div *ngIf="form.controls['Lastname'].invalid && (form.controls['Lastname'].dirty || form.controls['Lastname'].touched)" class="alert alert-danger">
+          <div class ="invalid-feedback" *ngIf="form.controls.Lastname.errors?.required">
+            Last-name is required.
+          </div>
+        </div>
+        <!-- Middle Name -->
+        <div class="form-group">
+          <label class="col-md-4">Middle Name (optional)</label>
+          <input type="text" class="form-control form-control-lg" 
+              required
+              formControlName="Middlename"
+              #Middlename />
+        </div>
         <!-- Enter a Username -->
         <div class="form-group">
             <label class="col-md-4">Enter a Username</label>
@@ -53,20 +87,12 @@
         <div class="form-group">
             <label class="col-md-4">What type of account?</label>
             <br><br>
-            <label for="volunteer" class="">Volunteer</label>
-            <input type="radio"
-                formControlName="volunteer"
-                id = "volunteer"
-                onclick="handleClick(this);"
-                #Username />
-            <br>
-            <label for="donator" class="">Donator</label>
-            <input type="radio" 
-                formControlName="donator"
-                id = "donator"
-                onclick="handleClick(this);"
-                #Username />
+            <select name="type" id="type" formControlName="Type" class="form-control">
+              <option value="Volunteer">Volunteer</option>
+              <option value="Donator">Donator</option>
+            </select>
         </div>
+        <br>
         <!-- Submit Button -->
         <div class="form-group">
           <button type="submit" class="btn btn-primary" [disabled]="form.pristine">
