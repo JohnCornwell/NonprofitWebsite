@@ -3,34 +3,69 @@
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <!-- Enter a Username -->
         <div class="form-group">
-          <label class="col-md-4">Enter a Username</label>
-          <input type="text" class="form-control form-control-lg" 
-                 formControlName="Username"
-                 #Username />
+            <label class="col-md-4">Enter a Username</label>
+            <input type="text" class="form-control form-control-lg" 
+                required
+                formControlName="Username"
+                #Username />
         </div>
-        <div *ngIf="form.controls.Username.errors?.usernameTaken" class="alert alert-danger">
+        <div *ngIf="form.controls['Username'].invalid && (form.controls['Username'].dirty || form.controls['Username'].touched)" class="alert alert-danger">
+            <div class ="invalid-feedback" *ngIf="form.controls.Username.errors?.required">
+              Username is required.
+            </div>
+          </div>
+        <div *ngIf="isUsernameTaken" class="alert alert-danger">
             <div class ="invalid-feedback">
               Username already exists
             </div>
         </div>
         <!-- Enter a Password -->
         <div class="form-group">
-          <label class="col-md-4">Enter a Password</label>
-          <input type="password" class="form-control form-control-lg"
-                 formControlName="Password"
-                 #Password />
+            <label class="col-md-4">Enter a Password</label>
+            <input type="password" class="form-control form-control-lg"
+                required
+                formControlName="Password"
+                #Password />
         </div>
+        <div *ngIf="form.controls['Password'].invalid && (form.controls['Password'].dirty || form.controls['Password'].touched)" class="alert alert-danger">
+            <div class ="invalid-feedback" *ngIf="form.controls.Password.errors?.required">
+              Password is required.
+            </div>
+          </div>
         <!-- Confirm a Password -->
         <div class="form-group">
             <label class="col-md-4">Confirm Password</label>
             <input type="password" class="form-control form-control-lg"
-                   formControlName="PasswordCheck"
-                   #PasswordCheck/>
+                formControlName="PasswordCheck"
+                #PasswordCheck/>
         </div>
+        <div *ngIf="form.controls['PasswordCheck'].invalid && (form.controls['PasswordCheck'].dirty || form.controls['PasswordCheck'].touched)" class="alert alert-danger">
+            <div class ="invalid-feedback" *ngIf="form.controls.PasswordCheck.errors?.required">
+              Password confimation is required.
+            </div>
+          </div>
         <div *ngIf="passwordsDontMatch" class="alert alert-danger">
             <div class ="invalid-feedback">
               Passwords do not match
             </div>
+        </div>
+        <!-- Pick account Type -->
+        <div class="form-group">
+            <label class="col-md-4">What type of account?</label>
+            <br><br>
+            <label for="volunteer" class="">Volunteer</label>
+            <input type="radio"
+                formControlName="volunteer"
+                id = "volunteer"
+                onclick="handleClick(this);"
+                #Username />
+            <br>
+            <label for="donator" class="">Donator</label>
+            <input type="radio" 
+                formControlName="donator"
+                id = "donator"
+                onclick="handleClick(this);"
+                #Username />
         </div>
         <!-- Submit Button -->
         <div class="form-group">

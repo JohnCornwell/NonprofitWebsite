@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl,
-  ValidationErrors} from '@angular/forms';
-// import { randomInt } from 'crypto';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-account-create',
@@ -16,7 +14,7 @@ export class AccountCreateComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
-      Username: ['', Validators.required, uniqueUsernameValidator()],
+      Username: ['', Validators.required],
       Password: ['', Validators.required],
       PasswordCheck: ['', Validators.required]
     });
@@ -31,6 +29,14 @@ export class AccountCreateComponent implements OnInit {
   }
 
   createAccount(Username: String, Password: String, PasswordCheck: String){
+    // Username check
+    //TODO query database for username
+    if(true){
+      this.isUsernameTaken = true;
+    }
+    else{
+      this.isUsernameTaken = false;
+    }
     // Password double check
     if(Password === PasswordCheck){
       this.passwordsDontMatch = false;
@@ -47,13 +53,4 @@ export class AccountCreateComponent implements OnInit {
       return;
     }
   }
-}
-
-/* Username must be unique */
-function uniqueUsernameValidator(): ValidatorFn {
-  return (control: AbstractControl): ValidationErrors | null => {
-    //TODO query database for username
-    const isInDatabaseAlready = true;
-    return isInDatabaseAlready ? { usernameTaken: { value: true } } : null;
-  };
 }
