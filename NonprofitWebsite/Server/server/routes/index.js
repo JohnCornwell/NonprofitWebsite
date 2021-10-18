@@ -15,15 +15,15 @@ module.exports = (app) => {
     message: 'This is the database API.',
   }));
 
-  app.post('/api/user/create', userController.create(req, res));
+  app.post('/api/user/create', userController.create);
 
-  app.post('/api/user/getUsername', userController.retrieve(req, res));
+  app.post('/api/user/getUsername', userController.retrieve);
 
-  app.get('/api/user', userController.list(req, res)); // get all
-  app.get('/api/user/:Username', userController.retrieve(req, res));
-  app.put('/api/todos/:Username', userController.update(req, res));
-  app.delete('/api/todos/:Username', userController.destroy(req, res));
+  app.get('/api/user', userController.list); // get all
+  app.get('/api/user/:Username', userController.retrieve);
+  app.put('/api/todos/:Username', userController.update);
+  app.delete('/api/todos/:Username', userController.destroy);
 
-  app.post('/api/event', eventController.create(req, res));
-  app.get('/api/event', eventController.list(req, res));
+  app.post('/api/event', eventController.create);
+  app.get('/api/event', eventController.list);
 };
