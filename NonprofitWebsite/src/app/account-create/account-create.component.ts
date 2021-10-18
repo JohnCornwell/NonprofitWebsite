@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, RadioControlValueAccessor } from '@angular/forms';
 
 @Component({
   selector: 'app-account-create',
@@ -11,6 +11,7 @@ export class AccountCreateComponent implements OnInit {
   form: FormGroup;
   passwordsDontMatch: boolean = false;
   isUsernameTaken: boolean = false;
+  isAccountNotChosen: boolean = false;
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
@@ -25,13 +26,17 @@ export class AccountCreateComponent implements OnInit {
   }
 
   onSubmit() {
-    this.createAccount(this.form.get('Username')?.value, this.form.get('Password')?.value, this.form.get('PasswordCheck')?.value);
+    this.createAccount(
+      this.form.get('Username')?.value,
+      this.form.get('Password')?.value,
+      this.form.get('PasswordCheck')?.value
+    );
   }
 
   createAccount(Username: String, Password: String, PasswordCheck: String){
     // Username check
     //TODO query database for username
-    if(true){
+    if(false){
       this.isUsernameTaken = true;
     }
     else{

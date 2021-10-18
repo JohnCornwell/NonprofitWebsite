@@ -53,19 +53,22 @@
         <div class="form-group">
             <label class="col-md-4">What type of account?</label>
             <br><br>
-            <label for="volunteer" class="">Volunteer</label>
+            <label for="Volunteer" class="col-md-1">Volunteer</label>
             <input type="radio"
-                formControlName="volunteer"
-                id = "volunteer"
-                onclick="handleClick(this);"
-                #Username />
-            <br>
-            <label for="donator" class="">Donator</label>
+                formControlName="Type"
+                name="type"
+                #Volunteer />
+            <br><br>
+            <label for="Donator" class="col-md-1">Donator</label>
             <input type="radio" 
-                formControlName="donator"
-                id = "donator"
-                onclick="handleClick(this);"
-                #Username />
+                formControlName="Type"
+                name="type"
+                #Donator />
+        </div>
+        <div *ngIf="isAccountNotChosen" class="alert alert-danger">
+            <div class ="invalid-feedback">
+              Must choose an account type
+            </div>
         </div>
         <!-- Submit Button -->
         <div class="form-group">
