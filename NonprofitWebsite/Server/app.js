@@ -62,6 +62,7 @@ app.post('/login', (req, res) => {
         }
       }
     }
+  })
 });
 
 app.post('/signup', function (req, res) {
@@ -107,9 +108,9 @@ app.all('/api/', (req, res, next) => {
 
 require('./server/routes')(app);
 
-// Setup a default catch-all route
+/*// Setup a default catch-all route
 app.get('*', (req, res) => {
   res.redirect('/');
-});
+});*/
 
   module.exports = app;
