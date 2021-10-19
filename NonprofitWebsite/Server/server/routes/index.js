@@ -51,6 +51,14 @@ module.exports = (app) => {
   //event retrieve already covered
   //event list already covered
 
+  app.all('/event/volunteer', (req, res, next) => {
+    if (req.session.User.UserType != 'Volunteer') {
+      res.status(401).send("Need to be an volunteer for this request.");
+    } else {
+      next();
+    }
+  });
+
   app.post('event/volunteer', eventController.volunteer) //volunteer for a time slot
 
   /* all user functions after this point require admin status */
