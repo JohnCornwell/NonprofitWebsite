@@ -100,10 +100,20 @@ app.get('/api', (req, res, next) => {
     res.send("Welcome to the API");
 });
 
+const orgController = require('./server/controllers/organizationController');
+app.get('/getOrganizations', orgController.list)
+
+// methods to retrieve events given an orgId
+const hostsController = require('./server/controllers/hostsController');
+const eventController = require('./server/controllers/eventController');
+//call /getHosts once, then getEventById for each Id returned
+app.get('/getHosts', hostsController.retrieveEvents); //req.body needs OrgId
+app.get('/getEventById', eventController.findById); //req.body needs EventId
+
 /* authenticate user before fufilling request */
-app.all('/api/auth/*', (req, res, next) => {
+app.all('/api/*', (req, res, next) => {
   if (!req.session || !req.session.Username) {
-    res.status(401).send();
+    res.status(401).send("Need to be logged in for this request.");
   } else {
     next();
   }

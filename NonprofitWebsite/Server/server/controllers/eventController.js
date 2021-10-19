@@ -9,6 +9,15 @@ module.exports = {
       }
     })
   },
+
+  findById(req, res) {
+    return Event.findAll({
+      where: {
+        EventId: req.body.EventId;
+      }
+    }).then(Event => res.status.send(Event));
+  }
+
   create(req, res) {
     return Event
       .create({
