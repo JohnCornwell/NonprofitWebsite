@@ -1,1 +1,9 @@
-<p>Look at the amazing stuff we do</p>
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <div formArrayName="orders" *ngFor="let order of ordersFormArray.controls; let i = index">
+        <label >
+            <input type="checkbox" [formControlName]="i" id="{{ordersData[i].id}}">
+            {{ordersData[i].name}}
+        </label>
+    </div>
+    <button>submit</button>
+</form>
