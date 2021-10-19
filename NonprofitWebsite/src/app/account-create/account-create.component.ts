@@ -1,5 +1,8 @@
+import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, RadioControlValueAccessor } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { get } from 'http';
+import { type } from 'os';
 
 @Component({
   selector: 'app-account-create',
@@ -13,7 +16,7 @@ export class AccountCreateComponent implements OnInit {
   isUsernameTaken: boolean = false;
   isAccountNotChosen: boolean = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private http: HttpClient) { 
     this.form = this.fb.group({
       Name: ['', Validators.required],
       Lastname: ['', Validators.required],
@@ -43,7 +46,17 @@ export class AccountCreateComponent implements OnInit {
 
   createAccount(Name: String, Lastname: String, Middlename: String, Username: String, Password: String, PasswordCheck: String, Type: String){
     if(this.validateAccount(Username, Password, PasswordCheck)){
-      //TODO add info into database
+      var body = {
+        Username: Username,
+        Password: Password,
+        FirstName: Name,
+        MiddleName: Middlename,
+        LastName: Lastname,
+        Type: Type
+      }
+      console.log(body);
+      var resp = this.http.post('localhost:8000/signup', body);
+      console.log(resp);
     }
   }
   
