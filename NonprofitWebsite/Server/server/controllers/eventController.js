@@ -13,10 +13,10 @@ module.exports = {
   findById(req, res) {
     return Event.findAll({
       where: {
-        EventId: req.body.EventId;
+        EventId: req.body.EventId
       }
     }).then(Event => res.status.send(Event));
-  }
+  },
 
   create(req, res) {
     return Event
@@ -105,5 +105,73 @@ module.exports = {
       })
       .catch(error => res.status(400).send(error));
   },
+
+  volunter(req, res) {
+    return Event
+      .findById(req.params.EventId)
+      .then(Event => {
+        if (!Event) {
+          return res.status(400).send({
+            message: "Event not found",
+          });
+        }
+        if (req.body.MoriningNeed) {
+          return Event
+            .update({
+              Name: Event.Name,
+              MorningNeed: req.body.MoriningNeed,
+              AfternoonNeed: Event.AfternoonNeed,
+              NightNeed: Event.NightNeed,
+              Month: Event.Month,
+              Day: Event.Day,
+              Year: Event.Year,
+              StartHour: Event.StartHour,
+              StartMinute: Event.StartMinute,
+              EndHour: Event.EndHour,
+              EndMinute: Event.EndMinute,
+              Description: Event.Description
+            })
+            .then(() => res.status(200).send({ message: 'Volunteered successfully.' }))
+            .catch(error => res.status(400).send(error));
+        } else if (req.body.AfternoonNeed) {
+          return Event
+            .update({
+              Name: Event.Name,
+              MorningNeed: Event.MoriningNeed,
+              AfternoonNeed: req.body.AfternoonNeed,
+              NightNeed: Event.NightNeed,
+              Month: Event.Month,
+              Day: Event.Day,
+              Year: Event.Year,
+              StartHour: Event.StartHour,
+              StartMinute: Event.StartMinute,
+              EndHour: Event.EndHour,
+              EndMinute: Event.EndMinute,
+              Description: Event.Description
+            })
+            .then(() => res.status(200).send({ message: 'Volunteered successfully.' }))
+            .catch(error => res.status(400).send(error));
+        } else {
+          return Event
+            .update({
+              Name: Event.Name,
+              MorningNeed: Event.MoriningNeed,
+              AfternoonNeed: Event.AfternoonNeed,
+              NightNeed: req.body.NightNeed,
+              Month: Event.Month,
+              Day: Event.Day,
+              Year: Event.Year,
+              StartHour: Event.StartHour,
+              StartMinute: Event.StartMinute,
+              EndHour: Event.EndHour,
+              EndMinute: Event.EndMinute,
+              Description: Event.Description
+            })
+            .then(() => res.status(200).send({ message: 'Volunteered successfully.' }))
+            .catch(error => res.status(400).send(error));
+        }
+      })
+      .catch(error => res.status(400).send(error));
+  }
 
 };

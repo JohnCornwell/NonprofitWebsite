@@ -5,8 +5,9 @@
     "\\NonprofitWebsite\\Server",
     "\\NonprofitWebsite\\Server\\server",
     "\\NonprofitWebsite\\Server\\server\\controllers",
+    "\\NonprofitWebsite\\Server\\server\\models",
     "\\NonprofitWebsite\\Server\\server\\routes"
   ],
-  "SelectedNode": "\\NonprofitWebsite\\Server\\app.js",
+  "SelectedNode": "\\NonprofitWebsite\\Server\\server\\models\\event.js",
   "PreviewInSolutionExplorer": false
 }

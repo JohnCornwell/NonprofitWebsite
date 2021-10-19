@@ -101,7 +101,7 @@ app.get('/api', (req, res, next) => {
 });
 
 const orgController = require('./server/controllers/organizationController');
-app.get('/getOrganizations', orgController.list)
+app.get('/getOrganizations', orgController.list) //list of all orgs
 
 // methods to retrieve events given an orgId
 const hostsController = require('./server/controllers/hostsController');
@@ -110,9 +110,12 @@ const eventController = require('./server/controllers/eventController');
 app.post('/getHosts', hostsController.retrieveEvents); //req.body needs OrgId
 app.post('/getEventById', eventController.findById); //req.body needs EventId
 
+app.post('/event/retrieve', eventController.retrieve); //anyone can retrieve an event by name
+app.get('/event/list', eventController.list) //anyone can view any event
+
 /* authenticate user is logged in before fufilling request */
 app.all('/*', (req, res, next) => {
-  if (!req.session || !req.session.User.Username) {
+  if (!req.session || !req.session.User || !req.session.User.Username) {
     res.status(401).send("Need to be logged in for this request.");
   } else {
     next();

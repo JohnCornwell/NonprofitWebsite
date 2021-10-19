@@ -10,15 +10,58 @@ const needsController = require('../controllers/needsController');
 
 module.exports = (app) => {
 
-  app.use('/user')
-  app.post('/api/user/create', userController.create);
-  app.post('/api/user/getUsername', userController.retrieve);
+  ////////////////////////USER SECTION/////////////////////////////
+  app.all('/user/retrieve', (req, res, next) => {
+    if (req.session.User.UserID != req.body.UserID && req.session.User.UserType != 'Admin') {
+      //cannot view another user's info unless you are an admin
+      res.status(401).send("Need to be an admin for this request.");
+    } else {
+      next();
+    }
+  });
 
-  app.get('/api/user/list', userController.list); // get all
-  app.get('/api/user/retrieve', userController.retrieve);
-  app.put('/api/user/update', userController.update);
-  app.delete('/api/user/delete', userController.destroy); //do not call this. Use update to soft delete
+  app.get('/user/retrieve', userController.retrieve);
 
-  app.post('/api/event', eventController.create);
-  app.get('/api/event', eventController.list);
+  app.all('/user/update', (req, res, next) => {
+    if ((req.session.User.UserID != req.body.UserID && req.session.User.UserType != 'Admin') ||
+        (req.session.UserType != null && req.session.User.UserType != req.body.UserType)) {
+      //cannot update someone else or change your own permissions
+      res.status(401).send("Need to be an admin for this request.");
+    } else {
+      next();
+    }
+  });
+  app.put('/user/update', userController.update);
+
+  /* all user functions after this point require admin status */
+  app.all('/user/*', (req, res, next) => {
+    if (req.session.User.UserType != 'Admin') {
+      res.status(401).send("Need to be an admin for this request.");
+    } else {
+      next();
+    }
+  });
+
+  app.post('/user/create', userController.create);  //used to create admins
+  app.get('/user/list', userController.list); // get all
+  app.delete('/user/delete', userController.destroy); //do not call this. Use update to soft delete
+
+  ////////////////////////Event SECTION/////////////////////////////
+
+  //event retrieve already covered
+  //event list already covered
+
+  app.post('event/volunteer', eventController.volunteer) //volunteer for a time slot
+
+  /* all user functions after this point require admin status */
+  app.all('/event/*', (req, res, next) => {
+    if (req.session.User.UserType != 'Admin') {
+      res.status(401).send("Need to be an admin for this request.");
+    } else {
+      next();
+    }
+  });
+
+  app.post('/event/create', eventController.create);  //used to create admins
+  app.delete('/user/delete', eventController.destroy); //do not call this. Use update to soft delete
 };
