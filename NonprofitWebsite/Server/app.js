@@ -36,7 +36,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Search for route from top to bottom
 
-app.get('/logout', (req, res) => {
+app.use('/logout', (req, res) => {
   req.session.destroy();
   res.redirect('localhost:4200/');
 });
@@ -107,10 +107,10 @@ app.get('/getOrganizations', orgController.list)
 const hostsController = require('./server/controllers/hostsController');
 const eventController = require('./server/controllers/eventController');
 //call /getHosts once, then getEventById for each Id returned
-app.get('/getHosts', hostsController.retrieveEvents); //req.body needs OrgId
-app.get('/getEventById', eventController.findById); //req.body needs EventId
+app.post('/getHosts', hostsController.retrieveEvents); //req.body needs OrgId
+app.post('/getEventById', eventController.findById); //req.body needs EventId
 
-/* authenticate user before fufilling request */
+/* authenticate user is logged in before fufilling request */
 app.all('/api/*', (req, res, next) => {
   if (!req.session || !req.session.Username) {
     res.status(401).send("Need to be logged in for this request.");
@@ -119,11 +119,7 @@ app.all('/api/*', (req, res, next) => {
   }
 });
 
+//these methods will check for specific user permissions before executing
 require('./server/routes')(app);
 
-/*// Setup a default catch-all route
-app.get('*', (req, res) => {
-  res.redirect('/');
-});*/
-
-  module.exports = app;
+module.exports = app;

@@ -11,12 +11,7 @@ const needsController = require('../controllers/needsController');
 module.exports = (app) => {
 
 
-  app.get('/api', (req, res) => res.status(200).send({
-    message: 'This is the database API.',
-  }));
-
   app.post('/api/user/create', userController.create);
-
   app.post('/api/user/getUsername', userController.retrieve);
 
   app.get('/api/user/list', userController.list); // get all
