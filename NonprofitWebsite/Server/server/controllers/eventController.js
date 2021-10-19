@@ -10,12 +10,12 @@ module.exports = {
     })
   },
 
-  findById(req, res) {
-    return Event.findAll({
+  findByName: function (id) {
+    return db.Event.findAll({
       where: {
-        EventId: req.body.EventId
+        EventId: id
       }
-    }).then(Event => res.status.send(Event));
+    })
   },
 
   create(req, res) {
@@ -106,9 +106,9 @@ module.exports = {
       .catch(error => res.status(400).send(error));
   },
 
-  volunter(req, res) {
+  volunteer(req, res) {
     return Event
-      .findById(req.params.EventId)
+      .findById(req.body.EventId)
       .then(Event => {
         if (!Event) {
           return res.status(400).send({

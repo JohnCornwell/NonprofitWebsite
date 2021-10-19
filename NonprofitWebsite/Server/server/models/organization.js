@@ -13,7 +13,7 @@ module.exports = function(sequelize, DataTypes) {
       unique: "Name"
     },
     About: {
-      type: DataTypes.BLOB,
+      type: DataTypes.TEXT,
       allowNull: true,
     }
   }, {

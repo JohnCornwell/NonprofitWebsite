@@ -21,10 +21,10 @@ export class EventAddComponent implements OnInit {
       AfternoonNeed: [0, [Validators.required, Validators.min(0)]],
       NightNeed: [0, [Validators.required, Validators.min(0)]],
       date: [new Date(), [Validators.required, forbiddenDateValidator()]],
-      Start: [new Date(0, 0, 0, 0, 0, 0), Validators.required],
-      End: [new Date(0, 0, 0, 0, 0, 0), Validators.required],
+      Start: ['09:00', Validators.required],
+      End: ['17:00', Validators.required],
       Description: ['']
-    }, { validators: invalidTimeValidator() });
+    }, { validators: invalidTimeValidator });
   }
 
   
@@ -37,6 +37,7 @@ export class EventAddComponent implements OnInit {
       this.form.get('date')?.value, this.form.get('Start')?.value, this.form.get('End')?.value,
       this.form.get('Description')?.value);
   }
+
 }
 
 /* Date must be tomorrow or in the future */
@@ -47,14 +48,32 @@ function forbiddenDateValidator(): ValidatorFn {
     return input.getTime() < tomorrow.getTime() ? { forbiddenDate: { value: control.value } } : null;
   };
 }
-
-/* End cannot be before Start */
-function invalidTimeValidator(): ValidatorFn {
-  return (control: AbstractControl): ValidationErrors | null => {
-    const sTime = control.get('Start')?.value;
-    const eTime = control.get('End')?.value;
-    const start = new Date(sTime);
-    const end = new Date(eTime);
-    return start.getTime() > end.getTime() ? { forbiddenTime: { value: true } } : null;
-  };
-}
+;
+const invalidTimeValidator(): ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+    const startTime = control.get('Start');
+    const endTime = control.get('End');
+    console.log("Validate");
+    if (startTime && endTime) {
+      console.log("In conditional");
+      const sTime:string = startTime.value; //string hh:mm
+      const eTime:string = endTime.value;  //string hh:mm
+      const startHour = sTime.substring(0, 2);
+      const startMin = sTime.substring(3);
+      let sHour = parseInt(startHour);
+      let sMin = parseInt(startMin);
+      const endHour = eTime.substring(0, 2);
+      const endMin = eTime.substring(3);
+      let eHour = parseInt(endHour);
+      let eMin = parseInt(endMin);
+      console.log(sTime + " " + eTime);
+      if (sHour > eHour) {
+        //start is after end
+        return { forbiddenDate: { value: true } };
+      } else if (sHour == eHour && sMin >= eMin) {
+        //start is the same or after end
+        return { forbiddenDate: { value: true } };
+      }
+    }
+    return null;
+  }
+};

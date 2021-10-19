@@ -1,4 +1,4 @@
-export default class Product {
+export default class Event {
   EventName: String;
   MorningNeed: number;
   AfternoonNeed: number;

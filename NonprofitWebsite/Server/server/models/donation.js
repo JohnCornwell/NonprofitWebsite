@@ -44,7 +44,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     Description: {
-      type: DataTypes.BLOB,
+      type: DataTypes.TEXT,
       allowNull: true
     }
   }, {
