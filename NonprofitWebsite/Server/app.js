@@ -7,17 +7,16 @@ const db = require('./server/models/index');
 const User = db['user'];
 //database connection defined in models
 // a variable to save a session
-var session; //WE NEED A SESSION STORE
 
 // Set up the express app
 const app = express();
 
 // Set up session info
-const oneDay = 1000 * 60 * 60 * 24;
+const ONEDAY = 1000 * 60 * 60 * 24;
 app.use(sessions({
   secret: "n0r0kvjnoi0lnfifnj9824n09hon209f",
   //store: 
-  cookie: { maxAge: oneDay },
+  cookie: { maxAge: ONEDAY },
   resave: false
 }));
 
@@ -44,7 +43,7 @@ app.get('/logout', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-  session.regenerate((err) => {
+  req.session.regenerate((err) => {
     if (err) {
       res.send("Unable to create session.");
     } else {
@@ -56,7 +55,7 @@ app.post('/login', (req, res) => {
       } else {
         // user exists
         if (User.Password == req.body.Password) {
-          session.User = User;
+          req.session.User = User;
         } else {
           res.status(400).send("Incorrect Password");
         }
@@ -66,7 +65,7 @@ app.post('/login', (req, res) => {
 });
 
 app.post('/signup', function (req, res) {
-  if (!req.body.id || !req.body.password) {
+  if (!req.body.Username || !req.body.Password) {
     res.status("400");
     res.send("Invalid details!");
   } else {
@@ -87,20 +86,23 @@ app.post('/signup', function (req, res) {
             Deleted: req.body.Deleted,
           })
             .then(User => req.session.user = User.Username)
-            .then(User => res.redirect('/'))
             .catch(error => res.status(400).send(error));
           res.status("200");
           res.send("Success");
         } else {
           // user exists, so give error
-
+          res.status(400).send("User already exists.");
         }
       });
   }
 });
 
+app.get('/api', (req, res, next) => {
+    res.send("Welcone to the API");
+});
+
 /* authenticate user before fufilling request */
-app.all('/api/', (req, res, next) => {
+app.all('/api/auth/*', (req, res, next) => {
   if (!req.session || !req.session.Username) {
     res.status(401).send();
   } else {
