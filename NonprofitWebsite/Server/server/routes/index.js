@@ -10,7 +10,7 @@ const needsController = require('../controllers/needsController');
 
 module.exports = (app) => {
 
-
+  app.use('/user')
   app.post('/api/user/create', userController.create);
   app.post('/api/user/getUsername', userController.retrieve);
 

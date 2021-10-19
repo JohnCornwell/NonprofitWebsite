@@ -36,7 +36,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Search for route from top to bottom
 
-app.use('/logout', (req, res) => {
+app.all('/logout', (req, res) => {
   req.session.destroy();
   res.redirect('localhost:4200/');
 });
