@@ -10,32 +10,37 @@ import { FormBuilder, FormGroup, FormArray,
 })
 export class HomeComponent implements OnInit {
 
+  showWell = false;
+  wellText = "";
   form: FormGroup;
-  ordersData = [
-    { id: 100, name: 'order 1' },
-    { id: 200, name: 'order 2' },
-    { id: 300, name: 'order 3' },
-    { id: 400, name: 'order 4' }
+  eventsData = [
+    { id: 100, name: 'event 1', description: 'test description 1' },
+    { id: 200, name: 'event 2', description: 'test description 2' },
+    { id: 300, name: 'event 3', description: 'test description 3' },
+    { id: 400, name: 'event 4', description: 'test description 4' }
   ];
 
-  get ordersFormArray() {
-    return this.form.controls.orders as FormArray;
+  get eventsFormArray() {
+    return this.form.controls.events as FormArray;
   }
 
   constructor(private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({
-      orders: new FormArray([])
+      SelectEvent: [''],
+      events: new FormArray([])
     });
 
-    this.addCheckboxes();
+    this.addEvents();
   }
 
-  private addCheckboxes() {
-    this.ordersData.forEach(() => this.ordersFormArray.push(new FormControl(false)));
+  private addEvents() {
+    this.eventsData.forEach(() => this.eventsFormArray.push(new FormControl()));
   }
 
   submit() {
-    console.log("test");
+    console.log(this.form.get('SelectEvent')?.value);
+    this.wellText = this.form.get('SelectEvent')?.value;
+    this.showWell = true;
   }
 
   ngOnInit(): void {
