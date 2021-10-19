@@ -111,8 +111,8 @@ app.post('/getHosts', hostsController.retrieveEvents); //req.body needs OrgId
 app.post('/getEventById', eventController.findById); //req.body needs EventId
 
 /* authenticate user is logged in before fufilling request */
-app.all('/api/*', (req, res, next) => {
-  if (!req.session || !req.session.Username) {
+app.all('/*', (req, res, next) => {
+  if (!req.session || !req.session.User.Username) {
     res.status(401).send("Need to be logged in for this request.");
   } else {
     next();
