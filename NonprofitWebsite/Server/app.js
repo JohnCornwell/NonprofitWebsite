@@ -86,8 +86,6 @@ app.post('/signup', function (req, res) {
           })
             .then(User => req.session.user = User.Username)
             .catch(error => res.status(400).send(error));
-          res.status("200");
-          res.send("Success");
         } else {
           // user exists, so give error
           res.status(400).send("User already exists.");

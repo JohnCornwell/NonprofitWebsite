@@ -1,3 +1,4 @@
+import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -11,7 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { EventAddComponent } from './event-add/event-add.component';
 import { EventGetComponent } from './event-get/event-get.component';
 import { EventEditComponent } from './event-edit/event-edit.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrganizationAddComponent } from './organization-add/organization-add.component';
 import { OrganizationGetComponent } from './organization-get/organization-get.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -27,7 +28,8 @@ import { AccountCreateComponent } from './account-create/account-create.componen
     EventEditComponent,
     OrganizationAddComponent,
     OrganizationGetComponent,
-    AccountCreateComponent
+    AccountCreateComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +39,7 @@ import { AccountCreateComponent } from './account-create/account-create.componen
     MatToolbarModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule
   ],
   providers: [EventsService],
