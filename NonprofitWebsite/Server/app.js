@@ -6,7 +6,6 @@ const bodyParser = require('body-parser');
 const db = require('./server/models/index');
 const User = db['user'];
 //database connection defined in models
-// a variable to save a session
 
 // Set up the express app
 const app = express();
@@ -15,7 +14,7 @@ const app = express();
 const ONEDAY = 1000 * 60 * 60 * 24;
 app.use(sessions({
   secret: "n0r0kvjnoi0lnfifnj9824n09hon209f",
-  //store: 
+  saveUninitialized: false,
   cookie: { maxAge: ONEDAY },
   resave: false
 }));
@@ -96,7 +95,7 @@ app.post('/signup', function (req, res) {
 });
 
 app.get('/api', (req, res, next) => {
-    res.send("Welcone to the API");
+    res.send("Welcome to the API");
 });
 
 /* authenticate user before fufilling request */

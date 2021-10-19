@@ -19,10 +19,10 @@ module.exports = (app) => {
 
   app.post('/api/user/getUsername', userController.retrieve);
 
-  app.get('/api/user', userController.list); // get all
-  app.get('/api/user/:Username', userController.retrieve);
-  app.put('/api/todos/:Username', userController.update);
-  app.delete('/api/todos/:Username', userController.destroy);
+  app.get('/api/user/list', userController.list); // get all
+  app.get('/api/user/retrieve', userController.retrieve);
+  app.put('/api/user/update', userController.update);
+  app.delete('/api/user/delete', userController.destroy); //do not call this. Use update to soft delete
 
   app.post('/api/event', eventController.create);
   app.get('/api/event', eventController.list);
