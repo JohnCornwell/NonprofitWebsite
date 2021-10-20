@@ -22,8 +22,8 @@ export class EventAddComponent implements OnInit {
       AfternoonNeed: [0, [Validators.required, Validators.min(0)]],
       NightNeed: [0, [Validators.required, Validators.min(0)]],
       date: [new Date(), [Validators.required, forbiddenDateValidator()]],
-      Start: [new Date(0, 0, 0, 0, 0, 0), Validators.required],
-      End: [new Date(0, 0, 0, 0, 0, 0), Validators.required],
+      Start: ['09:00', Validators.required],
+      End: ['17:00', Validators.required],
       Description: ['']
     }, { validators: invalidTimeValidator });
   }

@@ -103,6 +103,15 @@
       <div class="alert alert-danger" *ngIf="form.errors?.invalidTime">
         End time must be after start time.
       </div>
+      <!-- Section for Description -->
+      <div class="form-group">
+        <label class="col-md-4">Description</label>
+        <textarea id="eDescription" name="description" rows="4" cols="50" class="form-control"
+               formControlName="Description"
+               #Description >
+
+        </textarea>
+      </div>
       <!-- Section for submit button -->
       <div class="form-group">
         <button type="submit" class="btn btn-primary" [disabled]="form.pristine || form.invalid">
