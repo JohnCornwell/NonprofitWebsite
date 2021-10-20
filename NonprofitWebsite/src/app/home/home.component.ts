@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 interface Event {
   EventId: String,
   MorningNeed: Number,
+  AfternoonNeed: Number
   NightNeed: Number,
   Month: Number,
   Day: Number,
