@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, FormArray,
   FormControl, ValidatorFn
 } from '@angular/forms';
 import { Observable } from 'rxjs';
-import 'rxjs/Rx';
 
 interface Event {
   EventId: String,
@@ -62,9 +61,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.events$ = this.http
-      .get<Event[]>('localhost:8000/event/list')
-      .map(data => _.values(data)).do(
-        console.log(this.events$));
+      .get<Event[]>('localhost:8000/event/list');
 
     //let resp = this.http.get('localhost:8000/event/list');
     console.log(this.events$);
