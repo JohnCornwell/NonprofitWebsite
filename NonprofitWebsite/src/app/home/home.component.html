@@ -4,7 +4,7 @@
         <label class="col-md-4">Select an event, and we'll tell you about it:</label>
         <br>
         <select name="selectEvent" id="selectEvent" formControlName="SelectEvent" class="form-control" formArrayName="events">
-          <option *ngFor="let event of eventsFormArray.controls; let i = index" value="{{eventsData[i].description}}">{{eventsData[i].name}}</option>
+          <option *ngFor="let event of eventsFormArray.controls; let i = index" value="{{eventsData[i].Description}}">{{eventsData[i].Name}}</option>
         </select>
     </div>
     <div class="well">

@@ -30,13 +30,7 @@ interface Event {
 export class HomeComponent implements OnInit {
   wellText = "Event Description";
   form: FormGroup;
-  eventsData = [
-    { id: 100, name: 'event 1', description: 'test description 1' },
-    { id: 200, name: 'event 2', description: 'test description 2' },
-    { id: 300, name: 'event 3', description: 'test description 3' },
-    { id: 400, name: 'event 4', description: 'test description 4' }
-  ];
-  events$: Observable<Event[]> = new Observable();
+  eventsData: Array<Event> = new Array<Event>();
 
   get eventsFormArray() {
     return this.form.controls.events as FormArray;
@@ -47,12 +41,6 @@ export class HomeComponent implements OnInit {
       SelectEvent: [''],
       events: new FormArray([])
     });
-
-    this.addEvents();
-  }
-
-  private addEvents() {
-    this.eventsData.forEach(() => this.eventsFormArray.push(new FormControl()));
   }
 
   submit() {
@@ -60,14 +48,11 @@ export class HomeComponent implements OnInit {
     this.wellText = this.form.get('SelectEvent')?.value;
   }
 
-  
-
   ngOnInit(): void {
-    this.events$ = this.http
-      .get<Event[]>('localhost:8000/event/list').pipe(map((response: any) => response.json()));
-
-    //let resp = this.http.get('localhost:8000/event/list');
-    console.log(this.events$);
+    this.http.get<any>("/event/list").subscribe((result: Array<Event>) => {
+      result.forEach(() => this.eventsFormArray.push(new FormControl()));
+      this.eventsData = result;
+    });
   }
 
 }

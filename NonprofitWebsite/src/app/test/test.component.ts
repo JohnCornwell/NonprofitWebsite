@@ -7,9 +7,6 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./test.component.css']
 })
 export class TestComponent{
-
-  readonly ROOT_URL = 'localhost:8000';
-
   posts: any;
 
   constructor(private http: HttpClient) { }
