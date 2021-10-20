@@ -25,7 +25,7 @@ export class EventAddComponent implements OnInit {
       Start: ['09:00', Validators.required],
       End: ['17:00', Validators.required],
       Description: ['']
-    }, { validators: forbiddenDateValidator });
+    }, { validators: invalidTimeValidator });
   }
 
 
