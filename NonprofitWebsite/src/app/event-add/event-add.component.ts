@@ -4,6 +4,7 @@ import {
   ValidationErrors
 } from '@angular/forms';
 import { EventsService } from '../events.service';
+import { invalidTimeValidator } from '../validators/timeValidator'
 
 @Component({
   selector: 'app-event-add',
@@ -27,7 +28,7 @@ export class EventAddComponent implements OnInit {
     }, { validators: forbiddenDateValidator });
   }
 
-  
+
   ngOnInit(): void {
   }
 
@@ -37,7 +38,6 @@ export class EventAddComponent implements OnInit {
       this.form.get('date')?.value, this.form.get('Start')?.value, this.form.get('End')?.value,
       this.form.get('Description')?.value);
   }
-
 }
 
 /* Date must be tomorrow or in the future */
@@ -48,32 +48,3 @@ function forbiddenDateValidator(): ValidatorFn {
     return input.getTime() < tomorrow.getTime() ? { forbiddenDate: { value: control.value } } : null;
   };
 }
-;
-// const invalidTimeValidator(): ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-//     const startTime = control.get('Start');
-//     const endTime = control.get('End');
-//     console.log("Validate");
-//     if (startTime && endTime) {
-//       console.log("In conditional");
-//       const sTime:string = startTime.value; //string hh:mm
-//       const eTime:string = endTime.value;  //string hh:mm
-//       const startHour = sTime.substring(0, 2);
-//       const startMin = sTime.substring(3);
-//       let sHour = parseInt(startHour);
-//       let sMin = parseInt(startMin);
-//       const endHour = eTime.substring(0, 2);
-//       const endMin = eTime.substring(3);
-//       let eHour = parseInt(endHour);
-//       let eMin = parseInt(endMin);
-//       console.log(sTime + " " + eTime);
-//       if (sHour > eHour) {
-//         //start is after end
-//         return { forbiddenDate: { value: true } };
-//       } else if (sHour == eHour && sMin >= eMin) {
-//         //start is the same or after end
-//         return { forbiddenDate: { value: true } };
-//       }
-//     }
-//     return null;
-//   }
-// };

@@ -5,8 +5,11 @@
     "\\NonprofitWebsite\\Server",
     "\\NonprofitWebsite\\Server\\server",
     "\\NonprofitWebsite\\Server\\server\\controllers",
-    "\\NonprofitWebsite\\Server\\server\\routes"
+    "\\NonprofitWebsite\\Server\\server\\routes",
+    "\\NonprofitWebsite\\src",
+    "\\NonprofitWebsite\\src\\app",
+    "\\NonprofitWebsite\\src\\app\\event-add"
   ],
-  "SelectedNode": "\\NonprofitWebsite\\Server\\server\\routes\\index.js",
+  "SelectedNode": "\\NonprofitWebsite\\src\\app\\event-add\\event-add.component.ts",
   "PreviewInSolutionExplorer": false
 }
