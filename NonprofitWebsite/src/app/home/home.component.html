@@ -1,14 +1,14 @@
+<h3>Look at all the cool stuff we do!</h3>
 <form [formGroup]="form" (ngSubmit)="submit()">
     <div class="form-group">
-        <label class="col-md-4">Look at all the cool stuff we do!</label>
+        <label class="col-md-4">Select an event, and we'll tell you about it:</label>
         <br>
         <select name="selectEvent" id="selectEvent" formControlName="SelectEvent" class="form-control" formArrayName="events">
           <option *ngFor="let event of eventsFormArray.controls; let i = index" value="{{eventsData[i].description}}">{{eventsData[i].name}}</option>
         </select>
     </div>
-    <button>show</button>
-    <br><br>
-    <div class="well" *ngIf="this.showWell">
+    <div class="well">
         {{this.wellText}}
     </div>
+    <button class="btn btn-default">show</button>
 </form>

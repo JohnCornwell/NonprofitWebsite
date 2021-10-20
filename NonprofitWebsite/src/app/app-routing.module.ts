@@ -9,6 +9,7 @@ import { EventAddComponent } from './event-add/event-add.component';
 import { EventEditComponent } from './event-edit/event-edit.component';
 import { EventGetComponent } from './event-get/event-get.component';
 import { AccountCreateComponent } from './account-create/account-create.component';
+import { TestComponent } from './test/test.component';
 
 const routes: Routes = [ 
   { 
@@ -38,6 +39,10 @@ const routes: Routes = [
   {
     path: 'events',
     component: EventGetComponent
+  },
+  {
+    path: 'test',
+    component: TestComponent
   },
   { 
     path: '**', 

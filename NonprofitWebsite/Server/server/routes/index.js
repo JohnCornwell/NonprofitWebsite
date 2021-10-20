@@ -59,7 +59,7 @@ module.exports = (app) => {
     }
   });
 
-  app.post('event/volunteer', eventController.volunter) //volunteer for a time slot
+  app.post('event/volunteer', eventController.volunteer) //volunteer for a time slot
 
   /* all user functions after this point require admin status */
   app.all('/event/*', (req, res, next) => {
