@@ -8,13 +8,15 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TestComponent{
 
-  readonly ROOT_URL = 'http://jsonplaceholder.typicode.com';
+  readonly ROOT_URL = 'localhost:8000';
 
   posts: any;
 
   constructor(private http: HttpClient) { }
 
   getPosts(){
-    this.posts = this.http.get(this.ROOT_URL + "/posts")
+    this.posts = this.http.get<any>("/event/list").subscribe((result: Response) => {
+      console.log(result);
+    });
   }
 }
