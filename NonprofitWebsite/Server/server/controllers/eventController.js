@@ -41,7 +41,7 @@ module.exports = {
   list(req, res) {
     return Event
       .findAll()
-      .then(Event => res.status(200).send(Event.toJSON()))
+      .then(Event => res.status(200).send(Event))
       .catch(error => res.status(400).send(error));
   },
 
