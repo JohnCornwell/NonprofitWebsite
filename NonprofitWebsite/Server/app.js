@@ -4,7 +4,7 @@ const sessions = require('express-session');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const db = require('./server/models/index');
-const User = db['user'];
+let User = db['user'];
 //database connection defined in models
 
 // Set up the express app

@@ -1,5 +1,5 @@
 import { HttpClient, HttpRequest } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵCodegenComponentFactoryResolver } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { get } from 'http';
 import { type } from 'os';
@@ -45,19 +45,19 @@ export class AccountCreateComponent implements OnInit {
   }
 
   createAccount(Name: String, Lastname: String, Middlename: String, Username: String, Password: String, PasswordCheck: String, Type: String){
-    if(this.validateAccount(Username, Password, PasswordCheck)){
-      var body = {
-        Username: Username,
-        Password: Password,
-        FirstName: Name,
-        MiddleName: Middlename,
-        LastName: Lastname,
-        Type: Type
-      }
-      console.log(body);
-      var resp = this.http.post('localhost:8000/signup', body);
-      console.log(resp);
+    var body = {
+      Username: Username,
+      Password: Password,
+      FirstName: Name,
+      MiddleName: Middlename,
+      LastName: Lastname,
+      UserType: Type,
+      Deleted: false
     }
+
+    this.http.post('/signup', body).subscribe((result: any) => {
+      console.log(result);
+    });;
   }
   
   validateAccount(Username: String, Password: String, PasswordCheck: String){
