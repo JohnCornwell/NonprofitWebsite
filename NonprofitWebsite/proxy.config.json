@@ -1,0 +1,9 @@
+{
+    "context": [
+       "/event",
+       "/api",
+       "/signup"
+    ],
+    "target": "http://localhost:8000",
+    "secure": false
+ }
