@@ -5,10 +5,10 @@ const Hosts = db['hosts'];
  * parameter is the response we're preparing to eventually send back to
  * the client in response to their request */
 module.exports = {
-  findByOrgID: function (OrgId) {
+  findByProgID: function (ProgId) {
     return Hosts.findAll({
       where: {
-        OrgId: OrgId
+        ProgId: ProgId
       }
     })
   },
@@ -24,10 +24,10 @@ module.exports = {
   create(req, res) {
     return Hosts
       .create({
-        OrgId: req.body.OrgId,
+        ProgId: req.body.ProgId,
         EventId: req.body.EventId
       })
-      .then(Donates => res.status(201).send(Hosts))
+      .then(Hosts => res.status(201).send(Hosts))
       .catch(error => res.status(400).send(error));
   },
 
@@ -38,13 +38,13 @@ module.exports = {
       .catch(error => res.status(400).send(error));
   },
 
-  retrieveOrganizations(req, res) {
+  retrievePrograms(req, res) {
     return Hosts
       .findByEventId(req.params.EventId)
       .then(Hosts => {
         if (!Hosts) {
           return res.status(404).send({
-            message: 'No Organization relationships found',
+            message: 'No Program relationships found',
           });
         }
         return res.status(200).send(Hosts);
@@ -54,7 +54,7 @@ module.exports = {
 
   retrieveEvents(req, res) {
     return Hosts
-      .findByOrgID(req.params.OrgId)
+      .findByProgID(req.params.ProgId)
       .then(Hosts => {
         if (!Hosts) {
           return res.status(404).send({

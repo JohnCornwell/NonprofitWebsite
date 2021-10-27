@@ -4,11 +4,11 @@
     "\\NonprofitWebsite",
     "\\NonprofitWebsite\\Server",
     "\\NonprofitWebsite\\Server\\server",
-    "\\NonprofitWebsite\\Server\\server\\controllers",
-    "\\NonprofitWebsite\\Server\\server\\routes",
+    "\\NonprofitWebsite\\Server\\server\\models",
     "\\NonprofitWebsite\\src",
     "\\NonprofitWebsite\\src\\app",
-    "\\NonprofitWebsite\\src\\app\\event-add"
+    "\\NonprofitWebsite\\src\\app\\event-add",
+    "\\NonprofitWebsite\\src\\app\\validators"
   ],
   "SelectedNode": "\\NonprofitWebsite\\src\\app\\event-add\\event-add.component.ts",
   "PreviewInSolutionExplorer": false
