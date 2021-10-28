@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('supports', {
+  return sequelize.define('volunteers', {
     UserID: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -9,31 +9,35 @@ module.exports = function(sequelize, DataTypes) {
         key: 'UserID'
       }
     },
-    OrgID: {
+    EventID: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'organization',
-        key: 'OrgID'
+        model: 'event',
+        key: 'EventID'
       }
+    },
+    Deleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false
     }
   }, {
     sequelize,
-    tableName: 'supports',
+    tableName: 'volunteers',
     timestamps: false,
     indexes: [
       {
-        name: "UserID",
+        name: "VolunteersUserID",
         using: "BTREE",
         fields: [
           { name: "UserID" },
         ]
       },
       {
-        name: "SupportsOrgId",
+        name: "VolunteersEventID",
         using: "BTREE",
         fields: [
-          { name: "OrgID" },
+          { name: "EventID" },
         ]
       },
     ]

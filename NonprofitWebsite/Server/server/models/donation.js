@@ -7,22 +7,6 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    UserID: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'user',
-        key: 'UserID'
-      }
-    },
-    OrgID: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'organization',
-        key: 'OrgID'
-      }
-    },
     Type: {
       type: DataTypes.STRING(15),
       allowNull: false
@@ -58,20 +42,6 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "DonationId" },
-        ]
-      },
-      {
-        name: "DonationUserID",
-        using: "BTREE",
-        fields: [
-          { name: "UserID" },
-        ]
-      },
-      {
-        name: "DonationOrgID",
-        using: "BTREE",
-        fields: [
-          { name: "OrgID" },
         ]
       },
     ]

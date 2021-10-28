@@ -1,12 +1,12 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('hosts', {
-    OrgID: {
+    ProgID: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'organization',
-        key: 'OrgID'
+        model: 'program',
+        key: 'ProgID'
       }
     },
     EventID: {
@@ -23,10 +23,10 @@ module.exports = function(sequelize, DataTypes) {
     timestamps: false,
     indexes: [
       {
-        name: "HostsOrgID",
+        name: "HostsProgID",
         using: "BTREE",
         fields: [
-          { name: "OrgID" },
+          { name: "ProgID" },
         ]
       },
       {
