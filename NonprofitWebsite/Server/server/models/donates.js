@@ -14,7 +14,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       references: {
         model: 'donation',
-        key: 'DonationId'
+        key: 'DonationID'
       }
     }
   }, {

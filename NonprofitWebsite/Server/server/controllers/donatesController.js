@@ -8,7 +8,7 @@ module.exports = {
   findByUserId: function (id) {
     return Donates.findAll({
       where: {
-        UserId: id
+        UserID: id
       }
     })
   },
@@ -16,7 +16,7 @@ module.exports = {
   findByDonationId: function (id) {
     return Donates.findAll({
       where: {
-        DonationId: id
+        DonationID: id
       }
     })
   },
@@ -24,17 +24,17 @@ module.exports = {
   create(req, res) {
     return Donates
       .create({
-        UserId: req.body.UserId,
-        DonationId: req.body.DonationId
+        UserID: req.body.UserId,
+        DonationID: req.body.DonationId
       })
-      .then(Donates => res.status(201).send(Donates))
+      .then(Donates => res.status(201).send(JSON.stringify(Donates)))
       .catch(error => res.status(400).send(error));
   },
 
   list(req, res) {
     return Donates
       .findAll()
-      .then(Donates => res.status(200).send(Donates))
+      .then(Donates => res.status(200).send(JSON.stringify(Donates)))
       .catch(error => res.status(400).send(error));
   },
 
@@ -47,7 +47,7 @@ module.exports = {
             message: 'No Donation relationships found',
           });
         }
-        return res.status(200).send(Donates);
+        return res.status(200).send(JSON.stringify(Donates));
       })
       .catch(error => res.status(400).send(error));
   },
@@ -61,7 +61,7 @@ module.exports = {
             message: 'No User relationships found',
           });
         }
-        return res.status(200).send(Donates);
+        return res.status(200).send(JSON.stringify(Donates));
       })
       .catch(error => res.status(400).send(error));
   },

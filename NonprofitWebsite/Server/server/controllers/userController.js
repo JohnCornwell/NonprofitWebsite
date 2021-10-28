@@ -23,14 +23,14 @@ module.exports = {
         UserType: req.body.UserType,
         Deleted: req.body.Deleted,
       })
-      .then(User => res.status(201).send(User))
+      .then(User => res.status(201).send(JSON.stringify(User)))
       .catch(error => res.status(400).send(error));
   },
 
   list(req, res) {
     return User
       .findAll()
-      .then(User => res.status(200).send(User))
+      .then(User => res.status(200).send(JSON.stringify(User)))
       .catch(error => res.status(400).send(error));
   },
 
@@ -43,7 +43,7 @@ module.exports = {
             message: 'User Not Found',
           });
         }
-        return res.status(200).send(User);
+        return res.status(200).send(JSON.stringify(User));
       })
       .catch(error => res.status(400).send(error));
   },
@@ -67,7 +67,7 @@ module.exports = {
             UserType: req.body.UserType || User.UserType,
             Deleted: req.body.Deleted || User.Deleted,
           })
-          .then(() => res.status(200).send(User))  // Send back the updated User.
+          .then(() => res.status(200).send(JSON.stringify(User)))  // Send back the updated User.
           .catch((error) => res.status(400).send(error));
       })
       .catch((error) => res.status(400).send(error));

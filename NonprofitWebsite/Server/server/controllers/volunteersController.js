@@ -1,67 +1,67 @@
 const db = require('../models/index');
-const Contributes = db['contributes'];
+const Volunteers = db['volunteers'];
 
 /*The req parameter is the incoming request from the client. The res
  * parameter is the response we're preparing to eventually send back to
  * the client in response to their request */
 module.exports = {
   findByUser: function (id) {
-    return Contributes.findAll({
+    return Volunteers.findAll({
       where: {
-        UserId: id
+        UserID: id
       }
     })
   },
 
   findByOrg: function (id) {
-    return Contributes.findAll({
+    return Volunteers.findAll({
       where: {
-        OrgId: id
+        ProgID: id
       }
     })
   },
 
   create(req, res) {
-    return Contributes
+    return Volunteers
       .create({
-        UserId: req.body.UserId,
-        OrgId: req.body.OrgId
+        UserID: req.body.UserId,
+        ProgID: req.body.ProgID
       })
-      .then(Contributes => res.status(201).send(Contributes))
+      .then(Volunteers => res.status(201).send(JSON.stringify(Volunteers)))
       .catch(error => res.status(400).send(error));
   },
 
   list(req, res) {
-    return Contributes
+    return Volunteers
       .findAll()
-      .then(Contributes => res.status(200).send(Contributes))
+      .then(Volunteers => res.status(200).send(JSON.stringify(Volunteers)))
       .catch(error => res.status(400).send(error));
   },
 
   retrieveOrgs(req, res) {
-    return Contributes
+    return Volunteers
       .findByUser(req.params.UserId)
-      .then(Contributes => {
-        if (!Contributes) {
+      .then(Volunteers => {
+        if (!Volunteers) {
           return res.status(404).send({
             message: 'No Organization relationships found',
           });
         }
-        return res.status(200).send(Contributes);
+        return res.status(200).send(JSON.stringify(Volunteers));
       })
       .catch(error => res.status(400).send(error));
   },
 
   retrieveUsers(req, res) {
-    return Contributes
-      .findByOrg(req.params.OrgId)
-      .then(Contributes => {
-        if (!Contributes) {
+    return Volunteers
+      .findByOrg(req.params.ProgID)
+      .then(Volunteers => {
+        if (!Volunteers) {
           return res.status(404).send({
             message: 'No User relationships found',
           });
         }
-        return res.status(200).send(Contributes);
+        return res.status(200).send(JSON.stringify(Volunteers));
       })
       .catch(error => res.status(400).send(error));
   },

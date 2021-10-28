@@ -13,7 +13,7 @@ module.exports = {
   findByName: function (id) {
     return db.Event.findAll({
       where: {
-        EventId: id
+        EventID: id
       }
     })
   },
@@ -34,7 +34,7 @@ module.exports = {
         EndMinute: req.body.EndMinute,
         Description: req.body.Description
       })
-      .then(Event => res.status(201).send(Event))
+      .then(Event => res.status(201).send(JSON.stringify(Event)))
       .catch(error => res.status(400).send(error));
   },
 
@@ -54,7 +54,7 @@ module.exports = {
             message: 'Event Not Found',
           });
         }
-        return res.status(200).send(Event);
+        return res.status(200).send(JSON.stringify(Event));
       })
       .catch(error => res.status(400).send(error));
   },
@@ -83,7 +83,7 @@ module.exports = {
             EndMinute: req.body.EndMinute || Event.EndMinute,
             Description: req.body.Description || Event.Description
           })
-          .then(() => res.status(200).send(Event))
+          .then(() => res.status(200).send(JSON.stringify(Event)))
           .catch((error) => res.status(400).send(error));
       })
       .catch((error) => res.status(400).send(error));
@@ -106,6 +106,8 @@ module.exports = {
       .catch(error => res.status(400).send(error));
   },
 
+  /* this method will update one of the need fields with the calculated need
+   * after a volunteer volunteers for a time slot in the event. */
   volunteer(req, res) {
     return Event
       .findById(req.body.EventId)

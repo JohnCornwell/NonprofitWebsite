@@ -8,7 +8,7 @@ module.exports = {
   findByProgID: function (ProgId) {
     return Hosts.findAll({
       where: {
-        ProgId: ProgId
+        ProgID: ProgId
       }
     })
   },
@@ -16,7 +16,7 @@ module.exports = {
   findByEventId: function (EventId) {
     return Hosts.findAll({
       where: {
-        EventId: EventId
+        EventID: EventId
       }
     })
   },
@@ -24,17 +24,17 @@ module.exports = {
   create(req, res) {
     return Hosts
       .create({
-        ProgId: req.body.ProgId,
-        EventId: req.body.EventId
+        ProgID: req.body.ProgId,
+        EventID: req.body.EventId
       })
-      .then(Hosts => res.status(201).send(Hosts))
+      .then(Hosts => res.status(201).send(JSON.stringify(Hosts)))
       .catch(error => res.status(400).send(error));
   },
 
   list(req, res) {
     return Hosts
       .findAll()
-      .then(Hosts => res.status(200).send(Hosts))
+      .then(Hosts => res.status(200).send(JSON.stringify(Hosts)))
       .catch(error => res.status(400).send(error));
   },
 
@@ -47,7 +47,7 @@ module.exports = {
             message: 'No Program relationships found',
           });
         }
-        return res.status(200).send(Hosts);
+        return res.status(200).send(JSON.stringify(Hosts));
       })
       .catch(error => res.status(400).send(error));
   },
@@ -61,7 +61,7 @@ module.exports = {
             message: 'No Event relationships found',
           });
         }
-        return res.status(200).send(Hosts);
+        return res.status(200).send(JSON.stringify(Hosts));
       })
       .catch(error => res.status(400).send(error));
   },

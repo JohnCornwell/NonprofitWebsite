@@ -1,11 +1,10 @@
 const userController = require('../controllers/userController');
 const eventController = require('../controllers/eventController');
-const orgController = require('../controllers/organizationController');
+const programController = require('../controllers/programController');
 const donationController = require('../controllers/donationController');
 const hostsController = require('../controllers/hostsController');
-const supportsController = require('../controllers/supportsController');
 const donatesController = require('../controllers/donatesController');
-const contributesController = require('../controllers/contributesController');
+const volunteersController = require('../controllers/volunteersController');
 const needsController = require('../controllers/needsController');
 
 module.exports = (app) => {
@@ -70,6 +69,6 @@ module.exports = (app) => {
     }
   });
 
-  app.post('/event/create', eventController.create);  //used to create admins
+  app.post('/event/create', eventController.create);  //used to create events by admins
   app.delete('/user/delete', eventController.destroy); //do not call this. Use update to soft delete
 };

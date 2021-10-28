@@ -8,7 +8,7 @@ module.exports = {
   findByEventId: function (EventId) {
     return Needs.findAll({
       where: {
-        EventId: EventId
+        EventID: EventId
       }
     })
   },
@@ -16,7 +16,7 @@ module.exports = {
   findByDonationId: function (id) {
     return Needs.findAll({
       where: {
-        DonationId: id
+        DonationID: id
       }
     })
   },
@@ -24,17 +24,17 @@ module.exports = {
   create(req, res) {
     return Needs
       .create({
-        EventId: req.body.EventId,
-        DonationId: req.body.DonationId
+        EventID: req.body.EventId,
+        DonationID: req.body.DonationId
       })
-      .then(Needs => res.status(201).send(Needs))
+      .then(Needs => res.status(201).send(JSON.stringify(Needs)))
       .catch(error => res.status(400).send(error));
   },
 
   list(req, res) {
     return Needs
       .findAll()
-      .then(Needs => res.status(200).send(Needs))
+      .then(Needs => res.status(200).send(JSON.stringify(Needs)))
       .catch(error => res.status(400).send(error));
   },
 
@@ -47,7 +47,7 @@ module.exports = {
             message: 'No Donation relationships found',
           });
         }
-        return res.status(200).send(Needs);
+        return res.status(200).send(JSON.stringify(Needs));
       })
       .catch(error => res.status(400).send(error));
   },
@@ -61,7 +61,7 @@ module.exports = {
             message: 'No Event relationships found',
           });
         }
-        return res.status(200).send(Needs);
+        return res.status(200).send(JSON.stringify(Needs));
       })
       .catch(error => res.status(400).send(error));
   },
