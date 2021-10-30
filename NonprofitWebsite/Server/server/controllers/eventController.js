@@ -10,7 +10,7 @@ module.exports = {
     })
   },
 
-  findByName: function (id) {
+  findById: function (id) {
     return db.Event.findAll({
       where: {
         EventID: id

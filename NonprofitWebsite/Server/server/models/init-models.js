@@ -5,7 +5,6 @@ var _event = require("./event");
 var _hosts = require("./hosts");
 var _needs = require("./needs");
 var _program = require("./program");
-var _supports = require("./supports");
 var _user = require("./user");
 var _volunteers = require("./volunteers");
 
@@ -16,7 +15,6 @@ function initModels(sequelize) {
   var hosts = _hosts(sequelize, DataTypes);
   var needs = _needs(sequelize, DataTypes);
   var program = _program(sequelize, DataTypes);
-  var supports = _supports(sequelize, DataTypes);
   var user = _user(sequelize, DataTypes);
   var volunteers = _volunteers(sequelize, DataTypes);
 
@@ -32,12 +30,8 @@ function initModels(sequelize) {
   event.hasMany(volunteers, { as: "volunteers", foreignKey: "EventID"});
   hosts.belongsTo(program, { as: "Prog", foreignKey: "ProgID"});
   program.hasMany(hosts, { as: "hosts", foreignKey: "ProgID"});
-  supports.belongsTo(program, { as: "Prog", foreignKey: "ProgID"});
-  program.hasMany(supports, { as: "supports", foreignKey: "ProgID"});
   donates.belongsTo(user, { as: "User", foreignKey: "UserID"});
   user.hasMany(donates, { as: "donates", foreignKey: "UserID"});
-  supports.belongsTo(user, { as: "User", foreignKey: "UserID"});
-  user.hasMany(supports, { as: "supports", foreignKey: "UserID"});
   volunteers.belongsTo(user, { as: "User", foreignKey: "UserID"});
   user.hasMany(volunteers, { as: "volunteers", foreignKey: "UserID"});
 
@@ -48,7 +42,6 @@ function initModels(sequelize) {
     hosts,
     needs,
     program,
-    supports,
     user,
     volunteers,
   };

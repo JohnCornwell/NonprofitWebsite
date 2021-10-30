@@ -95,23 +95,22 @@ app.post('/signup', function (req, res) {
 });
 
 app.get('/api', (req, res, next) => {
-    res.send("Welcome to the API");
+  res.send({ message: "Welcome to the API" });
 });
 
-const orgController = require('./server/controllers/organizationController');
-app.get('/getOrganizations', orgController.list) //list of all orgs
-
-// methods to retrieve events given an orgId
 const hostsController = require('./server/controllers/hostsController');
 const eventController = require('./server/controllers/eventController');
+const programController = require('./server/controllers/programController');
 //call /getHosts once, then getEventById for each Id returned
-app.post('/getHosts', hostsController.retrieveEvents); //req.body needs OrgId
+app.post('/getHosts', hostsController.retrieveEvents); //req.body needs ProgID
 app.post('/getEventById', (req, res, next) => {//req.body needs EventId
-  res.send(eventController.findById(req.body.EventId));
+  res.send(JSON.stringify(eventController.findById(req.body.EventId)));
 });
 
 app.post('/event/retrieve', eventController.retrieve); //anyone can retrieve an event by name
 app.get('/event/list', eventController.list) //anyone can view any event
+app.post('/program/retrieve', programController.retrieve); //anyone can retrieve a program by name
+app.get('/program/list', programController.list) //anyone can view any program
 
 /* authenticate user is logged in before fufilling request */
 app.all('/*', (req, res, next) => {

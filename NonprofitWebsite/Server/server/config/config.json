@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "nonprofit",
+    "password": "nonprofit",
+    "database": "nonprofitDb",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "nonprofit",
+    "password": "nonprofit",
+    "database": "nonprofitDb",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "nonprofit",
+    "password": "nonprofit",
+    "database": "nonprofitDb",
+    "host": "localhost",
+    "dialect": "mysql"
+  }
+}
