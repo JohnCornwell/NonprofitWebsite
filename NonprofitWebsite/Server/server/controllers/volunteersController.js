@@ -13,10 +13,10 @@ module.exports = {
     })
   },
 
-  findByOrg: function (id) {
+  findByEvent: function (id) {
     return Volunteers.findAll({
       where: {
-        ProgID: id
+        EventID: id
       }
     })
   },
@@ -25,7 +25,9 @@ module.exports = {
     return Volunteers
       .create({
         UserID: req.body.UserId,
-        ProgID: req.body.ProgID
+        ProgID: req.body.ProgId,
+        Deleted: req.body.Deleted,
+        Slot: req.body.Slot
       })
       .then(Volunteers => res.status(201).send(JSON.stringify(Volunteers)))
       .catch(error => res.status(400).send(error));
@@ -38,7 +40,7 @@ module.exports = {
       .catch(error => res.status(400).send(error));
   },
 
-  retrieveOrgs(req, res) {
+  retrieveEvents(req, res) {
     return Volunteers
       .findByUser(req.params.UserId)
       .then(Volunteers => {
@@ -54,7 +56,7 @@ module.exports = {
 
   retrieveUsers(req, res) {
     return Volunteers
-      .findByOrg(req.params.ProgID)
+      .findByEvent(req.params.EventId)
       .then(Volunteers => {
         if (!Volunteers) {
           return res.status(404).send({

@@ -102,7 +102,8 @@ const hostsController = require('./server/controllers/hostsController');
 const eventController = require('./server/controllers/eventController');
 const programController = require('./server/controllers/programController');
 //call /getHosts once, then getEventById for each Id returned
-app.post('/getHosts', hostsController.retrieveEvents); //req.body needs ProgID
+app.post('/hosts/retrievePrograms', hostsController.retrievePrograms); //req.body needs EventId
+app.post('/hosts/retrieveEvents', hostsController.retrieveEvents); //req.body needs ProgId
 app.post('/getEventById', (req, res, next) => {//req.body needs EventId
   res.send(JSON.stringify(eventController.findById(req.body.EventId)));
 });

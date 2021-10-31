@@ -20,7 +20,11 @@ module.exports = function(sequelize, DataTypes) {
     Deleted: {
       type: DataTypes.BOOLEAN,
       allowNull: false
-    }
+    },
+    Slot: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
   }, {
     sequelize,
     tableName: 'volunteers',
