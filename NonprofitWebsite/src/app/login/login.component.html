@@ -3,8 +3,8 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <!-- Username -->
       <div class="form-group">
-        <label class="col-md-4">Username</label>
-        <input type="text" class="form-control form-control-lg"
+        <label for="username" class="col-md-4">Username</label>
+        <input name ="username" type="text" class="form-control form-control-lg"
                formControlName="Username"
                #Username />
       </div>
@@ -34,6 +34,6 @@
     </form>
   </div>
   <div>
-    <a style="color:rgb(94, 94, 240); float:right" href="account/create">Make an account</a>
+    <a style="color:rgb(94, 94, 240); float:right" href="Account/create">Make an account</a>
   </div>
 </div>

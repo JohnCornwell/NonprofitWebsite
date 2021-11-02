@@ -1,12 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\NonprofitWebsite",
-    "\\NonprofitWebsite\\Server",
-    "\\NonprofitWebsite\\Server\\server",
-    "\\NonprofitWebsite\\Server\\server\\config",
-    "\\NonprofitWebsite\\Server\\server\\routes"
+    "\\NonprofitWebsite"
   ],
-  "SelectedNode": "\\NonprofitWebsite\\Server\\server\\models",
+  "SelectedNode": "\\NonprofitWebsite\\Server",
   "PreviewInSolutionExplorer": false
 }

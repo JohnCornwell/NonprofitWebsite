@@ -8,16 +8,16 @@
   }
 
   /* Navigation Bar Style */
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: rgb(51, 18, 172);
-    position: -webkit-sticky; /* Safari */
-    position: sticky;
-    top: 0;
-  }
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: rgb(3, 252, 177);
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+}
   
   li {
     float: left;
@@ -30,16 +30,16 @@
     padding: 14px 16px;
     text-decoration: none;
   }
-  
-  li a:hover {
-    background-color: rgb(6, 23, 121);
-  }
+
+    li a:hover {
+      background-color: rgb(3, 252, 177);
+    }
 
   .orgTitle {
     font-size: 20px;
   }
 
-  .active {
-    background-color: #6250ff;
-    font-size: 21px;
-  }
+.active {
+  background-color: #fc039d;
+  font-size: 21px;
+}

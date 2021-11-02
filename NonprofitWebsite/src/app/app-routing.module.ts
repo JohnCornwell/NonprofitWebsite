@@ -17,31 +17,31 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'home',
+    path: 'Home',
     component: HomeComponent
   },
   { 
-    path: 'login', 
+    path: 'Login', 
     component: LoginComponent
   },
   {
-    path: 'event/create',
+    path: 'Event/create',
     component: EventAddComponent
   },
   {
-    path: 'account/create',
+    path: 'Account/create',
     component: AccountCreateComponent
   },
   {
-    path: 'edit/:id',
+    path: 'Edit/:id',
     component: EventEditComponent
   },
   {
-    path: 'events',
+    path: 'Events',
     component: EventGetComponent
   },
   {
-    path: 'test',
+    path: 'Test',
     component: TestComponent
   },
   { 

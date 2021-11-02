@@ -2,8 +2,17 @@
     "context": [
        "/event",
        "/api",
-       "/signup"
+       "/signup",
+       "/login",
+       "/logout",
+       "/hosts",
+       "/volunteers",
+       "/program",
+       "/user",
+       "/donation",
+       "/donates",
+       "/needs"
     ],
-    "target": "http://localhost:8000",
+    "target": "localhost:8000",
     "secure": false
  }

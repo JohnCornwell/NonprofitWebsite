@@ -2,10 +2,14 @@
 form {
     border: 3px solid #f1f1f1;
   }
+
+label{
+    text-align: right;
+}
   
-  /* Full-width inputs */
+  /* inputs */
   input[type=text], input[type=password] {
-    width: 100%;
+    width: 40%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -14,19 +18,20 @@ form {
   }
   
   /* Set a style for all buttons */
-  button {
-    background-color: #04AA6D;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-  }
+button {
+  background-color: #03fcb1;
+  color: white;
+  padding: 14px 20px;
+  display: block;
+  margin: 0 auto;
+  border: none;
+  cursor: pointer;
+  width: 40%;
+}
   
   /* Add a hover effect for buttons */
   button:hover {
-    opacity: 0.8;
+    background-color: #fc039d;
   }
   
   /* Add padding to containers */

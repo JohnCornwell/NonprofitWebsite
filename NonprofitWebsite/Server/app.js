@@ -19,6 +19,11 @@ app.use(sessions({
   resave: false
 }));
 
+const cors = require('cors');
+app.use(cors({
+  origin: '*'
+}));
+
 // parsing the incoming data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -38,7 +43,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.all('/logout', (req, res) => {
   req.session.destroy();
-  res.redirect('localhost:4200/');
+  res.status(200).send("Goodbye!");
 });
 
 app.post('/login', (req, res) => {
@@ -46,15 +51,14 @@ app.post('/login', (req, res) => {
     if (err) {
       res.send("Unable to create session.");
     } else {
-      person = null;
-      person = User.findByUsername(req.body.Username)
-      if (!person) {
+      person = userController.findByUsername(req.body.Username)
+      if (person.length == 0) {
         // user does not exist
         res.status(400).send("User does not exist");
       } else {
         // user exists
-        if (User.Password == req.body.Password) {
-          req.session.User = User;
+        if (person[0].Password == req.body.Password) {
+          req.session.User = person[0];
         } else {
           res.status(400).send("Incorrect Password");
         }
@@ -64,28 +68,19 @@ app.post('/login', (req, res) => {
 });
 
 app.post('/signup', function (req, res) {
-  if (!req.body.Username || !req.body.Password) {
-    res.status("400");
-    res.send("Invalid details!");
+  if (req.body.Username == undefined || req.body.Password == undefined) {
+    res.status(400).send("Invalid details!");
   } else {
     //see if user exists
-    User = null;
-    User
-      .findByUsername(req.params.Username)
+    User.count({
+      where: {
+        Username: req.body.Username
+      }
+    })
       .then(User => {
-        if (!User) {
+        if (User == 0) {
           // user does not exist, so create it
-          User.create({
-            Username: req.body.Username,
-            Password: req.body.Password,
-            FirstName: req.body.FirstName,
-            MiddleName: req.body.MiddleName || '',
-            LastName: req.body.LastName,
-            UserType: req.body.UserType,
-            Deleted: req.body.Deleted,
-          })
-            .then(User => req.session.user = User.Username)
-            .catch(error => res.status(400).send(error));
+          userController.create(req, res)
         } else {
           // user exists, so give error
           res.status(400).send("User already exists.");
@@ -101,6 +96,7 @@ app.get('/api', (req, res, next) => {
 const hostsController = require('./server/controllers/hostsController');
 const eventController = require('./server/controllers/eventController');
 const programController = require('./server/controllers/programController');
+const userController = require('./server/controllers/userController');
 //call /getHosts once, then getEventById for each Id returned
 app.post('/hosts/retrievePrograms', hostsController.retrievePrograms); //req.body needs EventId
 app.post('/hosts/retrieveEvents', hostsController.retrieveEvents); //req.body needs ProgId

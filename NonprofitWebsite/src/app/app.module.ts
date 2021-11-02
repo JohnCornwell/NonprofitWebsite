@@ -13,12 +13,12 @@ import { EventAddComponent } from './event-add/event-add.component';
 import { EventGetComponent } from './event-get/event-get.component';
 import { EventEditComponent } from './event-edit/event-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { OrganizationAddComponent } from './organization-add/organization-add.component';
-import { OrganizationGetComponent } from './organization-get/organization-get.component';
 import { HttpClientModule } from '@angular/common/http';
 import { EventsService } from './events.service';
 import { AccountCreateComponent } from './account-create/account-create.component';
 import { TestComponent } from './test/test.component';
+import { ProgramGetComponent } from './program-get/program-get.component';
+import { ProgramAddComponent } from './program-add/program-add.component';
 
 @NgModule({
   declarations: [
@@ -27,11 +27,11 @@ import { TestComponent } from './test/test.component';
     EventAddComponent,
     EventGetComponent,
     EventEditComponent,
-    OrganizationAddComponent,
-    OrganizationGetComponent,
     AccountCreateComponent,
     HomeComponent,
-    TestComponent
+    TestComponent,
+    ProgramGetComponent,
+    ProgramAddComponent
   ],
   imports: [
     BrowserModule,
