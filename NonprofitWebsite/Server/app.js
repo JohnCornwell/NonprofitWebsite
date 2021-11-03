@@ -51,18 +51,20 @@ app.post('/login', (req, res) => {
     if (err) {
       res.send("Unable to create session.");
     } else {
-      person = userController.findByUsername(req.body.Username)
-      if (person.length == 0) {
-        // user does not exist
-        res.status(400).send("User does not exist");
-      } else {
-        // user exists
-        if (person[0].Password == req.body.Password) {
-          req.session.User = person[0];
-        } else {
-          res.status(400).send("Incorrect Password");
-        }
-      }
+      userController.findByUsername(req.body.Username)
+        .then(person => {
+          if (person.length == 0) {
+            // user does not exist
+            res.status(400).send("User does not exist");
+          } else {
+            // user exists
+            if (person[0].Password == req.body.Password) {
+              req.session.User = person;
+              res.status(200).send(person[0])
+            } else {
+              res.status(400).send("Incorrect Password");
+            }
+          }})
     }
   })
 });

@@ -1,6 +1,6 @@
 {
     "context": [
-       "/event",
+      "/event",
        "/api",
        "/signup",
        "/login",
@@ -13,6 +13,6 @@
        "/donates",
        "/needs"
     ],
-    "target": "localhost:8000",
+    "target": "http://localhost:8000",
     "secure": false
  }

@@ -1,6 +1,7 @@
 import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Component, OnInit, ɵCodegenComponentFactoryResolver } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { get } from 'http';
 import { type } from 'os';
 
@@ -16,7 +17,7 @@ export class AccountCreateComponent implements OnInit {
   isUsernameTaken: boolean = false;
   isAccountNotChosen: boolean = false;
 
-  constructor(private fb: FormBuilder, private http: HttpClient) { 
+  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) { 
     this.form = this.fb.group({
       Name: ['', Validators.required],
       Lastname: ['', Validators.required],
@@ -54,10 +55,14 @@ export class AccountCreateComponent implements OnInit {
       UserType: Type,
       Deleted: false
     }
-
-    this.http.post('/signup', body).subscribe((result: any) => {
-      console.log(result);
-    });;
+    this.http.post<any>("/signup", body, { observe: "response" }).subscribe(result => {
+      if (result.status != 201) {
+        window.confirm(result.statusText);
+      } else {
+        window.alert("Signup successful.");
+        this.router.navigate(['/Login'])
+      }
+    });
   }
   
   validateAccount(Username: String, Password: String, PasswordCheck: String){

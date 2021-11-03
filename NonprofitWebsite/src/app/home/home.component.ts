@@ -49,10 +49,13 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.http.get<any>("/event/list").subscribe((result: Array<Event>) => {
-      result.forEach(() => this.eventsFormArray.push(new FormControl()));
-      this.eventsData = result;
+    this.http.get<any>("/event/list", { observe: "response" }).subscribe(result => {
+      if (result.status != 200) {
+        window.alert("Error in requesting event list from server.");
+      } else {
+        result.body.forEach(() => this.eventsFormArray.push(new FormControl()));
+        this.eventsData = result.body;
+      }
     });
   }
-
 }

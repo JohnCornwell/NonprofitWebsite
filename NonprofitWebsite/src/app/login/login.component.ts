@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +13,7 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   isExistingUser: boolean = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {
     this.form = this.fb.group({
       Username: ['', Validators.required],
       Password: ['', Validators.required]
@@ -27,7 +29,20 @@ export class LoginComponent implements OnInit {
   }
 
   tryLogin(Username: String, Password: String) {
-    // if user is in database
+    var body = {
+      Username: Username,
+      Password: Password
+    }
+    this.http.post<any>("/login", body, { observe: "response" }).subscribe(result => {
+      if (result.status != 200) {
+        window.confirm(result.statusText);
+      } else {
+        //need to set session info in SESSION_STORAGE
+        window.alert("Login successful.");
+        this.router.navigate(['/Home'])
+      }
+    });
+/*    // if user is in database
     this.checkUserInDatabase(Username);
     if(this.isExistingUser)
     {
@@ -49,7 +64,7 @@ export class LoginComponent implements OnInit {
     {
       // not an existing user
 
-    }
+    }*/
   }
 
   checkUserInDatabase(Username: String){

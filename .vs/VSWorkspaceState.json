@@ -1,8 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\NonprofitWebsite"
+    "\\NonprofitWebsite",
+    "\\NonprofitWebsite\\Server",
+    "\\NonprofitWebsite\\Server\\bin",
+    "\\NonprofitWebsite\\Server\\server",
+    "\\NonprofitWebsite\\Server\\server\\controllers",
+    "\\NonprofitWebsite\\src",
+    "\\NonprofitWebsite\\src\\app",
+    "\\NonprofitWebsite\\src\\app\\login",
+    "\\NonprofitWebsite\\src\\app\\program-get"
   ],
-  "SelectedNode": "\\NonprofitWebsite\\Server",
+  "SelectedNode": "\\NonprofitWebsite\\src\\app\\account-create\\account-create.component.ts",
   "PreviewInSolutionExplorer": false
 }
