@@ -8,9 +8,9 @@
     "\\NonprofitWebsite\\Server\\server\\controllers",
     "\\NonprofitWebsite\\src",
     "\\NonprofitWebsite\\src\\app",
-    "\\NonprofitWebsite\\src\\app\\login",
-    "\\NonprofitWebsite\\src\\app\\program-get"
+    "\\NonprofitWebsite\\src\\app\\account-create",
+    "\\NonprofitWebsite\\src\\app\\home"
   ],
-  "SelectedNode": "\\NonprofitWebsite\\src\\app\\account-create\\account-create.component.ts",
+  "SelectedNode": "\\NonprofitWebsite\\Server\\app.js",
   "PreviewInSolutionExplorer": false
 }

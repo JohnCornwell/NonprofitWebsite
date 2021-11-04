@@ -39,6 +39,10 @@ export class LoginComponent implements OnInit {
       } else {
         //need to set session info in SESSION_STORAGE
         window.alert("Login successful.");
+        //this stores the type of permission our user has.
+        //This will not affect the level of permission the client has with the
+        //server. It is only used for determining which UI elements to display
+        sessionStorage.setItem("type", result.body.UserType);
         this.router.navigate(['/Home'])
       }
     });
