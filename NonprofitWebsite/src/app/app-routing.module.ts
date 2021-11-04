@@ -10,6 +10,7 @@ import { EventEditComponent } from './event-edit/event-edit.component';
 import { EventGetComponent } from './event-get/event-get.component';
 import { AccountCreateComponent } from './account-create/account-create.component';
 import { TestComponent } from './test/test.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
 
 const routes: Routes = [ 
   { 
@@ -19,6 +20,18 @@ const routes: Routes = [
   {
     path: 'Home',
     component: HomeComponent
+  },
+  {
+    path: 'home',
+    component: HomeComponent
+  },
+  {
+    path: 'Home/admin',
+    component: AdminHomeComponent
+  },
+  {
+    path: 'home/admin',
+    component: AdminHomeComponent
   },
   { 
     path: 'Login', 

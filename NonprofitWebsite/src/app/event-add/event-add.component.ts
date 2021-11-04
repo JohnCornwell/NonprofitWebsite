@@ -4,7 +4,8 @@ import {
   ValidationErrors
 } from '@angular/forms';
 import { EventsService } from '../events.service';
-import { invalidTimeValidator } from '../validators/timeValidator'
+import { invalidTimeValidator } from '../validators/timeValidator';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-event-add',
@@ -15,7 +16,7 @@ export class EventAddComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private es: EventsService) {
+  constructor(private fb: FormBuilder, private es: EventsService, private router: Router) {
     this.form = this.fb.group({
       EventName: ['', Validators.required],
       MorningNeed: [0, [Validators.required, Validators.min(0)]],
@@ -37,6 +38,10 @@ export class EventAddComponent implements OnInit {
       this.form.get('AfternoonNeed')?.value, this.form.get('NightNeed')?.value,
       this.form.get('date')?.value, this.form.get('Start')?.value, this.form.get('End')?.value,
       this.form.get('Description')?.value);
+  }
+
+  navigateToAdminHome() {
+    this.router.navigate(['/Home/admin']);
   }
 }
 

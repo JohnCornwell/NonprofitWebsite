@@ -19,6 +19,7 @@ import { AccountCreateComponent } from './account-create/account-create.componen
 import { TestComponent } from './test/test.component';
 import { ProgramGetComponent } from './program-get/program-get.component';
 import { ProgramAddComponent } from './program-add/program-add.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ProgramAddComponent } from './program-add/program-add.component';
     HomeComponent,
     TestComponent,
     ProgramGetComponent,
-    ProgramAddComponent
+    ProgramAddComponent,
+    AdminHomeComponent
   ],
   imports: [
     BrowserModule,

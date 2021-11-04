@@ -1,0 +1,15 @@
+<h3>Welcome, Admin person!</h3>
+<form [formGroup]="form">
+    <div class="form-group">
+        <label class="col-md-4">Select an event to edit:</label>
+        <br>
+        <select name="selectEvent" id="selectEvent" formControlName="SelectEvent" class="form-control" formArrayName="events">
+          <option *ngFor="let event of eventsFormArray.controls; let i = index" value="{{eventsData[i].Description}}">{{eventsData[i].Name}}</option>
+        </select>
+    </div>
+    <div class="well">
+        {{this.wellText}}
+    </div>
+    <button class="btn btn-default" (click)="submit()">Edit</button>
+    <button class="btn btn-default" Style="float:right" (click)="navigateToEventAdd()">Add New Event</button>
+</form>
