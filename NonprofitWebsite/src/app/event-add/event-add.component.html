@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-body">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form [formGroup]="form">
       <!-- Section for Event Name -->
       <div class="form-group">
         <label class="col-md-4">Event Name</label>
@@ -114,9 +114,10 @@
       </div>
       <!-- Section for submit button -->
       <div class="form-group">
-        <button type="submit" class="btn btn-primary" [disabled]="form.pristine || form.invalid">
+        <button type="submit" class="btn btn-primary" [disabled]="form.pristine || form.invalid" (click)="onSubmit()">
           Add Event
         </button>
+        <button class="btn btn-default" Style="float:right" (click)="navigateToAdminHome()">Cancel</button>
       </div>
     </form>
   </div>

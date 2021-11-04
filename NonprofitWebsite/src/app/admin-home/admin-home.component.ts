@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { 
   FormBuilder, FormGroup, FormArray, FormControl
 } from '@angular/forms';
+import { Router } from '@angular/router';
 
 interface Event {
   EventId: String,
@@ -21,11 +22,11 @@ interface Event {
 }
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-admin-home',
+  templateUrl: './admin-home.component.html',
+  styleUrls: ['./admin-home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class AdminHomeComponent implements OnInit {
   wellText = "Event Description";
   form: FormGroup;
   eventsData: Array<Event> = new Array<Event>();
@@ -34,7 +35,7 @@ export class HomeComponent implements OnInit {
     return this.form.controls.events as FormArray;
   }
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) {
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) {
     this.form = this.formBuilder.group({
       SelectEvent: [''],
       events: new FormArray([])
@@ -44,6 +45,10 @@ export class HomeComponent implements OnInit {
   submit() {
     console.log(this.form.get('SelectEvent')?.value);
     this.wellText = this.form.get('SelectEvent')?.value;
+  }
+
+  navigateToEventAdd() {
+    this.router.navigate(['/Event/create']);
   }
 
   ngOnInit(): void {
@@ -56,4 +61,5 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+
 }
