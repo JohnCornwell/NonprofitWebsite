@@ -10,11 +10,15 @@ import { Router } from '@angular/router';
 export class EventEditComponent implements OnInit {
 
   ID: number = 0;
+  HasID: boolean = false;
 
   constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    this.ID = this.route.snapshot.params.id;
+    this.ID = this.route.snapshot.params?.id;
+    if(this.ID != undefined){
+      this.HasID = true;
+    }
   }
 
   navigateToAdminHome() {

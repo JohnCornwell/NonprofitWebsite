@@ -52,7 +52,7 @@ export class AdminHomeComponent implements OnInit {
   }
 
   navigateToEventEdit() {
-    this.router.navigate(['/Edit/' + this.form.get('SelectEvent')?.value]);
+    this.router.navigate(['/Event/edit/' + this.form.get('SelectEvent')?.value]);
   }
 
   ngOnInit(): void {

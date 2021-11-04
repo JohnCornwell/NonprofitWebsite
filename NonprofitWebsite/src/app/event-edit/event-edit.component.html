@@ -1,3 +1,4 @@
-<p>Editing event {{ID}}</p>
-<a href="Home/admin">back</a>
 
+<p *ngIf="HasID">Editing event {{ID}}</p>
+<p *ngIf="!HasID">You must specify an event</p>
+<a href="Home/admin">back</a>

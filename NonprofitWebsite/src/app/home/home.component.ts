@@ -26,7 +26,7 @@ interface Event {
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  wellText = "Event Description";
+  wellText = "Select an event to see the description.";
   form: FormGroup;
   eventsData: Array<Event> = new Array<Event>();
 

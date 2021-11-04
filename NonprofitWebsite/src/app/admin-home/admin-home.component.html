@@ -7,6 +7,6 @@
           <option *ngFor="let event of eventsFormArray.controls; let i = index" value="{{eventsData[i].EventID}}">{{eventsData[i].Name}}</option>
         </select>
     </div>
-    <button class="btn btn-default" (click)="navigateToEventEdit()">Edit</button>
+    <button class="btn btn-default" (click)="navigateToEventEdit()" [disabled]="form.get('SelectEvent')?.value === ''">Edit</button>
     <button class="btn btn-default" Style="float:right" (click)="navigateToEventAdd()">Add New Event</button>
 </form>

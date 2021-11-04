@@ -46,7 +46,11 @@ const routes: Routes = [
     component: AccountCreateComponent
   },
   {
-    path: 'Edit/:id',
+    path: 'Event/edit/:id',
+    component: EventEditComponent
+  },
+  {
+    path: 'Event/edit',
     component: EventEditComponent
   },
   {
