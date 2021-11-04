@@ -4,12 +4,9 @@
         <label class="col-md-4">Select an event to edit:</label>
         <br>
         <select name="selectEvent" id="selectEvent" formControlName="SelectEvent" class="form-control" formArrayName="events">
-          <option *ngFor="let event of eventsFormArray.controls; let i = index" value="{{eventsData[i].Description}}">{{eventsData[i].Name}}</option>
+          <option *ngFor="let event of eventsFormArray.controls; let i = index" value="{{eventsData[i].EventID}}">{{eventsData[i].Name}}</option>
         </select>
     </div>
-    <div class="well">
-        {{this.wellText}}
-    </div>
-    <button class="btn btn-default" (click)="submit()">Edit</button>
+    <button class="btn btn-default" (click)="navigateToEventEdit()">Edit</button>
     <button class="btn btn-default" Style="float:right" (click)="navigateToEventAdd()">Add New Event</button>
 </form>

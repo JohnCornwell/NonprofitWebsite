@@ -6,7 +6,7 @@ import {
 import { Router } from '@angular/router';
 
 interface Event {
-  EventId: String,
+  EventID: Number,
   Name: String,
   MorningNeed: Number,
   AfternoonNeed: Number
@@ -43,12 +43,16 @@ export class AdminHomeComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.form.get('SelectEvent')?.value);
+    console.log("ID: " + this.form.get('SelectEvent')?.value);
     this.wellText = this.form.get('SelectEvent')?.value;
   }
 
   navigateToEventAdd() {
     this.router.navigate(['/Event/create']);
+  }
+
+  navigateToEventEdit() {
+    this.router.navigate(['/Edit/' + this.form.get('SelectEvent')?.value]);
   }
 
   ngOnInit(): void {

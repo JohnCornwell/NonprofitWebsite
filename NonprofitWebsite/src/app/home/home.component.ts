@@ -5,7 +5,7 @@ import {
 } from '@angular/forms';
 
 interface Event {
-  EventId: String,
+  EventID: Number,
   Name: String,
   MorningNeed: Number,
   AfternoonNeed: Number
@@ -51,6 +51,7 @@ export class HomeComponent implements OnInit {
       if (result.status != 200) {
         window.alert("Error in requesting event list from server.");
       } else {
+        console.log(result.body);
         result.body.forEach(() => this.eventsFormArray.push(new FormControl()));
         this.eventsData = result.body;
       }
