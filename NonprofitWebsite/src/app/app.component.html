@@ -25,6 +25,7 @@
   </li>
   <!-- Disply admin dropdown if the current user is an admin -->
   <li *ngIf="(type | async) == 'Admin'" style="float:right">
+    <!-- This shows when it should, but my div will not-->
     <a class="active" href="Login" title="Login">IS ADMIN</a>
     <div class="dropdown-menu dropdown-menu-right">
       <button class="dropdown-item" href="/Users">Manage Users</button>
