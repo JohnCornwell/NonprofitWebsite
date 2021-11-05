@@ -3,14 +3,14 @@
     "",
     "\\NonprofitWebsite",
     "\\NonprofitWebsite\\Server",
-    "\\NonprofitWebsite\\Server\\bin",
     "\\NonprofitWebsite\\Server\\server",
     "\\NonprofitWebsite\\Server\\server\\controllers",
     "\\NonprofitWebsite\\src",
     "\\NonprofitWebsite\\src\\app",
     "\\NonprofitWebsite\\src\\app\\account-create",
-    "\\NonprofitWebsite\\src\\app\\home"
+    "\\NonprofitWebsite\\src\\app\\home",
+    "\\NonprofitWebsite\\src\\app\\login"
   ],
-  "SelectedNode": "\\NonprofitWebsite\\Server\\app.js",
+  "SelectedNode": "\\NonprofitWebsite\\src\\app\\login\\login.component.ts",
   "PreviewInSolutionExplorer": false
 }

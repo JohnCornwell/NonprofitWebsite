@@ -1,103 +1,104 @@
 <div class="card">
-    <div class="card-body">
-      <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <!-- First Name -->
-         <div class="form-group">
-          <label class="col-md-4">First Name</label>
-          <input type="text" class="form-control form-control-lg" 
-              required
-              formControlName="Name"
-              #Name />
+  <h1 class="card-title">Create Account</h1>
+  <div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <!-- First Name -->
+      <div class="form-group">
+        <label class="col-md-4">First Name</label>
+        <input type="text" class="form-control form-control-lg"
+               required
+               formControlName="Name"
+               #Name />
+      </div>
+      <div *ngIf="form.controls['Name'].invalid && (form.controls['Name'].dirty || form.controls['Name'].touched)" class="alert alert-danger">
+        <div class="invalid-feedback" *ngIf="form.controls.Name.errors?.required">
+          Name is required.
         </div>
-        <div *ngIf="form.controls['Name'].invalid && (form.controls['Name'].dirty || form.controls['Name'].touched)" class="alert alert-danger">
-          <div class ="invalid-feedback" *ngIf="form.controls.Name.errors?.required">
-            Name is required.
-          </div>
+      </div>
+      <!-- Last Name -->
+      <div class="form-group">
+        <label class="col-md-4">Last Name</label>
+        <input type="text" class="form-control form-control-lg"
+               required
+               formControlName="Lastname"
+               #Lastname />
+      </div>
+      <div *ngIf="form.controls['Lastname'].invalid && (form.controls['Lastname'].dirty || form.controls['Lastname'].touched)" class="alert alert-danger">
+        <div class="invalid-feedback" *ngIf="form.controls.Lastname.errors?.required">
+          Last-name is required.
         </div>
-        <!-- Last Name -->
-        <div class="form-group">
-          <label class="col-md-4">Last Name</label>
-          <input type="text" class="form-control form-control-lg" 
-              required
-              formControlName="Lastname"
-              #Lastname />
+      </div>
+      <!-- Middle Name -->
+      <div class="form-group">
+        <label class="col-md-4">Middle Name (optional)</label>
+        <input type="text" class="form-control form-control-lg"
+               required
+               formControlName="Middlename"
+               #Middlename />
+      </div>
+      <!-- Enter a Username -->
+      <div class="form-group">
+        <label class="col-md-4">Enter a Username</label>
+        <input type="text" class="form-control form-control-lg"
+               required
+               formControlName="Username"
+               #Username />
+      </div>
+      <div *ngIf="form.controls['Username'].invalid && (form.controls['Username'].dirty || form.controls['Username'].touched)" class="alert alert-danger">
+        <div class="invalid-feedback" *ngIf="form.controls.Username.errors?.required">
+          Username is required.
         </div>
-        <div *ngIf="form.controls['Lastname'].invalid && (form.controls['Lastname'].dirty || form.controls['Lastname'].touched)" class="alert alert-danger">
-          <div class ="invalid-feedback" *ngIf="form.controls.Lastname.errors?.required">
-            Last-name is required.
-          </div>
+      </div>
+      <div *ngIf="isUsernameTaken" class="alert alert-danger">
+        <div class="invalid-feedback">
+          Username already exists
         </div>
-        <!-- Middle Name -->
-        <div class="form-group">
-          <label class="col-md-4">Middle Name (optional)</label>
-          <input type="text" class="form-control form-control-lg" 
-              required
-              formControlName="Middlename"
-              #Middlename />
+      </div>
+      <!-- Enter a Password -->
+      <div class="form-group">
+        <label class="col-md-4">Enter a Password</label>
+        <input type="password" class="form-control form-control-lg"
+               required
+               formControlName="Password"
+               #Password />
+      </div>
+      <div *ngIf="form.controls['Password'].invalid && (form.controls['Password'].dirty || form.controls['Password'].touched)" class="alert alert-danger">
+        <div class="invalid-feedback" *ngIf="form.controls.Password.errors?.required">
+          Password is required.
         </div>
-        <!-- Enter a Username -->
-        <div class="form-group">
-            <label class="col-md-4">Enter a Username</label>
-            <input type="text" class="form-control form-control-lg" 
-                required
-                formControlName="Username"
-                #Username />
+      </div>
+      <!-- Confirm a Password -->
+      <div class="form-group">
+        <label class="col-md-4">Confirm Password</label>
+        <input type="password" class="form-control form-control-lg"
+               formControlName="PasswordCheck"
+               #PasswordCheck />
+      </div>
+      <div *ngIf="form.controls['PasswordCheck'].invalid && (form.controls['PasswordCheck'].dirty || form.controls['PasswordCheck'].touched)" class="alert alert-danger">
+        <div class="invalid-feedback" *ngIf="form.controls.PasswordCheck.errors?.required">
+          Password confimation is required.
         </div>
-        <div *ngIf="form.controls['Username'].invalid && (form.controls['Username'].dirty || form.controls['Username'].touched)" class="alert alert-danger">
-            <div class ="invalid-feedback" *ngIf="form.controls.Username.errors?.required">
-              Username is required.
-            </div>
-          </div>
-        <div *ngIf="isUsernameTaken" class="alert alert-danger">
-            <div class ="invalid-feedback">
-              Username already exists
-            </div>
+      </div>
+      <div *ngIf="passwordsDontMatch" class="alert alert-danger">
+        <div class="invalid-feedback">
+          Passwords do not match
         </div>
-        <!-- Enter a Password -->
-        <div class="form-group">
-            <label class="col-md-4">Enter a Password</label>
-            <input type="password" class="form-control form-control-lg"
-                required
-                formControlName="Password"
-                #Password />
-        </div>
-        <div *ngIf="form.controls['Password'].invalid && (form.controls['Password'].dirty || form.controls['Password'].touched)" class="alert alert-danger">
-            <div class ="invalid-feedback" *ngIf="form.controls.Password.errors?.required">
-              Password is required.
-            </div>
-          </div>
-        <!-- Confirm a Password -->
-        <div class="form-group">
-            <label class="col-md-4">Confirm Password</label>
-            <input type="password" class="form-control form-control-lg"
-                formControlName="PasswordCheck"
-                #PasswordCheck/>
-        </div>
-        <div *ngIf="form.controls['PasswordCheck'].invalid && (form.controls['PasswordCheck'].dirty || form.controls['PasswordCheck'].touched)" class="alert alert-danger">
-            <div class ="invalid-feedback" *ngIf="form.controls.PasswordCheck.errors?.required">
-              Password confimation is required.
-            </div>
-          </div>
-        <div *ngIf="passwordsDontMatch" class="alert alert-danger">
-            <div class ="invalid-feedback">
-              Passwords do not match
-            </div>
-        </div>
-        <!-- Pick account Type -->
-        <div class="form-group">
-            <label class="col-md-4">What type of account?</label>
-            <select name="type" id="type" formControlName="Type" class="form-control">
-              <option value="Volunteer">Volunteer</option>
-              <option value="Donor">Donor</option>
-            </select>
-        </div>
-        <br>
-        <!-- Submit Button -->
-        <div class="form-group">
-          <button type="submit" class="btn btn-primary" [disabled]="form.pristine">
-            Create Account
-          </button>
-        </div>
-      </form>
-    </div>
+      </div>
+      <!-- Pick account Type -->
+      <div class="form-group">
+        <label class="col-md-4">What type of account?</label>
+        <select name="type" id="type" formControlName="Type" class="form-control">
+          <option value="Volunteer">Volunteer</option>
+          <option value="Donor">Donor</option>
+        </select>
+      </div>
+      <br>
+      <!-- Submit Button -->
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary" [disabled]="form.pristine">
+          Create Account
+        </button>
+      </div>
+    </form>
   </div>
+</div>

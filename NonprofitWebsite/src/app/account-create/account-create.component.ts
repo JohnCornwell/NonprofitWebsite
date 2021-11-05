@@ -57,7 +57,7 @@ export class AccountCreateComponent implements OnInit {
     }
     this.http.post<any>("/signup", body, { observe: "response" }).subscribe(result => {
       if (result.status != 201) {
-        window.confirm(result.statusText);
+        window.alert(result.statusText);
       } else {
         window.alert("Signup successful.");
         this.router.navigate(['/Login'])
