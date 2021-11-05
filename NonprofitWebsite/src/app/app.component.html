@@ -21,35 +21,29 @@
   </li>
   <!-- Disply login button if there is no current user -->
   <li *ngIf="(type | async) == 'none'" style="float:right">
-    <a class="active" href="Login" title="Login">Login</a>
+    <a class="active" href="Login" id="op1">Login</a>
   </li>
   <!-- Disply admin dropdown if the current user is an admin -->
   <li *ngIf="(type | async) == 'Admin'" style="float:right">
-    <!-- This shows when it should, but my div will not-->
-    <a class="active" href="Login" title="Login">IS ADMIN</a>
-    <div class="dropdown-menu dropdown-menu-right">
-      <button class="dropdown-item" href="/Users">Manage Users</button>
-      <button class="dropdown-item" href="/Event/create">Create Event</button>
-      <button class="dropdown-item" href="/Program/create">Create Program</button>
-      <button class="dropdown-item" href="/Home/admin">Home</button>
-    </div>
+    <a class="active" id="op1" href="Users">Manage Users</a>
+    <a class="active" id="op1" href="Event/create">Create Event</a>
+    <a class="active" id="op1" href="Program">Create Program</a>
+    <a class="active" id="op1" href="Home/admin">Home</a>
   </li>
   <!-- Disply volunteer dropdown if the current user is a volunteer -->
   <li *ngIf="(type | async) == 'Volunteer'" style="float:right">
-    <div class="dropdown-menu dropdown-menu-right">
-      <button class="dropdown-item" href="/MyEvents">My Events</button>
-      <button class="dropdown-item" href="/Events">Volunteer</button>
-      <button class="dropdown-item" href="/Me">Profile</button>
-      <button class="dropdown-item" href="/Home/volunteer">Home</button>
-    </div>
+    <a class="active" id="op1" href="MyEvents">My Events</a>
+    <a class="active" id="op1" href="Events">Volunteer</a>
+    <a class="active" id="op1" href="Me">Profile</a>
+    <a class="active" id="op1" href="Home/voluteer">Home</a>
   </li>
   <!-- Disply donor dropdown if the current user is a donor -->
   <li *ngIf="(type | async) == 'Donor'" style="float:right">
     <div class="dropdown-menu dropdown-menu-right">
-      <button class="dropdown-item" href="/MyEvents">My Events</button>
-      <button class="dropdown-item" href="/Events">Volunteer</button>
-      <button class="dropdown-item" href="/Me">Profile</button>
-      <button class="dropdown-item" href="/Home/volunteer">Home</button>
+      <a class="active" id="op1" href="Donations">My Donations</a>
+      <a class="active" id="op1" href="Donation/create">Make Donation</a>
+      <a class="active" id="op1" href="Me">Profile</a>
+      <a class="active" id="op1" href="Home/donor">Home</a>
     </div>
   </li>
 </ul>

@@ -22,9 +22,15 @@ ul {
   li {
     float: left;
   }
+
+#op1 {
+  border-width: thin;
+  border-style: solid;
+  border-color: black;
+}
   
   li a {
-    display: block;
+    display: inline-block;
     color: white;
     text-align: center;
     padding: 14px 16px;
@@ -43,3 +49,6 @@ ul {
   background-color: #fc039d;
   font-size: 21px;
 }
+
+
+

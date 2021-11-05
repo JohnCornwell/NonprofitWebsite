@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { UserServiceService } from './user-service.service';
 
 @Component({
@@ -10,8 +10,7 @@ import { UserServiceService } from './user-service.service';
 export class AppComponent{
   title = 'NonprofitWebsite';
 
-  type: Observable<any>;
-
+  type: Observable<any>; //sends type of user logged into the system
 
   //make constructor that takes in a user service
   constructor(userService: UserServiceService) {

@@ -2,15 +2,13 @@
   "ExpandedNodes": [
     "",
     "\\NonprofitWebsite",
-    "\\NonprofitWebsite\\Server",
-    "\\NonprofitWebsite\\Server\\server",
-    "\\NonprofitWebsite\\Server\\server\\controllers",
     "\\NonprofitWebsite\\src",
     "\\NonprofitWebsite\\src\\app",
     "\\NonprofitWebsite\\src\\app\\account-create",
-    "\\NonprofitWebsite\\src\\app\\home",
+    "\\NonprofitWebsite\\src\\app\\admin-home",
+    "\\NonprofitWebsite\\src\\app\\event-add",
     "\\NonprofitWebsite\\src\\app\\login"
   ],
-  "SelectedNode": "\\NonprofitWebsite\\src\\app\\login\\login.component.ts",
+  "SelectedNode": "\\NonprofitWebsite\\src\\app\\app.component.ts",
   "PreviewInSolutionExplorer": false
 }
