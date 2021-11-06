@@ -67,6 +67,17 @@ module.exports = (app) => {
 
   app.post('event/volunteer', eventController.volunteer) //volunteer for a time slot
 
+  app.all('/event/donate', (req, res, next) => {
+    if (req.session.User == null || req.session.User.UserType != 'Donor') {
+      res.status(401).send("Need to be an donor for this request.");
+    } else {
+      next();
+    }
+  });
+
+  app.post('event/donate', eventController.donate) //restricted donation to event
+
+
   /* all user functions after this point require admin status */
   app.all('/event/*', (req, res, next) => {
     if (req.session.User == null || req.session.User.UserType != 'Admin') {

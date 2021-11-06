@@ -38,9 +38,8 @@ About TEXT
 CREATE TABLE Event (
 EventID INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
 Name VARCHAR(64) UNIQUE NOT NULL,
-MorningNeed INTEGER NOT NULL,
-AfternoonNeed INTEGER NOT NULL,
-NightNeed INTEGER NOT NULL,
+VolunteerNeed INTEGER NOT NULL,
+DonationGoal INTEGER NOT NULL,
 Month INTEGER NOT NULL, 
 Day INTEGER NOT NULL,
 Year INTEGER NOT NULL,
@@ -112,14 +111,14 @@ INSERT INTO Program (Name, About)
 VALUES ('Nonprofit Org 2', 'This is an example of a nonprofit Program in the system.
 Unlike Nonprofit Org 1, this Program cares about something.');
 
-INSERT INTO event (Name, MorningNeed, AfternoonNeed, NightNeed, Month, Day, Year, StartHour, 
+INSERT INTO event (Name, VolunteerNeed, DonationGoal, Month, Day, Year, StartHour, 
 StartMinute, EndHour, EndMinute, Description)
-VALUES ('Nonprofit Org 1\'s Annual Event', 2, 3, 1, 11, 21, 2021, 11, 00, 23, 00, 
+VALUES ('Nonprofit Org 1\'s Annual Event', 2, 3, 11, 21, 2021, 11, 00, 23, 00, 
 'This is the annual event for Nonprofit Org 1 where we talk about things and stuff.');
 
-INSERT INTO event (Name, MorningNeed, AfternoonNeed, NightNeed, Month, Day, Year, StartHour, 
+INSERT INTO event (Name, VolunteerNeed, DonationGoal, Month, Day, Year, StartHour, 
 StartMinute, EndHour, EndMinute, Description)
-VALUES ('Nonprofit Org 2\'s Annual Event', 2, 3, 1, 11, 22, 2021, 11, 00, 23, 00, 
+VALUES ('Nonprofit Org 2\'s Annual Event', 2, 3, 11, 22, 2021, 11, 00, 23, 00, 
 'This is the annual event for Nonprofit Org 2 where we talk about something.');
 
 INSERT INTO hosts (ProgID, EventID)

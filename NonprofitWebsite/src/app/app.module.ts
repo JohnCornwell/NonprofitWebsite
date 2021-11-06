@@ -14,7 +14,6 @@ import { EventGetComponent } from './event-get/event-get.component';
 import { EventEditComponent } from './event-edit/event-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { EventsService } from './events.service';
 import { AccountCreateComponent } from './account-create/account-create.component';
 import { TestComponent } from './test/test.component';
 import { ProgramGetComponent } from './program-get/program-get.component';
@@ -50,7 +49,7 @@ import { MyEventsComponent } from './my-events/my-events.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [EventsService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

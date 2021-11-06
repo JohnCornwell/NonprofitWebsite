@@ -22,9 +22,8 @@ module.exports = {
     return Event
       .create({
         Name: req.body.EventName,
-        MorningNeed: req.body.MoriningNeed,
-        AfternoonNeed: req.body.AfternoonNeed,
-        NightNeed: req.body.NightNeed,
+        VolunteerNeed: req.body.VolunteerNeed,
+        DonationGoal: req.body.DonationGoal,
         Month: req.body.Month,
         Day: req.body.Day,
         Year: req.body.Year,
@@ -71,9 +70,8 @@ module.exports = {
         return Event
           .update({
             Name: req.body.EventName || Event.Name,
-            MorningNeed: req.body.MoriningNeed || Event.MoriningNeed,
-            AfternoonNeed: req.body.AfternoonNeed || Event.AfternoonNeed,
-            NightNeed: req.body.NightNeed || Event.NightNeed,
+            VolunteerNeed: req.body.VolunteerNeed || Event.VolunteerNeed,
+            DonationGoal: req.body.DonationGoal || Event.DonationGoal,
             Month: req.body.Month || Event.Month,
             Day: req.body.Day || Event.Day,
             Year: req.body.Year || Event.Year,
@@ -106,8 +104,6 @@ module.exports = {
       .catch(error => res.status(400).send(error));
   },
 
-  /* this method will update one of the need fields with the calculated need
-   * after a volunteer volunteers for a time slot in the event. */
   volunteer(req, res) {
     return Event
       .findById(req.body.EventId)
@@ -116,50 +112,44 @@ module.exports = {
           return res.status(400).send({
             message: "Event not found",
           });
-        }
-        if (req.body.MoriningNeed) {
-          return Event
-            .update({
-              Name: Event.Name,
-              MorningNeed: req.body.MoriningNeed,
-              AfternoonNeed: Event.AfternoonNeed,
-              NightNeed: Event.NightNeed,
-              Month: Event.Month,
-              Day: Event.Day,
-              Year: Event.Year,
-              StartHour: Event.StartHour,
-              StartMinute: Event.StartMinute,
-              EndHour: Event.EndHour,
-              EndMinute: Event.EndMinute,
-              Description: Event.Description
-            })
-            .then(() => res.status(200).send({ message: 'Volunteered successfully.' }))
-            .catch(error => res.status(400).send(error));
-        } else if (req.body.AfternoonNeed) {
-          return Event
-            .update({
-              Name: Event.Name,
-              MorningNeed: Event.MoriningNeed,
-              AfternoonNeed: req.body.AfternoonNeed,
-              NightNeed: Event.NightNeed,
-              Month: Event.Month,
-              Day: Event.Day,
-              Year: Event.Year,
-              StartHour: Event.StartHour,
-              StartMinute: Event.StartMinute,
-              EndHour: Event.EndHour,
-              EndMinute: Event.EndMinute,
-              Description: Event.Description
-            })
-            .then(() => res.status(200).send({ message: 'Volunteered successfully.' }))
-            .catch(error => res.status(400).send(error));
         } else {
           return Event
             .update({
               Name: Event.Name,
-              MorningNeed: Event.MoriningNeed,
-              AfternoonNeed: Event.AfternoonNeed,
-              NightNeed: req.body.NightNeed,
+              VolunteerNeed: req.body.VolunteerNeed,
+              DonationGoal: Event.DonationGoal,
+              NightNeed: Event.NightNeed,
+              Month: Event.Month,
+              Day: Event.Day,
+              Year: Event.Year,
+              StartHour: Event.StartHour,
+              StartMinute: Event.StartMinute,
+              EndHour: Event.EndHour,
+              EndMinute: Event.EndMinute,
+              Description: Event.Description
+            })
+            .then(() => res.status(200).send({ message: 'Volunteered successfully.' }))
+            .catch(error => res.status(400).send(error));
+        }
+      })
+      .catch(error => res.status(400).send(error));
+  },
+
+  donate(req, res) {
+    return Event
+      .findById(req.body.EventId)
+      .then(Event => {
+        if (!Event) {
+          return res.status(400).send({
+            message: "Event not found",
+          });
+        } else {
+          return Event
+            .update({
+              Name: Event.Name,
+              VolunteerNeed: Event.VolunteerNeed,
+              DonationGoal: req.body.DonationGoal,
+              NightNeed: Event.NightNeed,
               Month: Event.Month,
               Day: Event.Day,
               Year: Event.Year,

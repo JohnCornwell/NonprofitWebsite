@@ -12,15 +12,11 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       unique: "Name"
     },
-    MorningNeed: {
+    VolunteerNeed: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    AfternoonNeed: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    NightNeed: {
+    DonationGoal: {
       type: DataTypes.INTEGER,
       allowNull: false
     },

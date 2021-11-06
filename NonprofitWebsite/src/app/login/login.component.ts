@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
     }
     this.http.post<any>("/login", body, { observe: "response" }).subscribe(result => {
       if (result.status != 200) {
-        window.confirm(result.body.message);
+        window.alert(result.body.message);
       } else {
         //need to set session info in SESSION_STORAGE
         window.alert("Login successful.");

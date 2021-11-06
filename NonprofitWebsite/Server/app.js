@@ -43,7 +43,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.all('/logout', (req, res) => {
   req.session.destroy();
-  res.status(200).send("Goodbye!");
+  res.status(200).send({ message: "Goodbye!" });
 });
 
 app.post('/login', (req, res) => {
@@ -51,15 +51,17 @@ app.post('/login', (req, res) => {
     if (err) {
       res.status(400).send({ message: "Unable to create session." });
     } else {
-      userController.findByUsername(req.body.Username)
+      let username = req.body.Username || '';
+      let password = req.body.Password || '';
+      userController.findByUsername(username)
         .then(person => {
           if (person.length == 0) {
             // user does not exist
             res.status(202).send({ message: "User does not exist" });
           } else {
             // user exists
-            if (person[0].Password == req.body.Password) {
-              req.session.User = person;
+            if (person[0].Password == password) {
+              req.session.User = person[0];
               res.status(200).send(person[0])
             } else {
               res.status(400).send({ message: "Incorrect Password" });

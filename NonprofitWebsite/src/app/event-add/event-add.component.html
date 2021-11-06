@@ -14,49 +14,34 @@
           Event name is required.
         </div>
       </div>
-      <!-- Section for Morning Need -->
+      <!-- Section for Volunteer Need -->
       <div class="form-group">
-        <label class="col-md-4">Morning Need</label>
+        <label class="col-md-4">Volunteer Need</label>
         <input type="number" class="form-control"
-               formControlName="MorningNeed" min="0"
-               #MorningNeed />
+               formControlName="VolunteerNeed" min="0"
+               #VolunteerNeed />
       </div>
-      <div *ngIf="form.controls['MorningNeed'].invalid && (form.controls['MorningNeed'].dirty || form.controls['MorningNeed'].touched)" class="alert alert-danger">
-        <div class="invalid-feedback" *ngIf="form.controls.MorningNeed.errors?.required">
-          Morning need is required.
+      <div *ngIf="form.controls['VolunteerNeed'].invalid && (form.controls['VolunteerNeed'].dirty || form.controls['VolunteerNeed'].touched)" class="alert alert-danger">
+        <div class="invalid-feedback" *ngIf="form.controls.VolunteerNeed.errors?.required">
+          Volunteer need is required.
         </div>
-        <div class="invalid-feedback" *ngIf="form.controls.MorningNeed.errors?.min">
-          Morning need cannot be negative.
+        <div class="invalid-feedback" *ngIf="form.controls.VolunteerNeed.errors?.min">
+          Volunteer need cannot be negative.
         </div>
       </div>
-      <!-- Section for Afternoon Need -->
+      <!-- Section for Donation Goal -->
       <div class="form-group">
-        <label class="col-md-4">Afternoon Need</label>
+        <label class="col-md-4">Donation Goal</label>
         <input type="number" class="form-control"
-               formControlName="AfternoonNeed" min="0"
-               #AfternoonNeed />
+               formControlName="DonationGoal" min="0"
+               #DonationGoal />
       </div>
-      <div *ngIf="form.controls['AfternoonNeed'].invalid && (form.controls['AfternoonNeed'].dirty || form.controls['AfternoonNeed'].touched)" class="alert alert-danger">
-        <div class="invalid-feedback" *ngIf="form.controls.AfternoonNeed.errors?.required">
-          Afternoon need is required.
+      <div *ngIf="form.controls['DonationGoal'].invalid && (form.controls['DonationGoal'].dirty || form.controls['DonationGoal'].touched)" class="alert alert-danger">
+        <div class="invalid-feedback" *ngIf="form.controls.DonationGoal.errors?.required">
+          Donation goal is required.
         </div>
-        <div class="invalid-feedback" *ngIf="form.controls.AfternoonNeed.errors?.min">
-          Afternoon need cannot be negative.
-        </div>
-      </div>
-      <!-- Section for Night Need -->
-      <div class="form-group">
-        <label class="col-md-4">Night Need</label>
-        <input type="number" class="form-control"
-               formControlName="NightNeed" min="0"
-               #NightNeed />
-      </div>
-      <div *ngIf="form.controls['NightNeed'].invalid && (form.controls['NightNeed'].dirty || form.controls['NightNeed'].touched)" class="alert alert-danger">
-        <div class="invalid-feedback" *ngIf="form.controls.NightNeed.errors?.required">
-          Night need is required.
-        </div>
-        <div class="invalid-feedback" *ngIf="form.controls.NightNeed.errors?.min">
-          Night need cannot be negative.
+        <div class="invalid-feedback" *ngIf="form.controls.DonationGoal.errors?.min">
+          Donation goal cannot be negative.
         </div>
       </div>
       <!-- Section for Date -->
@@ -118,7 +103,7 @@
         <button type="submit" class="btn btn-primary" [disabled]="form.pristine || form.invalid" (click)="onSubmit()">
           Add Event
         </button>
-        <button class="btn btn-default" Style="float:right" (click)="navigateToAdminHome()">Cancel</button>
+        <button class="btn btn-default" style="float:right" [routerLink]="'/Home/admin'">Cancel</button>
       </div>
     </form>
   </div>

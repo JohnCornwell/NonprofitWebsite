@@ -3,9 +3,9 @@ import {
   FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl,
   ValidationErrors
 } from '@angular/forms';
-import { EventsService } from '../events.service';
 import { invalidTimeValidator } from '../validators/timeValidator';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-event-add',
@@ -16,12 +16,11 @@ export class EventAddComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private es: EventsService, private router: Router) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {
     this.form = this.fb.group({
       EventName: ['', Validators.required],
-      MorningNeed: [0, [Validators.required, Validators.min(0)]],
-      AfternoonNeed: [0, [Validators.required, Validators.min(0)]],
-      NightNeed: [0, [Validators.required, Validators.min(0)]],
+      VolunteerNeed: [0, [Validators.required, Validators.min(0)]],
+      DonationGoal: [0, [Validators.required, Validators.min(0)]],
       date: [new Date(), [Validators.required, forbiddenDateValidator()]],
       Start: ['09:00', Validators.required],
       End: ['17:00', Validators.required],
@@ -34,14 +33,49 @@ export class EventAddComponent implements OnInit {
   }
 
   onSubmit() {
-    this.es.addEvent(this.form.get('EventName')?.value, this.form.get('MorningNeed')?.value,
-      this.form.get('AfternoonNeed')?.value, this.form.get('NightNeed')?.value,
-      this.form.get('date')?.value, this.form.get('Start')?.value, this.form.get('End')?.value,
+    //collect validated data from form and attempt to add it to the database
+    const date: Date = new Date(this.form.get('date')?.value);
+    const month: number = date.getMonth();
+    const day: number = date.getDay();
+    const year: number = date.getFullYear()
+    const startHour: number = parseInt(this.form.get('Start')?.value.substring(0, 2));
+    const startMin: number = parseInt(this.form.get('Start')?.value.substring(3));
+    const endHour: number = parseInt(this.form.get('End')?.value.substring(0, 2));
+    const endMin: number = parseInt(this.form.get('End')?.value.substring(3));
+
+
+    this.addEvent(this.form.get('EventName')?.value, this.form.get('VolunteerNeed')?.value,
+      this.form.get('DonationGoal')?.value, month, day, year, startHour, startMin, endHour, endMin,
       this.form.get('Description')?.value);
   }
 
-  navigateToAdminHome() {
-    this.router.navigate(['/Home/admin']);
+  addEvent(EventName: String, VolunteerNeed: number, DonationGoal: number,
+    Month: number, Day: number, Year: number, StartHour: number,
+    StartMinute: number, EndHour: number, EndMinute: number, Description: String) {
+
+    // body of the http post request we will send to the server
+    var body = {
+      EventName: EventName,
+      VolunteerNeed: VolunteerNeed ,
+      DonationGoal: VolunteerNeed,
+      Month: Month,
+      Day: Day,
+      Year: Year,
+      StartHour: StartHour,
+      StartMinute: StartMinute,
+      EndHour: EndHour,
+      EndMinute: EndMinute,
+      Description: Description
+    }
+    //the result of a successful post will have a 201 status
+    this.http.post<any>("/event/create", body, { observe: "response" }).subscribe(result => {
+      if (result.status != 201) {
+        window.alert(result.body.message);
+      } else {
+        window.alert("Event added.");
+      }
+      this.router.navigate(['/Home/admin']);
+    });
   }
 }
 
