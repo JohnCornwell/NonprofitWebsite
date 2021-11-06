@@ -12,6 +12,8 @@ import { EventGetComponent } from './event-get/event-get.component';
 import { AccountCreateComponent } from './account-create/account-create.component';
 import { TestComponent } from './test/test.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { VolunteerEventListComponent } from './volunteer-event-list/volunteer-event-list.component';
+import { VolunteerHomeComponent } from './volunteer-home/volunteer-home.component';
 
 const routes: Routes = [ 
   { 
@@ -23,16 +25,16 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'home',
-    component: HomeComponent
-  },
-  {
     path: 'Home/admin',
     component: AdminHomeComponent
   },
   {
-    path: 'home/admin',
-    component: AdminHomeComponent
+    path: 'Home/volunteer',
+    component: VolunteerHomeComponent
+  },
+  {
+    path: 'Volunteer/events',
+    component: VolunteerEventListComponent
   },
   {
     path: 'Logout',
