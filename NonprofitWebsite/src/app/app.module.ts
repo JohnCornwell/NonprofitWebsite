@@ -21,6 +21,7 @@ import { ProgramGetComponent } from './program-get/program-get.component';
 import { ProgramAddComponent } from './program-add/program-add.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { LogoutComponent } from './logout/logout.component';
+import { MyEventsComponent } from './my-events/my-events.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { LogoutComponent } from './logout/logout.component';
     ProgramGetComponent,
     ProgramAddComponent,
     AdminHomeComponent,
-    LogoutComponent
+    LogoutComponent,
+    MyEventsComponent
   ],
   imports: [
     BrowserModule,
