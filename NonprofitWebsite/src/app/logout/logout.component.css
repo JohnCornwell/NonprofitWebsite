@@ -1,0 +1,22 @@
+/* Bordered form */
+form {
+  border: 3px solid #f1f1f1;
+}
+
+p {
+  text-align: center;
+  font-size: large;
+  color: #fc039d;
+}
+
+/* Set a style for button */
+button {
+  background-color: #03fcb1;
+  color: #fc039d;
+  padding: 14px 20px;
+  display: block;
+  margin: 0 auto;
+  border: none;
+  cursor: pointer;
+  width: 40%;
+}

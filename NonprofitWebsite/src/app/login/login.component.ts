@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
     }
     this.http.post<any>("/login", body, { observe: "response" }).subscribe(result => {
       if (result.status != 200) {
-        window.confirm(result.statusText);
+        window.confirm(result.body.message);
       } else {
         //need to set session info in SESSION_STORAGE
         window.alert("Login successful.");
@@ -48,7 +48,8 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem("name", result.body.Username);
         sessionStorage.setItem("id", result.body.UserID);
         this.userService.login(result.body.UserType);
-        this.router.navigate(['/Home'])
+        console.log("logged in");
+        this.router.navigate(['/Home']);
       }
     });
 /*    // if user is in database

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { EventAddComponent } from './event-add/event-add.component';
@@ -29,6 +30,10 @@ const routes: Routes = [
   {
     path: 'Volunteer/events',
     component: VolunteerEventListComponent
+  },
+  {
+    path: 'Logout',
+    component: LogoutComponent
   },
   { 
     path: 'Login', 

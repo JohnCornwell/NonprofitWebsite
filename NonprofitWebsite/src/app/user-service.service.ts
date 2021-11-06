@@ -1,48 +1,31 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { Router } from '@angular/router';
+import { BehaviorSubject} from 'rxjs';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserServiceService {
+  /* This service is responsible for recording and broadcasting the
+   * type of user that is logged into the system.
+   */
 
   private currentTypeSubject: BehaviorSubject<String>;
   public currentType: Observable<String>;
 
-  constructor() {
+  constructor(private router: Router) {
     this.currentTypeSubject = new BehaviorSubject<String>("none");
     this.currentType = this.currentTypeSubject.asObservable();
+    console.log("User Service constructor called");
   }
 
-  public get currentTypeValue(): String {
-    return this.currentTypeSubject.value;
-  }
-
-  login(type: String): Observable<String> {
+  login(type: String) {
     this.currentTypeSubject.next(type);
-    return this.currentType;
   }
 
   logout() {
     this.currentTypeSubject.next("none");
-    return this.currentType;
-  }
-
-
-
-
-
-
-
-
-  private subject = new Subject<any>();
-
-  sendType(type: String) {
-    this.subject.next(type);
-  }
-
-  getType(): Observable<any> {
-    return this.subject.asObservable();
+    this.router.navigate(['Home']);
   }
 }
