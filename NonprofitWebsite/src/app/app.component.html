@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="app.component.css">
-
+<script src="app.component.ts"></script>
 <!-- Navigation Bar -->
 <ul>
   <li><a class="orgTitle" style="color: #fc039d" href="Home">UWL Nonprofit</a></li>
@@ -25,26 +25,27 @@
   </li>
   <!-- Disply admin dropdown if the current user is an admin -->
   <li *ngIf="(type | async) == 'Admin'" style="float:right">
-    <a class="active" id="op1" href="Users">Manage Users</a>
-    <a class="active" id="op1" href="Event/create">Create Event</a>
-    <a class="active" id="op1" href="Program">Create Program</a>
-    <a class="active" id="op1" href="Home/admin">Home</a>
+    <a class="active" id="op1" [routerLink]="'Users'">Manage Users</a>
+    <a class="active" id="op1" [routerLink]="'Event/create'">Create Event</a>
+    <a class="active" id="op1" [routerLink]="'Program'">Create Program</a>
+    <a class="active" id="op1" [routerLink]="'Home/admin'">Home</a>
+    <a class="active" id="op1" [routerLink]="'Logout'">Logout</a>
   </li>
   <!-- Disply volunteer dropdown if the current user is a volunteer -->
   <li *ngIf="(type | async) == 'Volunteer'" style="float:right">
-    <a class="active" id="op1" href="MyEvents">My Events</a>
-    <a class="active" id="op1" href="Events">Volunteer</a>
-    <a class="active" id="op1" href="Me">Profile</a>
-    <a class="active" id="op1" href="Home/voluteer">Home</a>
+    <a class="active" id="op1" [routerLink]="'MyEvents'">My Events</a>
+    <a class="active" id="op1" [routerLink]="'Events'">Volunteer</a>
+    <a class="active" id="op1" [routerLink]="'Me'">Profile</a>
+    <a class="active" id="op1" [routerLink]="'Home/voluteer'">Home</a>
+    <a class="active" id="op1" [routerLink]="'Logout'">Logout</a>
   </li>
   <!-- Disply donor dropdown if the current user is a donor -->
   <li *ngIf="(type | async) == 'Donor'" style="float:right">
-    <div class="dropdown-menu dropdown-menu-right">
-      <a class="active" id="op1" href="Donations">My Donations</a>
-      <a class="active" id="op1" href="Donation/create">Make Donation</a>
-      <a class="active" id="op1" href="Me">Profile</a>
-      <a class="active" id="op1" href="Home/donor">Home</a>
-    </div>
+    <a class="active" id="op1" [routerLink]="'Donations'">My Donations</a>
+    <a class="active" id="op1" [routerLink]="'Donation/create'">Make Donation</a>
+    <a class="active" id="op1" [routerLink]="'Me'">Profile</a>
+    <a class="active" id="op1" [routerLink]="'Home/donor'">Home</a>
+    <a class="active" id="op1" [routerLink]="'Logout'">Logout</a>
   </li>
 </ul>
 

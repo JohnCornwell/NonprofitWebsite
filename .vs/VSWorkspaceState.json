@@ -4,11 +4,9 @@
     "\\NonprofitWebsite",
     "\\NonprofitWebsite\\src",
     "\\NonprofitWebsite\\src\\app",
-    "\\NonprofitWebsite\\src\\app\\account-create",
     "\\NonprofitWebsite\\src\\app\\admin-home",
-    "\\NonprofitWebsite\\src\\app\\event-add",
-    "\\NonprofitWebsite\\src\\app\\login"
+    "\\NonprofitWebsite\\src\\app\\event-add"
   ],
-  "SelectedNode": "\\NonprofitWebsite\\src\\app\\app.component.ts",
+  "SelectedNode": "\\NonprofitWebsite\\src\\app\\app.module.ts",
   "PreviewInSolutionExplorer": false
 }

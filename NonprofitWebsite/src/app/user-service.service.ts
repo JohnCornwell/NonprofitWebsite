@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { Router } from '@angular/router';
+import { BehaviorSubject} from 'rxjs';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -13,7 +14,7 @@ export class UserServiceService {
   private currentTypeSubject: BehaviorSubject<String>;
   public currentType: Observable<String>;
 
-  constructor() {
+  constructor(private router: Router) {
     this.currentTypeSubject = new BehaviorSubject<String>("none");
     this.currentType = this.currentTypeSubject.asObservable();
     console.log("User Service constructor called");
@@ -25,6 +26,6 @@ export class UserServiceService {
 
   logout() {
     this.currentTypeSubject.next("none");
-    return this.currentType;
+    this.router.navigate(['Home']);
   }
 }
