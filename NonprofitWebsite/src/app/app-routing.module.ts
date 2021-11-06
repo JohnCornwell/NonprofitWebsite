@@ -13,6 +13,7 @@ import { AccountCreateComponent } from './account-create/account-create.componen
 import { TestComponent } from './test/test.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { VolunteerEventListComponent } from './volunteer-event-list/volunteer-event-list.component';
+import { VolunteerHomeComponent } from './volunteer-home/volunteer-home.component';
 
 const routes: Routes = [ 
   { 
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'Home/admin',
     component: AdminHomeComponent
+  },
+  {
+    path: 'Home/volunteer',
+    component: VolunteerHomeComponent
   },
   {
     path: 'Volunteer/events',

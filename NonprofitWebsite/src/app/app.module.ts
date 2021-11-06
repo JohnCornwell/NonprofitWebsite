@@ -21,6 +21,7 @@ import { ProgramGetComponent } from './program-get/program-get.component';
 import { ProgramAddComponent } from './program-add/program-add.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { VolunteerEventListComponent } from './volunteer-event-list/volunteer-event-list.component';
+import { VolunteerHomeComponent } from './volunteer-home/volunteer-home.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { VolunteerEventListComponent } from './volunteer-event-list/volunteer-ev
     ProgramGetComponent,
     ProgramAddComponent,
     AdminHomeComponent,
-    VolunteerEventListComponent
+    VolunteerEventListComponent,
+    VolunteerHomeComponent
   ],
   imports: [
     BrowserModule,
