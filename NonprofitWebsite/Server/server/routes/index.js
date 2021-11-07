@@ -157,7 +157,7 @@ app.all('/donates/create', (req, res, next) => {
 
   app.all('/donates/retrieveDonations', (req, res, next) => {
     if (req.session.User == null || req.session.User.UserType != 'Donor' ||
-      (req.body.UserId != req.session.user.UserId && req.session.User.UserType != 'Admin')) {
+      (req.body.UserId != req.session.User.UserId && req.session.User.UserType != 'Admin')) {
       // cannot get donations of other users unless you are an admin
       res.status(401).send("Need to be a donor or admin for this request.");
     } else {
@@ -232,7 +232,7 @@ app.all('/donates/create', (req, res, next) => {
 
   app.all('/volunteers/retrieveEvents', (req, res, next) => {
     if (req.session.User == null || req.session.User.UserType != 'Volunteer' ||
-       (req.body.UserId != req.session.user.UserId && req.session.User.UserType != 'Admin')) {
+       (req.body.UserId != req.session.User.UserId && req.session.User.UserType != 'Admin')) {
       res.status(401).send("Need to be a volunteer for this request.");
     } else {
       next();
