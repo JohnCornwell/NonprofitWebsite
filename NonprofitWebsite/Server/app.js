@@ -57,7 +57,7 @@ app.post('/login', (req, res) => {
         .then(person => {
           if (person.length == 0) {
             // user does not exist
-            res.status(202).send({ message: "User does not exist" });
+            res.status(404).send({ message: "User does not exist" });
           } else {
             // user exists
             //hash the password before adding it to the database

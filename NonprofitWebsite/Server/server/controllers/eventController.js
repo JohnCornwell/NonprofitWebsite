@@ -169,7 +169,7 @@ module.exports = {
         EndMinute: req.body.EndMinute,
         Description: req.body.Description
       })
-      .then(Event => res.status(201).send(JSON.stringify(Event)))
+      .then(Event => res.status(200).send(JSON.stringify(Event)))
       .catch(error => res.status(400).send(error));
   },
 

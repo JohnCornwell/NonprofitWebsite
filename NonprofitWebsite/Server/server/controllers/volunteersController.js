@@ -70,7 +70,7 @@ module.exports = {
         EventID: req.body.EventId,
         Deleted: req.body.Deleted,
       })
-      .then(Volunteers => res.status(201).send(JSON.stringify(Volunteers)))
+      .then(Volunteers => res.status(200).send(JSON.stringify(Volunteers)))
       .catch(error => res.status(400).send(error));
   },
 

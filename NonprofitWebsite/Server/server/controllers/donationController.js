@@ -82,7 +82,7 @@ module.exports = {
         Amount: req.body.Amount,
         Description: req.body.Description
       })
-      .then(Donation => res.status(201).send(JSON.stringify(Donation)))
+      .then(Donation => res.status(200).send(JSON.stringify(Donation)))
       .catch(error => res.status(400).send(error));
   },
 

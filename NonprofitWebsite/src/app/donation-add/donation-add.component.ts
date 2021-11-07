@@ -10,16 +10,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./donation-add.component.css']
 })
 export class DonationAddComponent implements OnInit {
+  /* This component is used by donors to make a restricted donation to
+   * an Event, or make an unrestricted donation.
+   */
 
   form: FormGroup;
   eventsData: Array<Event> = new Array<Event>();
-  EventID: number = -1;
+  EventID: number = -1; //sentinel value to indicate unrestricted donation
 
   get eventsFormArray() {
     return this.form.controls.events as FormArray;
   }
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) {
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) {
     this.form = this.formBuilder.group({
       Amount: [0, [Validators.required, Validators.min(5)]],
       SelectEvent: [''],
@@ -29,15 +32,78 @@ export class DonationAddComponent implements OnInit {
   }
 
   onSubmit() {
+    let type: string;
+    let today = new Date(); //creates a Date representing today
+    let DonationGoal: number = 0;
     if (this.form.get('SelectEvent')?.value != null) {
+      //there is an event selection, so this is a restricted donation
       this.EventID = this.form.get('SelectEvent')?.value;
+      type = "Restricted"
+      //subtract the donation from the DonationGoal of the Event we are donating to
+      for (var i = 0; i < this.eventsData.length; i++) {
+        if (this.eventsData[i].EventID == this.EventID) {
+          DonationGoal = this.eventsData[i].DonationGoal - this.form.get("Amount")?.value;
+        }
+      }
     } else {
       this.EventID = -1;
+      type = "Unrestricted";
     }
-    var body{
-      EventID: EventID,
-      Description: this.form.get('Description')
+
+    /* This is the body for all http requests. It is possible some fileds will not
+     * be used by the server
+     */
+    let body = {
+      Type: type,
+      Month: today.getMonth(),
+      Day: today.getDay(),
+      Year: today.getFullYear(),
+      Amount: this.form.get('Amount')?.value,
+      Description: this.form.get('Description')?.value,
+      EventID: this.EventID,
+      DonationGoal: DonationGoal
     }
+
+    //send the donation to the server
+    this.http.post<any>("/donation/create", body, { observe: "response" }).subscribe(result => {
+      if (result.status != 200) {
+        window.alert(result.body.message);
+      } else {
+        //donation was added, so modify other tables if necessary
+        if (this.EventID != -1) {
+          /* This is a restricted donation, so add an entry to the Needs
+           * table and update the event by subtracting the donation from
+           * the goal.
+           */
+          this.http.post<any>("/needs/create", body, { observe: "response" }).subscribe(result => {
+            if (result.status != 200) {
+              //we will alert the user to an unexpected code
+              window.alert(result.body.message);
+            }
+            //as long as we dont have an error code, we will modify the event table
+            this.http.post<any>("/event/donate", body, { observe: "response" }).subscribe(result => {
+              if (result.status != 200) {
+                window.alert(result.body.message);
+              } else {
+                window.alert("Event added.");
+              }
+              this.router.navigate(['/Home/admin']);
+            }, err => {
+              window.alert(err.error.message);
+            });
+          }, err => {
+            window.alert(err.error.message + "\n Unable to modify the event, " +
+                         "so this is an unrestricted donation.");
+          });
+        }
+      }
+      // all tables have been successfully modified
+      window.alert("Thank you for your donation.");
+      // we will go to the home page only on success codes (might not be 200)
+      this.router.navigate(['/Home/donor']);
+    }, err => {
+      window.alert(err.error.message);
+    });
   }
 
   ngOnInit(): void {

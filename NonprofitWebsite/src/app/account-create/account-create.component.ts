@@ -57,7 +57,7 @@ export class AccountCreateComponent implements OnInit {
       Deleted: false
     }
     this.http.post<any>("/signup", body, { observe: "response" }).subscribe(result => {
-      if (result.status != 201) {
+      if (result.status != 200) {
         window.alert(result.statusText);
       } else {
         window.alert("Signup successful.");

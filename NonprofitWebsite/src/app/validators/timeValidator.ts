@@ -1,6 +1,9 @@
 import { ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 
 export const invalidTimeValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+  /* This validator is responsible for ensuring that the start time of a form is
+   * before or equal to the end time for that form.
+   */
   const startTime = control.get('Start');
   const endTime = control.get('End');
   if (startTime && endTime) {
