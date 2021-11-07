@@ -2,18 +2,6 @@
   <h1 class="card-title">Make Donation</h1>
   <div class="card-body">
     <form [formGroup]="form">
-      <!-- Section for Donation Type -->
-      <div class="form-group">
-        <label class="col-md-4">Event Name</label>
-        <input type="text" class="form-control form-control-lg"
-               formControlName="EventName"
-               #EventName />
-      </div>
-      <div *ngIf="form.controls['EventName'].invalid && (form.controls['EventName'].dirty || form.controls['EventName'].touched)" class="alert alert-danger">
-        <div class="invalid-feedback" *ngIf="form.controls.EventName.errors?.required">
-          Event name is required.
-        </div>
-      </div>
       <!-- Section for Donation Amount -->
       <div class="form-group">
         <label class="col-md-4">Amount (USD)</label>
@@ -29,70 +17,18 @@
           Donation amount must be at least $5.
         </div>
       </div>
-      <!-- Section for Donation Goal -->
+      <!-- Section for Optional Event -->
       <div class="form-group">
-        <label class="col-md-4">Donation Goal</label>
-        <input type="number" class="form-control"
-               formControlName="DonationGoal" min="0"
-               #DonationGoal />
-      </div>
-      <div *ngIf="form.controls['DonationGoal'].invalid && (form.controls['DonationGoal'].dirty || form.controls['DonationGoal'].touched)" class="alert alert-danger">
-        <div class="invalid-feedback" *ngIf="form.controls.DonationGoal.errors?.required">
-          Donation goal is required.
-        </div>
-        <div class="invalid-feedback" *ngIf="form.controls.DonationGoal.errors?.min">
-          Donation goal cannot be negative.
-        </div>
-      </div>
-      <!-- Section for Date -->
-      <div class="form-group">
-        <label class="col-md-4">Event Date</label>
-        <input type="date" class="form-control"
-               formControlName="date"
-               #date />
-      </div>
-      <div *ngIf="form.controls['date'].invalid && (form.controls['date'].dirty || form.controls['date'].touched)" class="alert alert-danger">
-        <div class="invalid-feedback" *ngIf="form.controls.date.errors?.required">
-          Event date is required.
-        </div>
-        <div class="invalid-feedback" *ngIf="form.controls.date.errors?.forbiddenDate">
-          Events cannot be scheduled for today or in the past.
-        </div>
-      </div>
-      <!-- Section for Start -->
-      <div class="form-group">
-        <label class="col-md-4">Start Time</label>
-        <input type="time" class="form-control"
-               formControlName="Start"
-               #Start />
-      </div>
-      <div *ngIf="form.controls['Start'].invalid && (form.controls['Start'].dirty || form.controls['Start'].touched)" class="alert alert-danger">
-        <div class="invalid-feedback" *ngIf="form.controls.Start.errors?.required">
-          Start time is required.
-        </div>
-      </div>
-      <div class="alert alert-danger" *ngIf="form.errors?.invalidTime">
-        Start time must be before end time.
-      </div>
-      <!-- Section for End -->
-      <div class="form-group">
-        <label class="col-md-4">End Time</label>
-        <input type="time" class="form-control"
-               formControlName="End"
-               #End />
-      </div>
-      <div *ngIf="form.controls['End'].invalid && (form.controls['End'].dirty || form.controls['End'].touched)" class="alert alert-danger">
-        <div class="invalid-feedback" *ngIf="form.controls.End.errors?.required">
-          End time is required.
-        </div>
-      </div>
-      <div class="alert alert-danger" *ngIf="form.errors?.invalidTime">
-        End time must be after start time.
+        <label class="col-md-4">Select an event if you want to make a restricted donation</label>
+        <br>
+        <select name="selectEvent" id="selectEvent" formControlName="SelectEvent" class="form-control" formArrayName="events">
+          <option *ngFor="let event of eventsFormArray.controls; let i = index" value="{{eventsData[i].EventID}}">{{eventsData[i].Name}}</option>
+        </select>
       </div>
       <!-- Section for Description -->
       <div class="form-group">
         <label class="col-md-4">Description</label>
-        <textarea id="eDescription" name="description" rows="4" cols="50" class="form-control"
+        <textarea id="Description" name="description" rows="4" cols="50" class="form-control"
                   formControlName="Description"
                   #Description>
 
@@ -101,9 +37,9 @@
       <!-- Section for submit button -->
       <div class="form-group">
         <button type="submit" class="btn btn-primary" [disabled]="form.pristine || form.invalid" (click)="onSubmit()">
-          Add Event
+          Donate
         </button>
-        <button class="btn btn-default" style="float:right" [routerLink]="'/Home/admin'">Cancel</button>
+        <button class="btn btn-default" style="float:right" [routerLink]="'/Home/donor'">Cancel</button>
       </div>
     </form>
   </div>

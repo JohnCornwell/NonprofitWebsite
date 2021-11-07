@@ -69,14 +69,14 @@ export class EventAddComponent implements OnInit {
     }
     //the result of a successful post will have a 201 status
     this.http.post<any>("/event/create", body, { observe: "response" }).subscribe(result => {
-      if (result.status != 201) {
+      if (result.status != 200) {
         window.alert(result.body.message);
       } else {
         window.alert("Event added.");
       }
       this.router.navigate(['/Home/admin']);
     }, err => {
-      window.alert(err.body.message);
+      window.alert(err.error.message);
     });
   }
 }

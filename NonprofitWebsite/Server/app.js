@@ -57,9 +57,18 @@ app.post('/login', (req, res) => {
         .then(person => {
           if (person.length == 0) {
             // user does not exist
-            res.status(202).send({ message: "User does not exist" });
+            res.status(404).send({ message: "User does not exist" });
           } else {
             // user exists
+            //hash the password before adding it to the database
+            const crypto = require('crypto');
+            const secret = 'n0r0kvjnoi0lnfifnj9824n09hon209f';
+            const hash = crypto.createHmac('sha256', secret)
+              .update(req.body.Password)
+              .digest('hex');
+            console.log(hash);
+            //check the stored password against the hash
+            //todo
             if (person[0].Password == password) {
               req.session.User = person[0];
               res.status(200).send(person[0])
@@ -73,7 +82,7 @@ app.post('/login', (req, res) => {
 
 app.post('/signup', function (req, res) {
   if (req.body.Username == undefined || req.body.Password == undefined) {
-    res.status(400).send("Invalid details!");
+    res.status(400).send({ message: "Invalid details!" });
   } else {
     //see if user exists
     User.count({
@@ -83,11 +92,21 @@ app.post('/signup', function (req, res) {
     })
       .then(User => {
         if (User == 0) {
-          // user does not exist, so create it
+          //the user exists
+
+          //hash the password before adding it to the database
+          const crypto = require('crypto');
+          const secret = 'n0r0kvjnoi0lnfifnj9824n09hon209f';
+          const hash = crypto.createHmac('sha256', secret)
+            .update(req.body.Password)
+            .digest('hex');
+          console.log(hash);
+          //set the password to the generated hash
+          //todo
           userController.create(req, res)
         } else {
           // user exists, so give error
-          res.status(400).send("User already exists.");
+          res.status(400).send({ message: "User already exists." });
         }
       });
   }
@@ -116,7 +135,7 @@ app.get('/program/list', programController.list) //anyone can view any program
 /* authenticate user is logged in before fufilling request */
 app.all('/*', (req, res, next) => {
   if (!req.session || !req.session.User || !req.session.User.Username) {
-    res.status(401).send("Need to be logged in for this request.");
+    res.status(401).send({ message: "Need to be logged in for this request." });
   } else {
     next();
   }

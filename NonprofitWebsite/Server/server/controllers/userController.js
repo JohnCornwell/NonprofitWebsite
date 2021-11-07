@@ -85,7 +85,7 @@ module.exports = {
         UserType: req.body.UserType,
         Deleted: req.body.Deleted,
       })
-      .then(User => res.status(201).send(JSON.stringify(User)))
+      .then(User => res.status(200).send(JSON.stringify(User)))
       .catch(error => res.status(400).send(error));
   },
 

@@ -20,7 +20,7 @@ module.exports = (app) => {
     if (req.session.User == null || (req.session.User.UserId != req.body.UserId &&
         req.session.User.UserType != 'Admin')) {
       //cannot view another user's info unless you are an admin
-      res.status(401).send("Need to be an admin for this request.");
+      res.status(401).send({ message: "Need to be an admin for this request." });
     } else {
       next();
     }
@@ -32,7 +32,7 @@ module.exports = (app) => {
     if (req.session.UserType == null || req.session.User.UserType != req.body.UserType ||
        (req.session.User.UserId != req.body.UserId && req.session.User.UserType != 'Admin')) {
       //cannot update someone else or change your own permissions
-      res.status(401).send("Need to be an admin for this request.");
+      res.status(401).send({ message: "Need to be an admin for this request." });
     } else {
       next();
     }
@@ -42,7 +42,7 @@ module.exports = (app) => {
   /* all user functions after this point require admin status */
   app.all('/user/*', (req, res, next) => {
     if (req.session.User == null || req.session.User.UserType != 'Admin') {
-      res.status(401).send("Need to be an admin for this request.");
+      res.status(401).send({ message: "Need to be an admin for this request." });
     } else {
       next();
     }
@@ -59,7 +59,7 @@ module.exports = (app) => {
 
   app.all('/event/volunteer', (req, res, next) => {
     if (req.session.User == null || req.session.User.UserType != 'Volunteer') {
-      res.status(401).send("Need to be an volunteer for this request.");
+      res.status(401).send({ message: "Need to be a volunteer for this request." });
     } else {
       next();
     }
@@ -69,7 +69,7 @@ module.exports = (app) => {
 
   app.all('/event/donate', (req, res, next) => {
     if (req.session.User == null || req.session.User.UserType != 'Donor') {
-      res.status(401).send("Need to be an donor for this request.");
+      res.status(401).send({ message: "Need to be a donor for this request." });
     } else {
       next();
     }
@@ -81,7 +81,7 @@ module.exports = (app) => {
   /* all user functions after this point require admin status */
   app.all('/event/*', (req, res, next) => {
     if (req.session.User == null || req.session.User.UserType != 'Admin') {
-      res.status(401).send("Need to be an admin for this request.");
+      res.status(401).send({ message: "Need to be an admin for this request." });
     } else {
       next();
     }
@@ -98,7 +98,7 @@ module.exports = (app) => {
 /* all program functions after this point require admin status */
 app.all('/program/*', (req, res, next) => {
   if (req.session.User == null || req.session.User.UserType != 'Admin') {
-    res.status(401).send("Need to be an admin for this request.");
+    res.status(401).send({ message: "Need to be an admin for this request." });
   } else {
     next();
   }
@@ -112,7 +112,7 @@ app.delete('/program/delete', programController.destroy); //would need to delete
 
 app.all('/donation/create', (req, res, next) => {
   if (req.session.User == null || req.session.User.UserType != 'Donor') {
-    res.status(401).send("Need to be a donor for this request.");
+    res.status(401).send({ message: "Need to be a donor for this request." });
   } else {
     next();
   }
@@ -123,7 +123,7 @@ app.all('/donation/create', (req, res, next) => {
   app.all('/donation/retrieve', (req, res, next) => {
     if (req.session.User == null || (req.session.User.UserType != 'Donor' &&
       req.session.User.UserType != 'Admin')) {
-      res.status(401).send("Need to be a donor or admin for this request.");
+      res.status(401).send({ message: "Need to be a donor or admin for this request." });
     } else {
       next();
     }
@@ -134,7 +134,7 @@ app.all('/donation/create', (req, res, next) => {
 /* all user functions after this point require admin status */
 app.all('/donation/*', (req, res, next) => {
   if (req.session.User == null || req.session.User.UserType != 'Admin') {
-    res.status(401).send("Need to be an admin for this request.");
+    res.status(401).send({ message: "Need to be an admin for this request." });
   } else {
     next();
   }
@@ -147,7 +147,7 @@ app.delete('/donation/delete', donationController.destroy); //do not call, provi
  ////////////////////////Donates SECTION/////////////////////////////
 app.all('/donates/create', (req, res, next) => {
   if (req.session.User == null || req.session.User.UserType != 'Donor') {
-    res.status(401).send("Need to be a donor for this request.");
+    res.status(401).send({ message: "Need to be a donor for this request." });
   } else {
    next();
   }
@@ -159,7 +159,7 @@ app.all('/donates/create', (req, res, next) => {
     if (req.session.User == null || req.session.User.UserType != 'Donor' ||
       (req.body.UserId != req.session.User.UserId && req.session.User.UserType != 'Admin')) {
       // cannot get donations of other users unless you are an admin
-      res.status(401).send("Need to be a donor or admin for this request.");
+      res.status(401).send({ message: "Need to be a donor or admin for this request." });
     } else {
       next();
     }
@@ -170,7 +170,7 @@ app.all('/donates/create', (req, res, next) => {
 /* all user functions after this point require admin status */
  app.all('/donates/*', (req, res, next) => {
    if (req.session.User == null || req.session.User.UserType != 'Admin') {
-     res.status(401).send("Need to be an admin for this request.");
+     res.status(401).send({ message: "Need to be an admin for this request." });
    } else {
      next();
    }
@@ -184,21 +184,22 @@ app.all('/donates/create', (req, res, next) => {
   //getPrograms and getEvents are already covered in app.js
 
   /* all user functions after this point require admin status */
+  app.post('/hosts/list', hostsController.list);
+
   app.all('/hosts/*', (req, res, next) => {
     if (req.session.User == null || req.session.User.UserType != 'Admin') {
-      res.status(401).send("Need to be an admin for this request.");
+      res.status(401).send({ message: "Need to be an admin for this request." });
     } else {
       next();
     }
   });
 
   app.post('/hosts/create', hostsController.create);
-  app.post('/hosts/list', hostsController.list);
 
   ////////////////////////Needs SECTION/////////////////////////////
   app.all('/needs/create', (req, res, next) => {
     if (req.session.User == null || req.session.User.UserType != 'Donor') {
-      res.status(401).send("Need to be a donor for this request.");
+      res.status(401).send({ message: "Need to be a donor for this request." });
     } else {
       next();
     }
@@ -209,7 +210,7 @@ app.all('/donates/create', (req, res, next) => {
   /* all user functions after this point require admin status */
   app.all('/needs/*', (req, res, next) => {
     if (req.session.User == null || req.session.User.UserType != 'Admin') {
-      res.status(401).send("Need to be an admin for this request.");
+      res.status(401).send({ message: "Need to be an admin for this request." });
     } else {
       next();
     }
@@ -222,7 +223,7 @@ app.all('/donates/create', (req, res, next) => {
   ////////////////////////Volunteers SECTION/////////////////////////////
   app.all('/volunteers/create', (req, res, next) => {
     if (req.session.User == null || req.session.User.UserType != 'Volunteer') {
-      res.status(401).send("Need to be a volunteer for this request.");
+      res.status(401).send({ message: "Need to be a volunteer for this request." });
     } else {
       next();
     }
@@ -233,7 +234,7 @@ app.all('/donates/create', (req, res, next) => {
   app.all('/volunteers/retrieveEvents', (req, res, next) => {
     if (req.session.User == null || req.session.User.UserType != 'Volunteer' ||
        (req.body.UserId != req.session.User.UserId && req.session.User.UserType != 'Volunteer')) {
-      res.status(401).send("Need to be a volunteer for this request.");
+      res.status(401).send({ message: "Need to be a volunteer for this request." });
     } else {
       next();
     }
@@ -244,7 +245,7 @@ app.all('/donates/create', (req, res, next) => {
   /* all user functions after this point require admin status */
   app.all('/volunteers/*', (req, res, next) => {
     if (req.session.User == null || req.session.User.UserType != 'Admin') {
-      res.status(401).send("Need to be an admin for this request.");
+      res.status(401).send({ message: "Need to be an admin for this request." });
     } else {
       next();
     }

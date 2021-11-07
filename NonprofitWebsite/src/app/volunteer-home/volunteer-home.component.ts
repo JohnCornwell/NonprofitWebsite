@@ -34,6 +34,8 @@ export class VolunteerHomeComponent implements OnInit {
       } else {
         this.eventsList = result.body;
       }
+    }, err => {
+      window.alert(err.error.message);
     });
     var body = {
       UserId: Number(sessionStorage.getItem("id"))
@@ -47,7 +49,7 @@ export class VolunteerHomeComponent implements OnInit {
         console.log(result.body);
       }
     }, err => {
-      window.alert(err.body.message);
+      window.alert(err.error.message);
     });
   }
 

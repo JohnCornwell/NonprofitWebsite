@@ -76,7 +76,7 @@ module.exports = {
         Name: req.body.Name,
         About: req.body.About
       })
-      .then(Program => res.status(201).send(JSON.stringify(Program)))
+      .then(Program => res.status(200).send(JSON.stringify(Program)))
       .catch(error => res.status(400).send(error));
   },
 

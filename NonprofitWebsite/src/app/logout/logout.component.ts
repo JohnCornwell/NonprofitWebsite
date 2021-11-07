@@ -38,7 +38,7 @@ export class LogoutComponent implements OnInit {
       }
       this.router.navigate(["/Home"]);
     }, err => {
-      window.alert(err.body.message);
+      window.alert(err.error.message);
     });
   }
 }
