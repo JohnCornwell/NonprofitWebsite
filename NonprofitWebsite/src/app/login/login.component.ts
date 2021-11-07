@@ -51,39 +51,8 @@ export class LoginComponent implements OnInit {
         console.log("logged in");
         this.router.navigate(['/Home']);
       }
+    }, err => {
+      window.alert(err.error.message);
     });
-/*    // if user is in database
-    this.checkUserInDatabase(Username);
-    if(this.isExistingUser)
-    {
-      var bcrypt = require('bcryptjs');
-      // TODO get salt from database
-      var salt = bcrypt.genSaltSync(10);//this is placeholder
-      if(bcrypt.compareSync(Password, salt))
-      {
-        // password was right
-        this.login();
-      }
-      else
-      {
-        // password was incorrrect
-        
-      }
-    }
-    else
-    {
-      // not an existing user
-
-    }*/
   }
-
-  checkUserInDatabase(Username: String){
-    //TODO
-    this.isExistingUser = true;
-  }
-
-  login(){
-    //TODO
-  }
-
 }

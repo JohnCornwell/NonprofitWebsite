@@ -62,6 +62,8 @@ export class AccountCreateComponent implements OnInit {
         window.alert("Signup successful.");
         this.router.navigate(['/Login'])
       }
+    }, err => {
+      window.alert(err.body.message);
     });
   }
   

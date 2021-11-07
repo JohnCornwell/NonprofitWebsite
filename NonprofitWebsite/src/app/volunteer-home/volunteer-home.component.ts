@@ -40,6 +40,8 @@ export class VolunteerHomeComponent implements OnInit {
       } else {
         console.log(result.body);
       }
+    }, err => {
+      window.alert(err.body.message);
     });
   }
 
