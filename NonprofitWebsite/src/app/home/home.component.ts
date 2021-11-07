@@ -3,22 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { 
   FormBuilder, FormGroup, FormArray, FormControl
 } from '@angular/forms';
-
-interface Event {
-  EventID: Number,
-  Name: String,
-  MorningNeed: Number,
-  AfternoonNeed: Number
-  NightNeed: Number,
-  Month: Number,
-  Day: Number,
-  Year: Number,
-  StartHour: Number,
-  StartMinute: Number,
-  EndHour: Number,
-  EndMinute: Number,
-  Description: String
-}
+import { Event } from '../interfaces/Event';
 
 @Component({
   selector: 'app-home',
