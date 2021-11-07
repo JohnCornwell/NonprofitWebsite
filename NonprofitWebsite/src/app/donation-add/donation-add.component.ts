@@ -61,7 +61,8 @@ export class DonationAddComponent implements OnInit {
       Amount: this.form.get('Amount')?.value,
       Description: this.form.get('Description')?.value,
       EventID: this.EventID,
-      DonationGoal: DonationGoal
+      DonationGoal: DonationGoal,
+      DonationID: 0
     }
 
     //send the donation to the server
@@ -75,6 +76,9 @@ export class DonationAddComponent implements OnInit {
            * table and update the event by subtracting the donation from
            * the goal.
            */
+          //our result contains the DonationID that we need to add to Needs
+          console.log(result);
+          body.DonationID = result.body.Donation.DonationID;
           this.http.post<any>("/needs/create", body, { observe: "response" }).subscribe(result => {
             if (result.status != 200) {
               //we will alert the user to an unexpected code
@@ -85,9 +89,7 @@ export class DonationAddComponent implements OnInit {
               if (result.status != 200) {
                 window.alert(result.body.message);
               } else {
-                window.alert("Event added.");
               }
-              this.router.navigate(['/Home/admin']);
             }, err => {
               window.alert(err.error.message);
             });
