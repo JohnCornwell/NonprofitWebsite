@@ -10,6 +10,7 @@ import { EventAddComponent } from './event-add/event-add.component';
 import { EventEditComponent } from './event-edit/event-edit.component';
 import { EventGetComponent } from './event-get/event-get.component';
 import { AccountCreateComponent } from './account-create/account-create.component';
+import { DonationAddComponent } from './donation-add/donation-add.component';
 import { TestComponent } from './test/test.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { VolunteerEventListComponent } from './volunteer-event-list/volunteer-event-list.component';
@@ -47,6 +48,10 @@ const routes: Routes = [
   {
     path: 'Event/create',
     component: EventAddComponent
+  },
+  {
+    path: 'Donation/create',
+    component: DonationAddComponent
   },
   {
     path: 'Account/create',

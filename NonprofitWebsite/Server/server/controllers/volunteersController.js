@@ -25,9 +25,8 @@ module.exports = {
     return Volunteers
       .create({
         UserID: req.body.UserId,
-        ProgID: req.body.ProgId,
+        EventID: req.body.EventId,
         Deleted: req.body.Deleted,
-        Slot: req.body.Slot
       })
       .then(Volunteers => res.status(201).send(JSON.stringify(Volunteers)))
       .catch(error => res.status(400).send(error));
@@ -46,7 +45,7 @@ module.exports = {
       .then(Volunteers => {
         if (!Volunteers) {
           return res.status(404).send({
-            message: 'No Organization relationships found',
+            message: 'No Event relationships found',
           });
         }
         return res.status(200).send(JSON.stringify(Volunteers));

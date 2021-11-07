@@ -103,6 +103,9 @@ VALUES ('evan', 'nonprofit', 'Evan', '', 'Witthun', 'Admin', false);
 INSERT INTO user (Username, Password, FirstName, MiddleName, LastName, UserType, Deleted)
 VALUES ('john', 'nonprofit', 'John', '', 'Cornwell', 'Admin', false);
 
+INSERT INTO user (Username, Password, FirstName, MiddleName, LastName, UserType, Deleted)
+VALUES ('donor', 'donor', 'John', '', 'Cornwell', 'Donor', false);
+
 INSERT INTO Program (Name, About)
 VALUES ('Nonprofit Org 1', 'This is an example of a nonprofit Program in the system.
 This Program cares about things and stuff.');
