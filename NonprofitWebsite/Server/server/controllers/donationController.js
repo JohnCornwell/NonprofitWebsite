@@ -34,7 +34,7 @@ module.exports = {
 
   retrieve(req, res) {
     return Donation
-      .findByDonationId(req.params.DonationId)
+      .findByDonationId(req.body.DonationId)
       .then(Donation => {
         if (!Donation) {
           return res.status(404).send({
@@ -48,7 +48,7 @@ module.exports = {
 
   update(req, res) {
     return Donation
-      .findByDonationId(req.params.DonationId)
+      .findByDonationId(req.body.DonationId)
       .then(Donation => {
         if (!Donation) {
           return res.status(404).send({
@@ -72,7 +72,7 @@ module.exports = {
 
   destroy(req, res) {
     return Donation
-      .findByDonationId(req.params.DonationId)
+      .findByDonationId(req.body.DonationId)
       .then(Donation => {
         if (!Donation) {
           return res.status(400).send({

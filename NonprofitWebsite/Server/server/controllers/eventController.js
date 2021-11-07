@@ -46,7 +46,7 @@ module.exports = {
 
   retrieve(req, res) {
     return Event
-      .findByName(req.params.EventName)
+      .findByName(req.body.EventName)
       .then(Event => {
         if (!Event) {
           return res.status(404).send({
@@ -60,7 +60,7 @@ module.exports = {
 
   update(req, res) {
     return Event
-      .findByName(req.params.EventName)
+      .findByName(req.body.EventName)
       .then(Event => {
         if (!Event) {
           return res.status(404).send({
@@ -89,7 +89,7 @@ module.exports = {
 
   destroy(req, res) {
     return Event
-      .findName(req.params.EventName)
+      .findName(req.body.EventName)
       .then(Event => {
         if (!Event) {
           return res.status(400).send({

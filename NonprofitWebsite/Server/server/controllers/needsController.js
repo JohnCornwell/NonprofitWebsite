@@ -40,7 +40,7 @@ module.exports = {
 
   retrieveDonations(req, res) {
     return Needs
-      .findByEventId(req.params.EventId)
+      .findByEventId(req.body.EventId)
       .then(Needs => {
         if (!Needs) {
           return res.status(404).send({
@@ -54,7 +54,7 @@ module.exports = {
 
   retrieveEvents(req, res) {
     return Needs
-      .findByDonationId(req.params.DonationId)
+      .findByDonationId(req.body.DonationId)
       .then(Needs => {
         if (!Needs) {
           return res.status(404).send({

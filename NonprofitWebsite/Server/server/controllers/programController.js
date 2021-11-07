@@ -31,7 +31,7 @@ module.exports = {
 
   retrieve(req, res) {
     return Program
-      .findByName(req.params.Name)
+      .findByName(req.body.Name)
       .then(Organizaion => {
         if (!Program) {
           return res.status(404).send({
@@ -45,7 +45,7 @@ module.exports = {
 
   update(req, res) {
     return Program
-      .findByName(req.params.Name)
+      .findByName(req.body.Name)
       .then(Name => {
         if (!Name) {
           return res.status(404).send({
@@ -65,7 +65,7 @@ module.exports = {
 
   destroy(req, res) {
     return Program
-      .findByName(req.params.Name)
+      .findByName(req.body.Name)
       .then(Program => {
         if (!Program) {
           return res.status(400).send({

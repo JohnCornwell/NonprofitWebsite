@@ -36,7 +36,7 @@ module.exports = {
 
   retrieve(req, res) {
     return User
-      .findByUsername(req.params.Username)
+      .findByUsername(req.body.Username)
       .then(User => {
         if (!User) {
           return res.status(404).send({
@@ -50,7 +50,7 @@ module.exports = {
 
   update(req, res) {
     return User
-      .findByUsername(req.params.Username)
+      .findByUsername(req.body.Username)
       .then(User => {
         if (!User) {
           return res.status(404).send({
@@ -75,7 +75,7 @@ module.exports = {
 
   destroy(req, res) {
     return User
-      .findByUsername(req.params.Username)
+      .findByUsername(req.body.Username)
       .then(User => {
         if (!User) {
           return res.status(400).send({

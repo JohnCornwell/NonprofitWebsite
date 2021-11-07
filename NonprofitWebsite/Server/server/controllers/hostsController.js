@@ -40,7 +40,7 @@ module.exports = {
 
   retrievePrograms(req, res) {
     return Hosts
-      .findByEventId(req.params.EventId)
+      .findByEventId(req.body.EventId)
       .then(Hosts => {
         if (!Hosts) {
           return res.status(404).send({
@@ -54,7 +54,7 @@ module.exports = {
 
   retrieveEvents(req, res) {
     return Hosts
-      .findByProgID(req.params.ProgId)
+      .findByProgID(req.body.ProgId)
       .then(Hosts => {
         if (!Hosts) {
           return res.status(404).send({

@@ -40,7 +40,7 @@ module.exports = {
 
   retrieveDonations(req, res) {
     return Donates
-      .findByUserId(req.params.UserId)
+      .findByUserId(req.body.UserId)
       .then(Donates => {
         if (!Donates) {
           return res.status(404).send({
@@ -54,7 +54,7 @@ module.exports = {
 
   retrieveUsers(req, res) {
     return Donates
-      .findByDonationId(req.params.DonationId)
+      .findByDonationId(req.body.DonationId)
       .then(Donates => {
         if (!Donates) {
           return res.status(404).send({
