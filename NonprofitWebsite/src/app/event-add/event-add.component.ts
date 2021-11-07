@@ -76,7 +76,7 @@ export class EventAddComponent implements OnInit {
       }
       this.router.navigate(['/Home/admin']);
     }, err => {
-      window.alert(err.body.message);
+      window.alert(err.error.message);
     });
   }
 }

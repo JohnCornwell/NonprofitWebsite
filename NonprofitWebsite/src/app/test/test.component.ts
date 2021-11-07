@@ -14,6 +14,8 @@ export class TestComponent{
   getPosts(){
     this.posts = this.http.get<any>("/event/list").subscribe((result: Response) => {
       console.log(result);
+    }, err => {
+      window.alert(err.error.message);
     });
   }
 }

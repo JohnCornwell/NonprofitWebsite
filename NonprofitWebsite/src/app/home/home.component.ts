@@ -40,6 +40,8 @@ export class HomeComponent implements OnInit {
         result.body.forEach(() => this.eventsFormArray.push(new FormControl()));
         this.eventsData = result.body;
       }
+    }, err => {
+      window.alert(err.error.message);
     });
   }
 }

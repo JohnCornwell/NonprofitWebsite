@@ -46,6 +46,7 @@ export class AccountCreateComponent implements OnInit {
   }
 
   createAccount(Name: String, Lastname: String, Middlename: String, Username: String, Password: String, PasswordCheck: String, Type: String){
+    /* create a new volunteer or donor account. The password will be hashed by the database */
     var body = {
       Username: Username,
       Password: Password,
@@ -63,7 +64,7 @@ export class AccountCreateComponent implements OnInit {
         this.router.navigate(['/Login'])
       }
     }, err => {
-      window.alert(err.body.message);
+      window.alert(err.error.message);
     });
   }
   
