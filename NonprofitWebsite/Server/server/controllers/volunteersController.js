@@ -41,7 +41,7 @@ module.exports = {
 
   retrieveEvents(req, res) {
     return Volunteers
-      .findByUser(req.params.UserId)
+      .findByUser(req.body.UserId)
       .then(Volunteers => {
         if (!Volunteers) {
           return res.status(404).send({
@@ -55,7 +55,7 @@ module.exports = {
 
   retrieveUsers(req, res) {
     return Volunteers
-      .findByEvent(req.params.EventId)
+      .findByEvent(req.body.EventId)
       .then(Volunteers => {
         if (!Volunteers) {
           return res.status(404).send({

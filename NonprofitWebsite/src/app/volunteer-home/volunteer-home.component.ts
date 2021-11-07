@@ -32,6 +32,7 @@ export class VolunteerHomeComponent implements OnInit {
       UserId: Number(sessionStorage.getItem("id"))
       // UserType: sessionStorage.getItem("type")
     }
+    console.log("User id is " + body.UserId);
     console.log(body);
     this.http.post<any>("/volunteers/retrieveEvents", body, { observe: "response" }).subscribe(result => {
       if (result.status != 200) {

@@ -65,7 +65,7 @@ module.exports = (app) => {
     }
   });
 
-  app.post('event/volunteer', eventController.volunteer) //volunteer for a time slot
+  app.post('/event/volunteer', eventController.volunteer) //volunteer for a time slot
 
   app.all('/event/donate', (req, res, next) => {
     if (req.session.User == null || req.session.User.UserType != 'Donor') {
@@ -75,7 +75,7 @@ module.exports = (app) => {
     }
   });
 
-  app.post('event/donate', eventController.donate) //restricted donation to event
+  app.post('/event/donate', eventController.donate) //restricted donation to event
 
 
   /* all user functions after this point require admin status */
@@ -155,7 +155,7 @@ app.all('/donates/create', (req, res, next) => {
 
   app.post('/donates/create', donatesController.create);
 
-  app.all('donates/retrieveDonations', (req, res, next) => {
+  app.all('/donates/retrieveDonations', (req, res, next) => {
     if (req.session.User == null || req.session.User.UserType != 'Donor' ||
       (req.body.UserId != req.session.user.UserId && req.session.User.UserType != 'Admin')) {
       // cannot get donations of other users unless you are an admin
@@ -176,7 +176,7 @@ app.all('/donates/create', (req, res, next) => {
    }
  });
 
-  app.get('donates/list', donatesController.list);
+  app.get('/donates/list', donatesController.list);
   app.post('/donates/retrieveUsers', donatesController.retrieveUsers);
 
   ////////////////////////Hosts SECTION/////////////////////////////
@@ -215,7 +215,7 @@ app.all('/donates/create', (req, res, next) => {
     }
   });
 
-  app.get('needs/list', needsController.list);
+  app.get('/needs/list', needsController.list);
   app.post('/needs/retrieveEvents', needsController.retrieveEvents);
   app.post('/needs/retrieveDonations', needsController.retrieveDonations);
 
@@ -250,7 +250,7 @@ app.all('/donates/create', (req, res, next) => {
     }
   });
 
-  app.get('volunteers/list', volunteersController.list);
+  app.get('/volunteers/list', volunteersController.list);
   app.post('/needs/retrieveUsers', volunteersController.retrieveUsers);
 
 };

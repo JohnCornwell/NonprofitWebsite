@@ -15,12 +15,16 @@ export class DonationAddComponent implements OnInit {
   constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {
     this.form = this.fb.group({
       Type: ['', Validators.required],
-      Amount: [0, [Validators.required, Validators.min(0)]],
+      Amount: [0, [Validators.required, Validators.min(5)]],
       Description: ['']
     });
   }
 
 
   ngOnInit(): void {
+  }
+
+  onSubmit() {
+
   }
 }
