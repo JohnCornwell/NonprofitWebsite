@@ -4,7 +4,7 @@
             <h4 class="panel-title">
                 <a data-toggle="collapse" href="#collapse{{i}}">{{eventsList[i].Name}}</a>
                 {{eventsList[i].Month}}/{{eventsList[i].Day}}/{{eventsList[i].Year}}
-                <button style="float:right" (click)="volunteer(eventsList[i].EventID)">
+                <button style="float:right" (click)="buttonPress(eventsList[i].EventID)">
                     Volunteer
                     <span class="badge badge-secondary">
                         {{eventsList[i].VolunteerNeed}}
