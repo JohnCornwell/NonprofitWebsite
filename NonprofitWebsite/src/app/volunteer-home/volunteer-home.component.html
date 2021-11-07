@@ -1,1 +1,20 @@
-<p>volunteer-home works!</p>
+<div *ngFor="let event of eventsList; let i = index" class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapse{{i}}">{{eventsList[i].Name}}</a>
+                {{eventsList[i].Month}}/{{eventsList[i].Day}}/{{eventsList[i].Year}}
+                <button style="float:right" (click)="volunteer(eventsList[i].EventID)">
+                    Volunteer
+                    <span class="badge badge-secondary">
+                        {{eventsList[i].VolunteerNeed}}
+                    </span>
+                </button>
+            </h4>
+        </div>
+        <div id="collapse{{i}}" class="panel-collapse collapse">
+            <div class="panel-body">{{eventsList[i].Description}}</div>
+            <div class="panel-footer">{{eventsList[i].StartHour}}:{{eventsList[i].StartMinute}}-{{eventsList[i].EndHour}}:{{eventsList[i].EndMinute}}</div>
+        </div>
+    </div>
+</div>
