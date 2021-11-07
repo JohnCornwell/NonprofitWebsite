@@ -4,6 +4,7 @@ module.exports = function(sequelize, DataTypes) {
     UserID: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      primaryKey: true,
       references: {
         model: 'user',
         key: 'UserID'
@@ -12,6 +13,7 @@ module.exports = function(sequelize, DataTypes) {
     EventID: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      primaryKey: true,
       references: {
         model: 'event',
         key: 'EventID'
@@ -19,10 +21,6 @@ module.exports = function(sequelize, DataTypes) {
     },
     Deleted: {
       type: DataTypes.BOOLEAN,
-      allowNull: false
-    },
-    Slot: {
-      type: DataTypes.INTEGER,
       allowNull: false
     },
   }, {

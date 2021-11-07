@@ -4,6 +4,48 @@ const Volunteers = db['volunteers'];
 /*The req parameter is the incoming request from the client. The res
  * parameter is the response we're preparing to eventually send back to
  * the client in response to their request */
+function findByUser(id) {
+  return Volunteers.findAll({
+    where: {
+      UserID: id
+    }
+  })
+}
+
+function findByEvent (id) {
+  return Volunteers.findAll({
+    where: {
+      EventID: id
+    }
+  })
+}
+
+function retrieveEvents(req, res) {
+  return findByUser(req.body.UserId)
+    .then(Volunteers => {
+      if (!Volunteers) {
+        return res.status(404).send({
+          message: 'No Event relationships found',
+        });
+      }
+      return res.status(200).send(JSON.stringify(Volunteers));
+    })
+    .catch(error => res.status(400).send(error));
+}
+
+function retrieveUsers(req, res) {
+  return findByEvent(req.body.EventId)
+    .then(Volunteers => {
+      if (!Volunteers) {
+        return res.status(404).send({
+          message: 'No User relationships found',
+        });
+      }
+      return res.status(200).send(JSON.stringify(Volunteers));
+    })
+    .catch(error => res.status(400).send(error));
+}
+
 module.exports = {
   findByUser: function (id) {
     return Volunteers.findAll({
@@ -39,31 +81,7 @@ module.exports = {
       .catch(error => res.status(400).send(error));
   },
 
-  retrieveEvents(req, res) {
-    return Volunteers
-      .findByUser(req.body.UserId)
-      .then(Volunteers => {
-        if (!Volunteers) {
-          return res.status(404).send({
-            message: 'No Event relationships found',
-          });
-        }
-        return res.status(200).send(JSON.stringify(Volunteers));
-      })
-      .catch(error => res.status(400).send(error));
-  },
+  retrieveEvents,
 
-  retrieveUsers(req, res) {
-    return Volunteers
-      .findByEvent(req.body.EventId)
-      .then(Volunteers => {
-        if (!Volunteers) {
-          return res.status(404).send({
-            message: 'No User relationships found',
-          });
-        }
-        return res.status(200).send(JSON.stringify(Volunteers));
-      })
-      .catch(error => res.status(400).send(error));
-  },
+  retrieveUsers
 };
