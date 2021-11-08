@@ -79,7 +79,6 @@ export class DonationAddComponent implements OnInit {
       } else {
         //donation was added, so modify other tables if necessary
         if (this.EventID != -1) {
-          console.log("Not neg" + this.EventID)
           /* This is a restricted donation, so add an entry to the Needs
            * table and update the event by subtracting the donation from
            * the goal.
