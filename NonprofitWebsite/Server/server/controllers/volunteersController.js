@@ -23,7 +23,7 @@ function findByEvent (id) {
 function retrieveEvents(req, res) {
   return findByUser(req.body.UserId)
     .then(Volunteers => {
-      if (!Volunteers) {
+      if (Volunteers.length == 0) {
         return res.status(404).send({
           message: 'No Event relationships found',
         });
@@ -36,7 +36,7 @@ function retrieveEvents(req, res) {
 function retrieveUsers(req, res) {
   return findByEvent(req.body.EventId)
     .then(Volunteers => {
-      if (!Volunteers) {
+      if (Volunteers.length == 0) {
         return res.status(404).send({
           message: 'No User relationships found',
         });

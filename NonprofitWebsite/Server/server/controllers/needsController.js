@@ -24,7 +24,7 @@ function findByDonationId (id) {
 function retrieveDonations(req, res) {
   return findByEventId(req.body.EventId)
     .then(Needs => {
-      if (!Needs) {
+      if (Needs.length == 0) {
         return res.status(404).send({
           message: 'No Donation relationships found',
         });
@@ -37,7 +37,7 @@ function retrieveDonations(req, res) {
 function retrieveEvents(req, res) {
   return findByDonationId(req.body.DonationId)
     .then(Needs => {
-      if (!Needs) {
+      if (Needs.length == 0) {
         return res.status(404).send({
           message: 'No Event relationships found',
         });

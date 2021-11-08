@@ -27,7 +27,6 @@ export class HomeComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.form.get('SelectEvent')?.value);
     this.wellText = this.form.get('SelectEvent')?.value;
   }
 
@@ -36,7 +35,6 @@ export class HomeComponent implements OnInit {
       if (result.status != 200) {
         window.alert("Error in requesting event list from server.");
       } else {
-        console.log(result.body);
         result.body.forEach(() => this.eventsFormArray.push(new FormControl()));
         this.eventsData = result.body;
       }

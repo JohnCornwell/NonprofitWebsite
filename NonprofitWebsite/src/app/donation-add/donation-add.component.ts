@@ -35,7 +35,7 @@ export class DonationAddComponent implements OnInit {
     let type: string;
     let today = new Date(); //creates a Date representing today
     let DonationGoal: number = 0;
-    if (this.form.get('SelectEvent')?.value != null) {
+    if (this.form.get('SelectEvent')?.value != '') {
       //there is an event selection, so this is a restricted donation
       this.EventID = this.form.get('SelectEvent')?.value;
       type = "Restricted"
@@ -60,11 +60,18 @@ export class DonationAddComponent implements OnInit {
       Year: today.getFullYear(),
       Amount: this.form.get('Amount')?.value,
       Description: this.form.get('Description')?.value,
-      EventID: this.EventID,
+      EventId: this.EventID,
       DonationGoal: DonationGoal,
-      DonationID: 0
+      DonationId: 0
     }
 
+    this.makeDonation(body);
+  }
+
+  makeDonation(body: {
+    Type?: string; Month?: number; Day?: number; Year?: number;
+    Amount?: any; Description?: any; EventId?: number; DonationGoal?: number; DonationId: any;
+    }) {
     //send the donation to the server
     this.http.post<any>("/donation/create", body, { observe: "response" }).subscribe(result => {
       if (result.status != 200) {
@@ -72,13 +79,14 @@ export class DonationAddComponent implements OnInit {
       } else {
         //donation was added, so modify other tables if necessary
         if (this.EventID != -1) {
+          console.log("Not neg" + this.EventID)
           /* This is a restricted donation, so add an entry to the Needs
            * table and update the event by subtracting the donation from
            * the goal.
            */
           //our result contains the DonationID that we need to add to Needs
           console.log(result);
-          body.DonationID = result.body.Donation.DonationID;
+          body.DonationId = result.body.DonationID;
           this.http.post<any>("/needs/create", body, { observe: "response" }).subscribe(result => {
             if (result.status != 200) {
               //we will alert the user to an unexpected code

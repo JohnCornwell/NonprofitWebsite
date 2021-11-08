@@ -1,9 +1,7 @@
-import { HttpClient, HttpRequest } from '@angular/common/http';
-import { Component, OnInit, ɵCodegenComponentFactoryResolver } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { get } from 'http';
-import { type } from 'os';
 
 @Component({
   selector: 'app-account-create',
@@ -66,34 +64,5 @@ export class AccountCreateComponent implements OnInit {
     }, err => {
       window.alert(err.error.message);
     });
-  }
-  
-  validateAccount(Username: String, Password: String, PasswordCheck: String){
-  let returnValue = true;
-    // Username check
-    //TODO query database for username
-    if(false){
-      this.isUsernameTaken = true;
-      returnValue = false;
-    }
-    else{
-      this.isUsernameTaken = false;
-    }
-    // Password double check
-    if(Password === PasswordCheck){
-      this.passwordsDontMatch = false;
-      // hash the password
-      var bcrypt = require('bcryptjs');
-      // create salt
-      // var salt = bcrypt.genSaltSync(randomInt(Number.MAX_SAFE_INTEGER));
-      // var hash = bcrypt.hashSync(Password, salt);
-      //TODO store salt and hash in database
-    }
-    else
-    {
-      this.passwordsDontMatch = true;
-      returnValue = false;
-    }
-    return returnValue;
   }
 }

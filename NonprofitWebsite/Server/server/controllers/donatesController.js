@@ -24,7 +24,7 @@ function findByDonationId(id) {
 function retrieveDonations(req, res) {
   return findByUserId(req.body.UserId)
     .then(Donates => {
-      if (!Donates) {
+      if (Donates.length == 0) {
         return res.status(404).send({
           message: 'No Donation relationships found',
         });
@@ -37,7 +37,7 @@ function retrieveDonations(req, res) {
 function retrieveUsers(req, res) {
   return findByDonationId(req.body.DonationId)
     .then(Donates => {
-      if (!Donates) {
+      if (Donates.length == 0) {
         return res.status(404).send({
           message: 'No User relationships found',
         });

@@ -106,6 +106,9 @@ VALUES ('john', 'nonprofit', 'John', '', 'Cornwell', 'Admin', false);
 INSERT INTO user (Username, Password, FirstName, MiddleName, LastName, UserType, Deleted)
 VALUES ('donor', 'donor', 'John', '', 'Cornwell', 'Donor', false);
 
+INSERT INTO user (Username, Password, FirstName, MiddleName, LastName, UserType, Deleted)
+VALUES ('volunteer', 'volunteer', 'John', '', 'Cornwell', 'Volunteer', false);
+
 INSERT INTO Program (Name, About)
 VALUES ('Nonprofit Org 1', 'This is an example of a nonprofit Program in the system.
 This Program cares about things and stuff.');
@@ -116,12 +119,12 @@ Unlike Nonprofit Org 1, this Program cares about something.');
 
 INSERT INTO event (Name, VolunteerNeed, DonationGoal, Month, Day, Year, StartHour, 
 StartMinute, EndHour, EndMinute, Description)
-VALUES ('Nonprofit Org 1\'s Annual Event', 2, 3, 11, 21, 2021, 11, 00, 23, 00, 
+VALUES ('Nonprofit Org 1\'s Annual Event', 2, 300, 11, 21, 2021, 11, 00, 23, 00, 
 'This is the annual event for Nonprofit Org 1 where we talk about things and stuff.');
 
 INSERT INTO event (Name, VolunteerNeed, DonationGoal, Month, Day, Year, StartHour, 
 StartMinute, EndHour, EndMinute, Description)
-VALUES ('Nonprofit Org 2\'s Annual Event', 2, 3, 11, 22, 2021, 11, 00, 23, 00, 
+VALUES ('Nonprofit Org 2\'s Annual Event', 2, 300, 11, 22, 2021, 11, 00, 23, 00, 
 'This is the annual event for Nonprofit Org 2 where we talk about something.');
 
 INSERT INTO hosts (ProgID, EventID)

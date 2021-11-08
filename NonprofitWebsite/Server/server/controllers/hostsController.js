@@ -5,7 +5,7 @@ const Hosts = db['hosts'];
  * parameter is the response we're preparing to eventually send back to
  * the client in response to their request */
 
-function findByProgID(ProgId) {
+function findByProgId(ProgId) {
   return Hosts.findAll({
     where: {
       ProgID: ProgId
@@ -24,7 +24,7 @@ function findByEventId(EventId) {
 function retrievePrograms(req, res) {
   return findByEventId(req.body.EventId)
     .then(Hosts => {
-      if (!Hosts) {
+      if (Hosts.length == 0) {
         return res.status(404).send({
           message: 'No Program relationships found',
         });
@@ -37,7 +37,7 @@ function retrievePrograms(req, res) {
 function retrieveEvents(req, res) {
   return findByProgId(req.body.ProgId)
     .then(Hosts => {
-      if (!Hosts) {
+      if (Hosts.length == 0) {
         return res.status(404).send({
           message: 'No Event relationships found',
         });
@@ -48,7 +48,7 @@ function retrieveEvents(req, res) {
 }
 
 module.exports = {
-  findByProgID: function (ProgId) {
+  findByProgId: function (ProgId) {
     return Hosts.findAll({
       where: {
         ProgID: ProgId

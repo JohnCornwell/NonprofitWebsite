@@ -22,7 +22,7 @@
         <label class="col-md-4">Select an event if you want to make a restricted donation</label>
         <br>
         <select name="selectEvent" id="selectEvent" formControlName="SelectEvent" class="form-control" formArrayName="events">
-          <option *ngFor="let event of eventsFormArray.controls; let i = index" value="{{eventsData[i].EventID}}">{{eventsData[i].Name}}</option>
+          <option *ngFor="let event of eventsData; let i = index" value="{{this.eventsData[i].EventID}}">{{this.eventsData[i].Name}}</option>
         </select>
       </div>
       <!-- Section for Description -->

@@ -17,7 +17,6 @@ export class UserServiceService {
   constructor(private router: Router) {
     this.currentTypeSubject = new BehaviorSubject<String>("none");
     this.currentType = this.currentTypeSubject.asObservable();
-    console.log("User Service constructor called");
   }
 
   login(type: String) {

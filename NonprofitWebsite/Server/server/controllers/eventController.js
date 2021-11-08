@@ -5,7 +5,7 @@ const Event = db['event'];
  * the client in response to their request */
 
 function findByName(name) {
-  return db.Event.findAll({
+  return Event.findAll({
     where: {
       EventName: name
     }
@@ -13,7 +13,7 @@ function findByName(name) {
 }
 
 function findById(id) {
-  return db.Event.findAll({
+  return Event.findAll({
     where: {
       EventID: id
     }
@@ -23,7 +23,7 @@ function findById(id) {
 function retrieve(req, res) {
   return findByName(req.body.EventName)
     .then(Event => {
-      if (!Event) {
+      if (Event.length == 0) {
         return res.status(404).send({
           message: 'Event Not Found',
         });
@@ -36,12 +36,12 @@ function retrieve(req, res) {
 function update(req, res) {
   return findByName(req.body.EventName)
     .then(Event => {
-      if (!Event) {
+      if (Event.length == 0) {
         return res.status(404).send({
           message: 'Event Not Found',
         });
       }
-      return Event
+      return Event[0]
         .update({
           Name: req.body.EventName || Event.Name,
           VolunteerNeed: req.body.VolunteerNeed || Event.VolunteerNeed,
@@ -64,12 +64,12 @@ function update(req, res) {
 function destroy(req, res) {
   return findByName(req.body.EventName)
     .then(Event => {
-      if (!Event) {
+      if (Event.length == 0) {
         return res.status(400).send({
           message: 'Event Not Found',
         });
       }
-      return Event
+      return Event[0]
         .destroy()
         .then(() => res.status(200).send({ message: 'Event deleted successfully.' }))
         .catch(error => res.status(400).send(error));
@@ -80,12 +80,12 @@ function destroy(req, res) {
 function volunteer(req, res) {
   return findById(req.body.EventId)
     .then(Event => {
-      if (!Event) {
+      if (Event.length == 0) {
         return res.status(400).send({
           message: "Event not found",
         });
       } else {
-        return Event
+        return Event[0]
           .update({
             Name: Event.Name,
             VolunteerNeed: req.body.VolunteerNeed,
@@ -110,12 +110,12 @@ function volunteer(req, res) {
 function donate(req, res) {
   return findById(req.body.EventId)
     .then(Event => {
-      if (!Event) {
+      if (Event.length == 0) {
         return res.status(400).send({
           message: "Event not found",
         });
       } else {
-        return Event
+        return Event[0]
           .update({
             Name: Event.Name,
             VolunteerNeed: Event.VolunteerNeed,
@@ -130,7 +130,7 @@ function donate(req, res) {
             EndMinute: Event.EndMinute,
             Description: Event.Description
           })
-          .then(() => res.status(200).send({ message: 'Volunteered successfully.' }))
+          .then(() => res.status(200).send({ message: 'Donated successfully.' }))
           .catch(error => res.status(400).send(error));
       }
     })
@@ -139,7 +139,7 @@ function donate(req, res) {
 
 module.exports = {
   findByName: function (name) {
-    return db.Event.findAll({
+    return Event.findAll({
       where: {
         EventName: name
       }
@@ -147,7 +147,7 @@ module.exports = {
   },
 
   findById: function (id) {
-    return db.Event.findAll({
+    return Event.findAll({
       where: {
         EventID: id
       }

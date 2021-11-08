@@ -16,7 +16,7 @@ function findByUsername (username) {
 function retrieve(req, res) {
   return findByUsername(req.body.Username)
     .then(User => {
-      if (!User) {
+      if (User.length == 0) {
         return res.status(404).send({
           message: 'User Not Found',
         });
@@ -29,12 +29,12 @@ function retrieve(req, res) {
 function update(req, res) {
   return findByUsername(req.body.Username)
     .then(User => {
-      if (!User) {
+      if (User.length == 0) {
         return res.status(404).send({
           message: 'User Not Found',
         });
       }
-      return User
+      return User[0]
         .update({
           Username: req.body.Username || User.Username,
           Password: req.body.Password || User.Password,
@@ -53,12 +53,12 @@ function update(req, res) {
 function destroy(req, res) {
   return findByUsername(req.body.Username)
     .then(User => {
-      if (!User) {
+      if (User.length == 0) {
         return res.status(400).send({
           message: 'User Not Found',
         });
       }
-      return User
+      return User[0]
         .destroy()
         .then(() => res.status(200).send({ message: 'User deleted successfully.' }))
         .catch(error => res.status(400).send(error));

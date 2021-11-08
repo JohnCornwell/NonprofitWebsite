@@ -16,7 +16,7 @@ function findByName (name) {
 function retrieve(req, res) {
   return findByName(req.body.Name)
     .then(Program => {
-      if (!Program) {
+      if (Program.length == 0) {
         return res.status(404).send({
           message: 'Program Not Found',
         });
@@ -29,12 +29,12 @@ function retrieve(req, res) {
 function update(req, res) {
   return findByName(req.body.Name)
     .then(Name => {
-      if (!Name) {
+      if (Name.length == 0) {
         return res.status(404).send({
           message: 'Program Not Found',
         });
       }
-      return Program
+      return Program[0]
         .update({
           Name: req.body.Name || Orgainzation.Name,
           About: req.body.About || Orgainzation.About
@@ -48,12 +48,12 @@ function update(req, res) {
 function destroy(req, res) {
   return findByName(req.body.Name)
     .then(Program => {
-      if (!Program) {
+      if (Program.length == 0) {
         return res.status(400).send({
           message: 'Program Not Found',
         });
       }
-      return Program
+      return Program[0]
         .destroy()
         .then(() => res.status(200).send({ message: 'Program deleted successfully.' }))
         .catch(error => res.status(400).send(error));
