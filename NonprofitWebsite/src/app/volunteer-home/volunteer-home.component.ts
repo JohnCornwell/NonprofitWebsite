@@ -14,8 +14,16 @@ export class VolunteerHomeComponent implements OnInit {
 
   }
 
-  volunteer(ID: Number){
-    console.log("Volunteer "+ ID);
+  buttonPress(ID: Number){
+    console.log("Volunteer for "+ ID);
+    this.volunteer(ID);
+  }
+
+  volunteer(ID: Number)
+  {
+    var body = {
+      UserId: Number(sessionStorage.getItem("id"))
+    }
   }
 
   ngOnInit(): void {
@@ -30,9 +38,7 @@ export class VolunteerHomeComponent implements OnInit {
       window.alert(err.error.message);
     });
     var body = {
-      // User: sessionStorage.getItem("name"),
       UserId: Number(sessionStorage.getItem("id"))
-      // UserType: sessionStorage.getItem("type")
     }
     console.log("User id is " + body.UserId);
     console.log(body);
