@@ -67,10 +67,12 @@ app.post('/login', (req, res) => {
               .update(req.body.Password)
               .digest('hex');
             console.log(hash);
+            console.log("Person is " + person[0]);
             //check the stored password against the hash
             //todo
             if (person[0].Password == password) {
               req.session.User = person[0];
+              console.log(person[0]);
               res.status(200).send(person[0])
             } else {
               res.status(400).send({ message: "Incorrect Password" });
