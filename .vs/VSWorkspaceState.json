@@ -3,8 +3,13 @@
     "",
     "\\NonprofitWebsite",
     "\\NonprofitWebsite\\src",
-    "\\NonprofitWebsite\\src\\app"
+    "\\NonprofitWebsite\\src\\app",
+    "\\NonprofitWebsite\\src\\app\\donation-add",
+    "\\NonprofitWebsite\\src\\app\\donor-home",
+    "\\NonprofitWebsite\\src\\app\\event-edit",
+    "\\NonprofitWebsite\\src\\app\\login",
+    "\\NonprofitWebsite\\src\\app\\volunteer-home"
   ],
-  "SelectedNode": "\\NonprofitWebsite\\src\\app",
+  "SelectedNode": "\\NonprofitWebsite\\src\\app\\login\\login.component.ts",
   "PreviewInSolutionExplorer": false
 }

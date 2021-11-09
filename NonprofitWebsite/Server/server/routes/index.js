@@ -233,14 +233,25 @@ app.all('/donates/create', (req, res, next) => {
 
   app.all('/volunteers/retrieveEvents', (req, res, next) => {
     if (req.session.User == null || req.session.User.UserType != 'Volunteer' ||
-       (req.body.UserId != req.session.User.UserId && req.session.User.UserType != 'Volunteer')) {
-      res.status(401).send({ message: "Need to be a volunteer for this request." });
+       (req.body.UserId != req.session.User.UserId && req.session.User.UserType != 'Admin')) {
+      res.status(401).send({ message: "Need to be a volunteer or admin for this request." });
     } else {
       next();
     }
   });
 
   app.post('/volunteers/retrieveEvents', volunteersController.retrieveEvents);
+
+  app.all('/volunteers/update', (req, res, next) => {
+    if (req.session.User == null || req.session.User.UserType != 'Volunteer' ||
+      (req.body.UserId != req.session.User.UserId && req.session.User.UserType != 'Admin')) {
+      res.status(401).send({ message: "Need to be a volunteer or admin for this request." });
+    } else {
+      next();
+    }
+  });
+
+  app.post('/volunteers/update', volunteersController.update);
 
   /* all user functions after this point require admin status */
   app.all('/volunteers/*', (req, res, next) => {

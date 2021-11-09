@@ -46,6 +46,26 @@ function retrieveUsers(req, res) {
     .catch(error => res.status(400).send(error));
 }
 
+function update(req, res) {
+  return findByUserId(req.body.UserId)
+    .then(Volunteers => {
+      if (Volunteers.length == 0) {
+        return res.status(404).send({
+          message: 'No User relationships found',
+        });
+      }
+      return Volunteers[0]
+        .update({
+          UserID: req.body.UserId || Volunteers[0].UserID,
+          EventID: req.body.EventId || Volunteers[0].EventID,
+          Deleted: req.body.Deleted || Volunteers[0].Deleted
+        })
+        .then(() => res.status(200).send(JSON.stringify(Volunteers[0])))  // Send back the updated User.
+        .catch((error) => res.status(400).send(error));
+    })
+    .catch(error => res.status(400).send(error));
+}
+
 module.exports = {
   findByUser: function (id) {
     return Volunteers.findAll({
@@ -83,5 +103,7 @@ module.exports = {
 
   retrieveEvents,
 
-  retrieveUsers
+  retrieveUsers,
+
+  update
 };

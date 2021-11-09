@@ -36,13 +36,13 @@ function update(req, res) {
       }
       return User[0]
         .update({
-          Username: req.body.Username || User.Username,
-          Password: req.body.Password || User.Password,
-          FirstName: req.body.FirstName || User.FirstName,
-          MiddleName: req.body.MiddleName || User.MiddleName,
-          LastName: req.body.LastName || User.LastName,
-          UserType: req.body.UserType || User.UserType,
-          Deleted: req.body.Deleted || User.Deleted,
+          Username: req.body.Username || User[0].Username,
+          Password: req.body.Password || User[0].Password,
+          FirstName: req.body.FirstName || User[0].FirstName,
+          MiddleName: req.body.MiddleName || User[0].MiddleName,
+          LastName: req.body.LastName || User[0].LastName,
+          UserType: req.body.UserType || User[0].UserType,
+          Deleted: req.body.Deleted || User[0].Deleted,
         })
         .then(() => res.status(200).send(JSON.stringify(User)))  // Send back the updated User.
         .catch((error) => res.status(400).send(error));
