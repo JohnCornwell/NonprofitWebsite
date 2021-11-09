@@ -1,0 +1,5 @@
+/*Change the color of the row being hovered over*/
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #03fcb1;
+}

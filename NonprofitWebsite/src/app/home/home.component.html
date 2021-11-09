@@ -14,7 +14,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let event of eventsData;">
+        <tr *ngFor="let event of eventsData; let i=index;" (click)="Select(i);">
           <td scope="row">{{ event.Name }}</td>
           <td>{{ event.VolunteerNeed }}</td>
           <td>{{ event.DonationGoal }}</td>
@@ -26,8 +26,11 @@
     </table>
   </div>
 </div>
+<div class="well">
+  {{this.wellText}}
+</div>
 <!-- Form to select an event to see its description -->
-<form [formGroup]="form" (ngSubmit)="submit()">
+<!--<form [formGroup]="form" (ngSubmit)="submit()">
   <div class="form-group">
     <label class="col-md-4">Select an event, and we'll tell you about it:</label>
     <br>
@@ -39,4 +42,4 @@
     {{this.wellText}}
   </div>
   <button class="btn btn-default">show</button>
-</form>
+</form>-->

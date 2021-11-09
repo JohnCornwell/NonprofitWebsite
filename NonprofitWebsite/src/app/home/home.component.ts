@@ -11,7 +11,7 @@ import { Event } from '../interfaces/Event';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  wellText = "Select an event to see the description.";
+  wellText: String = "Click an event to see the description.";
   form: FormGroup;
   eventsData: Array<Event> = new Array<Event>();
 
@@ -33,9 +33,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.http.get<any>("/event/list", { observe: "response" }).subscribe(result => {
       if (result.status != 200) {
-        window.alert("Error in requesting event list from server.");
+        window.alert(result.body.message  + "Unable to display event data.");
       } else {
-        result.body.forEach(() => this.eventsFormArray.push(new FormControl()));
         //set up readable strings for every Event before adding it to the array for display
         result.body.forEach((event: Event) => {
           let eventDate = new Date(event.Year, event.Month, event.Day);
@@ -75,13 +74,20 @@ export class HomeComponent implements OnInit {
             event.StartMinuteString = sm;
             event.EndHourString = eh;
             event.EndMinuteString = em;
+            //add event to the list
             this.eventsData.push(event);
+            //space for the event in the dropdown
+            this.eventsFormArray.push(new FormControl());
           } //end of if
         }); //end of iterator
-
       }
     }, err => {
       window.alert(err.error.message);
     });
   }
+
+  Select(i: number) {
+    this.wellText = this.eventsData[i].Description;
+  }
+
 }
