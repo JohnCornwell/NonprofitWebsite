@@ -1,14 +1,42 @@
 <h3>Look at all the cool stuff we do!</h3>
+<!-- Table with all events happening today or in the future -->
+<div class="container">
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Event Name</th>
+          <th scope="col">Volunteer Need</th>
+          <th scope="col">Donation Goal</th>
+          <th scope="col">Date</th>
+          <th scope="col">Start</th>
+          <th scope="col">End</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let event of eventsData;">
+          <td scope="row">{{ event.Name }}</td>
+          <td>{{ event.VolunteerNeed }}</td>
+          <td>{{ event.DonationGoal }}</td>
+          <td>{{ event.MonthString + '/' + event.DayString + '/' + event.YearString }}</td>
+          <td>{{ event.StartHourString + ':' + event.StartMinuteString }}</td>
+          <td>{{ event.EndHourString + ':' + event.EndMinuteString }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- Form to select an event to see its description -->
 <form [formGroup]="form" (ngSubmit)="submit()">
-    <div class="form-group">
-        <label class="col-md-4">Select an event, and we'll tell you about it:</label>
-        <br>
-        <select name="selectEvent" id="selectEvent" formControlName="SelectEvent" class="form-control" formArrayName="events">
-          <option *ngFor="let event of eventsFormArray.controls; let i = index" value="{{eventsData[i].Description}}">{{eventsData[i].Name}}</option>
-        </select>
-    </div>
-    <div class="well">
-        {{this.wellText}}
-    </div>
-    <button class="btn btn-default">show</button>
+  <div class="form-group">
+    <label class="col-md-4">Select an event, and we'll tell you about it:</label>
+    <br>
+    <select name="selectEvent" id="selectEvent" formControlName="SelectEvent" class="form-control" formArrayName="events">
+      <option *ngFor="let event of eventsFormArray.controls; let i = index" value="{{eventsData[i].Description}}">{{eventsData[i].Name}}</option>
+    </select>
+  </div>
+  <div class="well">
+    {{this.wellText}}
+  </div>
+  <button class="btn btn-default">show</button>
 </form>

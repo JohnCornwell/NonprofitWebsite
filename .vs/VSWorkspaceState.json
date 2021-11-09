@@ -3,10 +3,8 @@
     "",
     "\\NonprofitWebsite",
     "\\NonprofitWebsite\\src",
-    "\\NonprofitWebsite\\src\\app",
-    "\\NonprofitWebsite\\src\\app\\admin-home",
-    "\\NonprofitWebsite\\src\\app\\event-add"
+    "\\NonprofitWebsite\\src\\app"
   ],
-  "SelectedNode": "\\NonprofitWebsite\\src\\app\\app.module.ts",
+  "SelectedNode": "\\NonprofitWebsite\\src\\app",
   "PreviewInSolutionExplorer": false
 }

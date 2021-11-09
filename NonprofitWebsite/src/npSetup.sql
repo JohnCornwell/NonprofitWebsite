@@ -119,13 +119,17 @@ Unlike Nonprofit Org 1, this Program cares about something.');
 
 INSERT INTO event (Name, VolunteerNeed, DonationGoal, Month, Day, Year, StartHour, 
 StartMinute, EndHour, EndMinute, Description)
-VALUES ('Nonprofit Org 1\'s Annual Event', 2, 300, 11, 21, 2021, 11, 00, 23, 00, 
+VALUES ('Nonprofit Org 1\'s Annual Event', 2, 300, 11, 21, 2021, 09, 00, 17, 00, 
 'This is the annual event for Nonprofit Org 1 where we talk about things and stuff.');
 
 INSERT INTO event (Name, VolunteerNeed, DonationGoal, Month, Day, Year, StartHour, 
 StartMinute, EndHour, EndMinute, Description)
-VALUES ('Nonprofit Org 2\'s Annual Event', 2, 300, 11, 22, 2021, 11, 00, 23, 00, 
+VALUES ('Nonprofit Org 2\'s Annual Event', 2, 300, 11, 22, 2021, 08, 00, 16, 00, 
 'This is the annual event for Nonprofit Org 2 where we talk about something.');
+
+INSERT INTO event (Name, VolunteerNeed, DonationGoal, Month, Day, Year, StartHour, 
+StartMinute, EndHour, EndMinute, Description)
+VALUES ('Event 3', 2, 300, 11, 22, 2021, 08, 00, 16, 00, 'NA');
 
 INSERT INTO hosts (ProgID, EventID)
 VALUES (1, 1);

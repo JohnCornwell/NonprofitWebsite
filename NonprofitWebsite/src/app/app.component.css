@@ -13,7 +13,7 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: rgb(3, 252, 177);
+  background-color: #03fcb1;
   position: -webkit-sticky; /* Safari */
   position: sticky;
   top: 0;
