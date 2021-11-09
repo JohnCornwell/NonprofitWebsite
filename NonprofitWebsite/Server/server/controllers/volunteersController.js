@@ -60,7 +60,7 @@ function update(req, res) {
           EventID: req.body.EventId || Volunteers[0].EventID,
           Deleted: req.body.Deleted || Volunteers[0].Deleted
         })
-        .then(() => res.status(200).send(JSON.stringify(Volunteers[0])))  // Send back the updated User.
+        .then(volunteers => res.status(200).send(JSON.stringify(volunteers)))  // Send back the updated User.
         .catch((error) => res.status(400).send(error));
     })
     .catch(error => res.status(400).send(error));

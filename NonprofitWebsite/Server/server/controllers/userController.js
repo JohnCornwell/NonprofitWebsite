@@ -44,7 +44,7 @@ function update(req, res) {
           UserType: req.body.UserType || User[0].UserType,
           Deleted: req.body.Deleted || User[0].Deleted,
         })
-        .then(() => res.status(200).send(JSON.stringify(User)))  // Send back the updated User.
+        .then(user => res.status(200).send(JSON.stringify(user)))  // Send back the updated User.
         .catch((error) => res.status(400).send(error));
     })
     .catch((error) => res.status(400).send(error));

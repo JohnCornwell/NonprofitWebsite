@@ -36,10 +36,10 @@ function update(req, res) {
       }
       return Program[0]
         .update({
-          Name: req.body.Name || Orgainzation.Name,
-          About: req.body.About || Orgainzation.About
+          Name: req.body.Name || Program[0].Name,
+          About: req.body.About || Program[0].About
         })
-        .then(() => res.status(200).send(JSON.stringify(Program)))
+        .then(() => res.status(200).send(JSON.stringify(Program[0])))
         .catch((error) => res.status(400).send(error));
     })
     .catch((error) => res.status(400).send(error));

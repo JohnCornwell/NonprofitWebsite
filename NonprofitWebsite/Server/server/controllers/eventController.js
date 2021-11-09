@@ -43,19 +43,19 @@ function update(req, res) {
       }
       return Event[0]
         .update({
-          Name: req.body.EventName || Event.Name,
-          VolunteerNeed: req.body.VolunteerNeed || Event.VolunteerNeed,
-          DonationGoal: req.body.DonationGoal || Event.DonationGoal,
-          Month: req.body.Month || Event.Month,
-          Day: req.body.Day || Event.Day,
-          Year: req.body.Year || Event.Year,
-          StartHour: req.body.StartHour || Event.StartHour,
-          StartMinute: req.body.StartMinute || Event.StartMinute,
-          EndHour: req.body.EndHour || Event.EndHour,
-          EndMinute: req.body.EndMinute || Event.EndMinute,
-          Description: req.body.Description || Event.Description
+          Name: req.body.EventName || Event[0].Name,
+          VolunteerNeed: req.body.VolunteerNeed || Event[0].VolunteerNeed,
+          DonationGoal: req.body.DonationGoal || Event[0].DonationGoal,
+          Month: req.body.Month || Event[0].Month,
+          Day: req.body.Day || Event[0].Day,
+          Year: req.body.Year || Event[0].Year,
+          StartHour: req.body.StartHour || Event[0].StartHour,
+          StartMinute: req.body.StartMinute || Event[0].StartMinute,
+          EndHour: req.body.EndHour || Event[0].EndHour,
+          EndMinute: req.body.EndMinute || Event[0].EndMinute,
+          Description: req.body.Description || Event[0].Description
         })
-        .then(() => res.status(200).send(JSON.stringify(Event)))
+        .then(event => res.status(200).send(JSON.stringify(event)))
         .catch((error) => res.status(400).send(error));
     })
     .catch((error) => res.status(400).send(error));
@@ -87,18 +87,18 @@ function volunteer(req, res) {
       } else {
         return Event[0]
           .update({
-            Name: Event.Name,
+            Name: Event[0].Name,
             VolunteerNeed: req.body.VolunteerNeed,
-            DonationGoal: Event.DonationGoal,
-            NightNeed: Event.NightNeed,
-            Month: Event.Month,
-            Day: Event.Day,
-            Year: Event.Year,
-            StartHour: Event.StartHour,
-            StartMinute: Event.StartMinute,
-            EndHour: Event.EndHour,
-            EndMinute: Event.EndMinute,
-            Description: Event.Description
+            DonationGoal: Event[0].DonationGoal,
+            NightNeed: Event[0].NightNeed,
+            Month: Event[0].Month,
+            Day: Event[0].Day,
+            Year: Event[0].Year,
+            StartHour: Event[0].StartHour,
+            StartMinute: Event[0].StartMinute,
+            EndHour: Event[0].EndHour,
+            EndMinute: Event[0].EndMinute,
+            Description: Event[0].Description
           })
           .then(() => res.status(200).send({ message: 'Volunteered successfully.' }))
           .catch(error => res.status(400).send(error));
@@ -117,18 +117,18 @@ function donate(req, res) {
       } else {
         return Event[0]
           .update({
-            Name: Event.Name,
-            VolunteerNeed: Event.VolunteerNeed,
+            Name: Event[0].Name,
+            VolunteerNeed: Event[0].VolunteerNeed,
             DonationGoal: req.body.DonationGoal,
-            NightNeed: Event.NightNeed,
-            Month: Event.Month,
-            Day: Event.Day,
-            Year: Event.Year,
-            StartHour: Event.StartHour,
-            StartMinute: Event.StartMinute,
-            EndHour: Event.EndHour,
-            EndMinute: Event.EndMinute,
-            Description: Event.Description
+            NightNeed: Event[0].NightNeed,
+            Month: Event[0].Month,
+            Day: Event[0].Day,
+            Year: Event[0].Year,
+            StartHour: Event[0].StartHour,
+            StartMinute: Event[0].StartMinute,
+            EndHour: Event[0].EndHour,
+            EndMinute: Event[0].EndMinute,
+            Description: Event[0].Description
           })
           .then(() => res.status(200).send({ message: 'Donated successfully.' }))
           .catch(error => res.status(400).send(error));

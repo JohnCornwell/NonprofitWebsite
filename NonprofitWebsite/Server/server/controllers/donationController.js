@@ -35,14 +35,14 @@ function update(req, res) {
       }
       return Donation[0]
         .update({
-          Type: req.body.Type || Donation.Type,
-          Month: req.body.Month || Donation.Month,
-          Day: req.body.Day || Donation.Day,
-          Year: req.body.Year || Donation.Year,
-          Amount: req.body.Amount || Donation.Amount,
-          Description: req.body.Description || Donation.Description
+          Type: req.body.Type || Donation[0].Type,
+          Month: req.body.Month || Donation[0].Month,
+          Day: req.body.Day || Donation[0].Day,
+          Year: req.body.Year || Donation[0].Year,
+          Amount: req.body.Amount || Donation[0].Amount,
+          Description: req.body.Description || Donation[0].Description
         })
-        .then(() => res.status(200).send(JSON.stringify(Donation)))
+        .then(donation => res.status(200).send(JSON.stringify(donation)))
         .catch((error) => res.status(400).send(error));
     })
     .catch((error) => res.status(400).send(error));
