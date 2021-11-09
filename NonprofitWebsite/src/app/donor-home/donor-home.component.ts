@@ -18,6 +18,7 @@ export class DonorHomeComponent implements OnInit {
   }
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient) {
+    console.log("constructor")
     this.form = this.formBuilder.group({
       SelectEvent: [''],
       events: new FormArray([])
@@ -29,6 +30,7 @@ export class DonorHomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("on init");
     this.http.get<any>("/event/list", { observe: "response" }).subscribe(result => {
       if (result.status != 200) {
         window.alert(result.body.message + "Unable to display event data.");

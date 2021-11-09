@@ -48,7 +48,6 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem("name", result.body.Username);
         sessionStorage.setItem("id", result.body.UserID);
         this.userService.login(result.body.UserType);
-        console.log("logged in");
         this.router.navigate(['/Home']);
       }
     }, err => {

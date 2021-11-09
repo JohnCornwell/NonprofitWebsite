@@ -71,7 +71,7 @@ export class DonationAddComponent implements OnInit {
   makeDonation(body: {
     Type?: string; Month?: number; Day?: number; Year?: number;
     Amount?: any; Description?: any; EventId?: number; DonationGoal?: number; DonationId: any;
-    }) {
+  }) {
     //send the donation to the server
     this.http.post<any>("/donation/create", body, { observe: "response" }).subscribe(result => {
       if (result.status != 200) {
@@ -84,7 +84,6 @@ export class DonationAddComponent implements OnInit {
            * the goal.
            */
           //our result contains the DonationID that we need to add to Needs
-          console.log(result);
           body.DonationId = result.body.DonationID;
           this.http.post<any>("/needs/create", body, { observe: "response" }).subscribe(result => {
             if (result.status != 200) {
@@ -95,24 +94,33 @@ export class DonationAddComponent implements OnInit {
             this.http.post<any>("/event/donate", body, { observe: "response" }).subscribe(result => {
               if (result.status != 200) {
                 window.alert(result.body.message);
-              } else {
               }
+              // all tables have been successfully modified
+              window.alert("Thank you for your donation.");
+              // we will go to the home page only on success codes (might not be 200)
+              this.router.navigate(['Home/donor']);
             }, err => {
-              window.alert(err.error.message);
+              //error for event donate
+              window.alert(err.error.message + "\n Unable to modify the event, " +
+                "so this is an unrestricted donation.");
+              this.router.navigate(['Home/donor']);
             });
           }, err => {
-            window.alert(err.error.message + "\n Unable to modify the event, " +
-                         "so this is an unrestricted donation.");
+            //error for needs create
+            window.alert(err.error.message);
           });
+        } else {
+          //this is an unrestricted donation that was successful, so we can leave
+          // all tables have been successfully modified
+          window.alert("Thank you for your donation.");
+          // we will go to the home page only on success codes (might not be 200)
+          this.router.navigate(['Home/donor']);
         }
-      }
-      // all tables have been successfully modified
-      window.alert("Thank you for your donation.");
-      // we will go to the home page only on success codes (might not be 200)
-      this.router.navigate(['/Home/donor']);
+      } //end of body for donation create that did not result in an error
     }, err => {
+      //error for donation create
       window.alert(err.error.message);
-    });
+    });//end of donation create
   }
 
   ngOnInit(): void {
@@ -120,7 +128,6 @@ export class DonationAddComponent implements OnInit {
       if (result.status != 200) {
         window.alert("Error in requesting event list from server.");
       } else {
-        console.log(result.body);
         result.body.forEach(() => this.eventsFormArray.push(new FormControl()));
         this.eventsFormArray.push(new FormControl())
         this.eventsData = result.body;

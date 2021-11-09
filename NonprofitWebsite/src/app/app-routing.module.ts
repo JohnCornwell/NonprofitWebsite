@@ -35,7 +35,7 @@ const routes: Routes = [
     component: VolunteerHomeComponent
   },
   {
-    path: 'Home/volunteer',
+    path: 'Home/donor',
     component: DonorHomeComponent
   },
   {
