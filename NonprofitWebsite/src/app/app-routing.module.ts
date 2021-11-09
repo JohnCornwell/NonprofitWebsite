@@ -15,6 +15,7 @@ import { TestComponent } from './test/test.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { VolunteerEventListComponent } from './volunteer-event-list/volunteer-event-list.component';
 import { VolunteerHomeComponent } from './volunteer-home/volunteer-home.component';
+import { DonorHomeComponent } from './donor-home/donor-home.component';
 
 const routes: Routes = [ 
   { 
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'Home/volunteer',
     component: VolunteerHomeComponent
+  },
+  {
+    path: 'Home/volunteer',
+    component: DonorHomeComponent
   },
   {
     path: 'Volunteer/events',
