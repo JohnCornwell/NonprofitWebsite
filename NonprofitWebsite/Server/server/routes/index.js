@@ -17,7 +17,7 @@ module.exports = (app) => {
 
   ////////////////////////USER SECTION/////////////////////////////
   app.all('/user/retrieve', (req, res, next) => {
-    if (req.session.User == null || (req.session.User.UserId != req.body.UserId &&
+    if (req.session.User == null || (req.session.User.UserID != req.body.UserId &&
         req.session.User.UserType != 'Admin')) {
       //cannot view another user's info unless you are an admin
       res.status(401).send({ message: "Need to be an admin for this request." });
@@ -30,7 +30,7 @@ module.exports = (app) => {
 
   app.all('/user/update', (req, res, next) => {
     if (req.session.UserType == null || req.session.User.UserType != req.body.UserType ||
-       (req.session.User.UserId != req.body.UserId && req.session.User.UserType != 'Admin')) {
+       (req.session.User.UserID != req.body.UserId && req.session.User.UserType != 'Admin')) {
       //cannot update someone else or change your own permissions
       res.status(401).send({ message: "Need to be an admin for this request." });
     } else {
@@ -157,7 +157,7 @@ app.all('/donates/create', (req, res, next) => {
 
   app.all('/donates/retrieveDonations', (req, res, next) => {
     if (req.session.User == null || req.session.User.UserType != 'Donor' ||
-      (req.body.UserId != req.session.User.UserId && req.session.User.UserType != 'Admin')) {
+      (req.body.UserId != req.session.User.UserID && req.session.User.UserType != 'Admin')) {
       // cannot get donations of other users unless you are an admin
       res.status(401).send({ message: "Need to be a donor or admin for this request." });
     } else {
@@ -244,7 +244,7 @@ app.all('/donates/create', (req, res, next) => {
 
   app.all('/volunteers/update', (req, res, next) => {
     if (req.session.User == null || req.session.User.UserType != 'Volunteer' ||
-      (req.body.UserId != req.session.User.UserId && req.session.User.UserType != 'Admin')) {
+      (req.body.UserId != req.session.User.UserID && req.session.User.UserType != 'Admin')) {
       res.status(401).send({ message: "Need to be a volunteer or admin for this request." });
     } else {
       next();
