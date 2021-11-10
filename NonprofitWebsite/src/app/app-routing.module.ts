@@ -16,6 +16,7 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { VolunteerEventListComponent } from './volunteer-event-list/volunteer-event-list.component';
 import { VolunteerHomeComponent } from './volunteer-home/volunteer-home.component';
 import { DonorHomeComponent } from './donor-home/donor-home.component';
+import { MyEventsComponent } from './my-events/my-events.component';
 
 const routes: Routes = [ 
   { 
@@ -73,6 +74,10 @@ const routes: Routes = [
   {
     path: 'Events',
     component: EventGetComponent
+  },
+  {
+    path: 'MyEvents',
+    component: MyEventsComponent
   },
   {
     path: 'Test',

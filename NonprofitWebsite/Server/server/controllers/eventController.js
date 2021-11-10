@@ -20,8 +20,21 @@ function findById(id) {
   })
 }
 
-function retrieve(req, res) {
+function retrieveByName(req, res) {
   return findByName(req.body.EventName)
+    .then(Event => {
+      if (Event.length == 0) {
+        return res.status(404).send({
+          message: 'Event Not Found',
+        });
+      }
+      return res.status(200).send(JSON.stringify(Event));
+    })
+    .catch(error => res.status(400).send(error));
+}
+
+function retrieveById(req, res) {
+  return findById(req.body.EventId)
     .then(Event => {
       if (Event.length == 0) {
         return res.status(404).send({
@@ -180,7 +193,9 @@ module.exports = {
       .catch(error => res.status(400).send(error));
   },
 
-  retrieve,
+  retrieveByName,
+
+  retrieveById,
 
   update,
 
