@@ -1,17 +1,11 @@
 <div *ngFor="let event of eventsList; let i = index" class="panel-group">
     <div class="panel panel-default">
-        <div class="panel-heading">
+        <div class="panel-heading" *ngIf="!checkVolunteered(eventsList[i].EventID)">
             <h4 class="panel-title">
                 <a data-toggle="collapse" href="#collapse{{i}}">{{eventsList[i].Name}}</a>
                 {{eventsList[i].Month}}/{{eventsList[i].Day}}/{{eventsList[i].Year}}
-                <button *ngIf="!checkVolunteered(eventsList[i].EventID)" style="float:right" (click)="volunteer(eventsList[i].EventID)">
+                <button style="float:right" (click)="volunteer(eventsList[i].EventID)">
                     Volunteer
-                    <span class="badge badge-secondary">
-                        Need: {{eventsList[i].VolunteerNeed}}
-                    </span>
-                </button>
-                <button *ngIf="checkVolunteered(eventsList[i].EventID)" style="float:right" (click)="unvolunteer(eventsList[i].EventID)">
-                    Un-Volunteer
                     <span class="badge badge-secondary">
                         Need: {{eventsList[i].VolunteerNeed}}
                     </span>

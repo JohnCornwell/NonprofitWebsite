@@ -36,26 +36,6 @@ export class VolunteerComponent implements OnInit {
     });
   }
 
-  unvolunteer(ID: Number)
-  {
-    console.log("UnVolunteer for "+ ID);
-    var body = {
-      UserId: Number(sessionStorage.getItem("id")),
-      EventId: ID,
-      Deleted: true
-    }
-
-    this.http.post<any>("/volunteers/update", body, { observe: "response" }).subscribe(result => {
-      if (result.status != 200) {
-        window.alert("Error in posting new volunteer entry.");
-      } else {
-        console.log(result.body);
-      }
-    }, err => {
-      window.alert(err.error.message);
-    });
-  }
-
   ngOnInit(): void {
     // Get list of all events
     console.log("ID: " + sessionStorage.getItem("id"));
