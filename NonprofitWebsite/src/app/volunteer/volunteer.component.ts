@@ -113,7 +113,7 @@ export class VolunteerComponent implements OnInit {
   checkVolunteered(ID: number){
     let returnVal: boolean = false;
     this.volunteersList.forEach(element => {
-      if (element.EventID === ID && !element.Deleted){
+      if (element.EventID === ID){
         returnVal = true;
       }
     });
