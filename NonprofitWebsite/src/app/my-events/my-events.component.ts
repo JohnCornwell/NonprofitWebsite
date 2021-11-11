@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Event } from '../interfaces/Event';
-import { Volunteers } from '../interfaces/Volunteers';
+import { Volunteer } from '../interfaces/Volunteer';
 
 @Component({
   selector: 'app-my-events',
@@ -14,7 +14,7 @@ export class MyEventsComponent implements OnInit {
   wellText: String = "Click an event to see the description.";
   form: FormGroup;
   eventsData: Array<Event> = new Array<Event>(); //upcoming events that were volunteered for
-  volunteers: Array<Volunteers> = new Array <Volunteers>(); //holds status values for the array
+  volunteers: Array<Volunteer> = new Array <Volunteer>(); //holds status values for the array
 
   get eventsFormArray() {
     return this.form.controls.events as FormArray;
@@ -47,7 +47,7 @@ export class MyEventsComponent implements OnInit {
         window.alert(result.body.message + "Unable to display event data.");
       } else {
         //set up readable strings for every Event before adding it to the array for display
-        result.body.forEach((volunteers: Volunteers) => {
+        result.body.forEach((volunteers: Volunteer) => {
           this.volunteers.push(volunteers);
         }); //end of iterator
         //now that we have all of the EventIDs, find the events

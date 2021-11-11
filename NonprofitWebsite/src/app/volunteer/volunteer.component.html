@@ -7,13 +7,13 @@
                 <button *ngIf="!checkVolunteered(eventsList[i].EventID)" style="float:right" (click)="volunteer(eventsList[i].EventID)">
                     Volunteer
                     <span class="badge badge-secondary">
-                        {{eventsList[i].VolunteerNeed}}
+                        Need: {{eventsList[i].VolunteerNeed}}
                     </span>
                 </button>
                 <button *ngIf="checkVolunteered(eventsList[i].EventID)" style="float:right" (click)="unvolunteer(eventsList[i].EventID)">
                     Un-Volunteer
                     <span class="badge badge-secondary">
-                        {{eventsList[i].VolunteerNeed}}
+                        Need: {{eventsList[i].VolunteerNeed}}
                     </span>
                 </button>
             </h4>

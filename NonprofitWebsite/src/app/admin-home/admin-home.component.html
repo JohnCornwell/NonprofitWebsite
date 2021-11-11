@@ -32,11 +32,9 @@
           <td>{{ event.MonthString + '/' + event.DayString + '/' + event.YearString }}</td>
           <td>{{ event.StartHourString + ':' + event.StartMinuteString }}</td>
           <td>{{ event.EndHourString + ':' + event.EndMinuteString }}</td>
+          <td><button class="btn btn-default" (click)="editEvent(event.EventID)">Edit</button></td>
         </tr>
       </tbody>
     </table>
   </div>
-</div>
-<div class="well">
-  {{this.wellText}}
 </div>
