@@ -114,15 +114,84 @@ export class MyEventsComponent implements OnInit {
   }
 
   Select(i: number) {
+    //not sure if we will use this method
     this.wellText = this.eventsData[i].Description;
   }
 
   Attend(i: number) {
-
+    //this method is called when the volunteer wants to attend a cancelled volunteer slot
+    //we need to do some checking in order to ensure that there is space for the volunteer
+    //to attend the event
+    if (this.eventsData[i].VolunteerNeed >= 1) {
+      //there is an open slot to volunteer
+      const userId = +(sessionStorage?.getItem("id") || '-1'); //convert to number
+      //we will use body to send data to the server
+      var body = {
+        UserId: userId,
+        EventId: this.volunteers[i].EventID,
+        Deleted: false,
+        VolunteerNeed: this.eventsData[i].VolunteerNeed - 1 //add one back to the slot
+      }
+      //make the requests to the server
+      this.http.post<any>('volunteers/update', body, { observe: "response" }).subscribe(result => {
+        if (result.status != 200) {
+          window.alert(result.body.message + "Unable to update volunteer data.");
+        } else {
+          //successfully updated the volunteers table, so update the event
+          this.http.post<any>('event/volunteer', body, { observe: "response" }).subscribe(result => {
+            if (result.status != 200) {
+              window.alert(result.body.message + "Unable to update event data.");
+            } else {
+              //we have sucessfully cancelled the volunteer slot
+              window.alert("Sucessfully volunteered for the event.")
+              this.router.navigate(["Home"]);
+            }
+          }, err => {
+            window.alert(err.body.message);
+          }); //end of http events/volunteer request
+        } //end of else
+      }, err => {
+        window.alert(err.body.message);
+      }); //end of http volunteers/update request
+    } else {
+      //there is not enough room for the volunteer to attend
+      window.alert("There are no available volunteer slots for this event.");
+    }
   }
 
   Cancel(i: number) {
-
+    //this method is called when a volunteer wants to cancel their volunteered slot
+    //no checking is needed here, we only need to update the volunteers table and add 
+    //a slot to the related event
+    const userId = +(sessionStorage?.getItem("id") || '-1'); //convert to number
+    //we will use body to send data to the server
+    var body = {
+      UserId: userId,
+      EventId: this.volunteers[i].EventID,
+      Deleted: true,
+      VolunteerNeed: this.eventsData[i].VolunteerNeed + 1 //add one back to the slot
+    }
+    //make the requests to the server
+    this.http.post<any>('volunteers/update', body, { observe: "response" }).subscribe(result => {
+      if (result.status != 200) {
+        window.alert(result.body.message + "Unable to update volunteer data.");
+      } else {
+        //successfully updated the volunteers table, so update the event
+        this.http.post<any>('event/volunteer', body, { observe: "response" }).subscribe(result => {
+          if (result.status != 200) {
+            window.alert(result.body.message + "Unable to update event data.");
+          } else {
+            //we have sucessfully cancelled the volunteer slot
+            window.alert("Sucessfully cancelled volunteer slot.")
+            this.router.navigate(["Home"]);
+          }
+        }, err => {
+          window.alert(err.body.message);
+        }); //end of http events/volunteer request
+      } //end of else
+    }, err => {
+      window.alert(err.body.message);
+    }); //end of http volunteers/update request
   }
 
 }
