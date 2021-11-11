@@ -23,6 +23,7 @@ import { VolunteerEventListComponent } from './volunteer-event-list/volunteer-ev
 import { VolunteerHomeComponent } from './volunteer-home/volunteer-home.component';
 import { DonationAddComponent } from './donation-add/donation-add.component';
 import { DonorHomeComponent } from './donor-home/donor-home.component';
+import { VolunteerComponent } from './volunteer/volunteer.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { DonorHomeComponent } from './donor-home/donor-home.component';
     VolunteerEventListComponent,
     VolunteerHomeComponent,
     DonationAddComponent,
-    DonorHomeComponent
+    DonorHomeComponent,
+    VolunteerComponent
   ],
   imports: [
     BrowserModule,
