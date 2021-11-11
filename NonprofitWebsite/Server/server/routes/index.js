@@ -231,8 +231,7 @@ app.all('/donates/create', (req, res, next) => {
   app.post('/volunteers/create', volunteersController.create); //volunteer for event
 
   app.all('/volunteers/retrieveEvents', (req, res, next) => {
-    if (req.session.User == null || req.session.User.UserType == 'Donor' ||
-      (req.body.UserId != req.session.User.UserID && req.session.User.UserType != 'Admin')) {
+    if (req.session.User == null || req.session.User.UserType != 'Volunteer') {
       res.status(401).send({ message: "Need to be a volunteer or admin for this request." });
     } else {
       next();

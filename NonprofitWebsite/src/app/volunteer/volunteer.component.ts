@@ -4,11 +4,11 @@ import { Event } from '../interfaces/Event';
 import { Volunteer } from '../interfaces/Volunteer';
 
 @Component({
-  selector: 'app-volunteer-home',
-  templateUrl: './volunteer-home.component.html',
-  styleUrls: ['./volunteer-home.component.css']
+  selector: 'app-volunteer',
+  templateUrl: './volunteer.component.html',
+  styleUrls: ['./volunteer.component.css']
 })
-export class VolunteerHomeComponent implements OnInit {
+export class VolunteerComponent implements OnInit {
   eventsList: Array<Event> = new Array<Event>();
   volunteersList: Array<Volunteer> = new Array<Volunteer>();
 
