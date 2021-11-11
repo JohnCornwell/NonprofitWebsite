@@ -70,16 +70,15 @@ export class VolunteerComponent implements OnInit {
     });
 
     // Get list of all events this user is a volunteer for
-    const userId = sessionStorage?.getItem("id") || '-1';
+    //get all of the EventIDs that this volunteer is volunteered to (includes cancelled)
+    //get this user's id. If there is none in storage, send the invalid -1 id
+    const userId = +(sessionStorage?.getItem("id") || '-1'); //convert to number
     var body = {
-      UserId: userId + 0
+      UserId: userId
     }
-
-    console.log("User id is " + body.UserId);
-    console.log(body);
     this.http.post<any>("/volunteers/retrieveEvents", body, { observe: "response" }).subscribe(result => {
       if (result.status != 200) {
-        window.alert("Error in requesting volunteers list from server.");
+        window.alert(result.body.message + "Unable to display event data.");
       } else {
         console.log(result.body);
         this.volunteersList = result.body;

@@ -18,6 +18,7 @@ import { VolunteerHomeComponent } from './volunteer-home/volunteer-home.componen
 import { DonorHomeComponent } from './donor-home/donor-home.component';
 import { MyEventsComponent } from './my-events/my-events.component';
 import { MyDonationsComponent } from './my-donations/my-donations.component';
+import { VolunteerComponent } from './volunteer/volunteer.component';
 
 const routes: Routes = [ 
   { 
@@ -43,6 +44,10 @@ const routes: Routes = [
   {
     path: 'Volunteer/events',
     component: VolunteerEventListComponent
+  },
+  {
+    path: 'Volunteer',
+    component: VolunteerComponent
   },
   {
     path: 'Logout',
