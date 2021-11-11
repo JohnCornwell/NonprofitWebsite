@@ -8,7 +8,7 @@ import { UserServiceService } from './user-service.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent{
+export class AppComponent {
   title = 'NonprofitWebsite';
 
   type: Observable<any>; //sends type of user logged into the system

@@ -20,6 +20,15 @@ function findByEvent (id) {
   })
 }
 
+function findByUserAndEvent(UserId, EventId) {
+  return Volunteers.findAll({
+    where: {
+      UserID: UserId,
+      EventID: EventId
+    }
+  })
+}
+
 function retrieveEvents(req, res) {
   return findByUser(req.body.UserId)
     .then(Volunteers => {
@@ -47,21 +56,21 @@ function retrieveUsers(req, res) {
 }
 
 function update(req, res) {
-  return findByUserId(req.body.UserId)
+  return findByUserAndEvent(req.body.UserId, req.body.EventId)
     .then(Volunteers => {
       if (Volunteers.length == 0) {
         return res.status(404).send({
           message: 'No User relationships found',
         });
-      }
-      return Volunteers[0]
-        .update({
-          UserID: req.body.UserId || Volunteers[0].UserID,
-          EventID: req.body.EventId || Volunteers[0].EventID,
-          Deleted: req.body.Deleted || Volunteers[0].Deleted
+      } else {
+        return Volunteers[0].update({
+          UserID: req.body.UserId,
+          EventID: req.body.EventId,
+          Deleted: req.body.Deleted
         })
         .then(volunteers => res.status(200).send(JSON.stringify(volunteers)))  // Send back the updated User.
         .catch((error) => res.status(400).send(error));
+      }
     })
     .catch(error => res.status(400).send(error));
 }
@@ -88,7 +97,7 @@ module.exports = {
       .create({
         UserID: req.body.UserId,
         EventID: req.body.EventId,
-        Deleted: req.body.Deleted,
+        Deleted: req.body.Deleted
       })
       .then(Volunteers => res.status(200).send(JSON.stringify(Volunteers)))
       .catch(error => res.status(400).send(error));
