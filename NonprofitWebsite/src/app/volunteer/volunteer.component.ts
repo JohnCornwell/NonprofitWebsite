@@ -63,46 +63,53 @@ export class VolunteerComponent implements OnInit {
       if (result.status != 200) {
         window.alert("Error in requesting event list from server.");
       } else {
-         //we have an event, so pair it with the volunteers entry
-         var event: Event = result.body[0];
-         //consider only adding dates that are for today or the future
-         let m: String = event.Month.toString(10);
-         let d: String = event.Day.toString(10);
-         let sh: String = event.StartHour.toString(10);
-         let sm: String = event.StartMinute.toString(10);
-         let eh: String = event.EndHour.toString(10);
-         let em: String = event.EndMinute.toString(10);
-         if (m.length == 1) {
-           m = '0' + m;
-         }
-         if (d.length == 1) {
-           d = '0' + d;
-         }
-         if (sh.length == 1) {
-           sh = '0' + sh;
-         }
-         if (sm.length == 1) {
-           sm = '0' + sm;
-         }
-         if (eh.length == 1) {
-           eh = '0' + eh;
-         }
-         if (em.length == 1) {
-           em = '0' + em;
-         }
-         event.MonthString = m;
-         event.DayString = d;
-         event.YearString = event.Year.toString(10);
-         event.StartHourString = sh;
-         event.StartMinuteString = sm;
-         event.EndHourString = eh;
-         event.EndMinuteString = em;
-         //now that we have the event, add it to our list
-         this.eventsList.push(event);
-      }
-    }, err => {
-      window.alert(err.error.message);
-    });
+        //set up readable strings for every Event before adding it to the array for display
+        result.body.forEach((event: Event) => {
+          let eventDate = new Date(event.Year, event.Month, event.Day);
+          let today = new Date(); //the current date
+          let todayStart = new Date(today.getDate()); //this is today without the current time
+          //only display events that are happening now or in the future
+          if (todayStart.getTime() <= eventDate.getTime()) {
+            //only add dates that are for today or the future
+            let m: String = event.Month.toString(10);
+            let d: String = event.Day.toString(10);
+            let sh: String = event.StartHour.toString(10);
+            let sm: String = event.StartMinute.toString(10);
+            let eh: String = event.EndHour.toString(10);
+            let em: String = event.EndMinute.toString(10);
+            if (m.length == 1) {
+              m = '0' + m;
+            }
+            if (d.length == 1) {
+              d = '0' + d;
+            }
+            if (sh.length == 1) {
+              sh = '0' + sh;
+            }
+            if (sm.length == 1) {
+              sm = '0' + sm;
+            }
+            if (eh.length == 1) {
+              eh = '0' + eh;
+            }
+            if (em.length == 1) {
+              em = '0' + em;
+            }
+            event.MonthString = m;
+            event.DayString = d;
+            event.YearString = event.Year.toString(10);
+            event.StartHourString = sh;
+            event.StartMinuteString = sm;
+            event.EndHourString = eh;
+            event.EndMinuteString = em;
+            //add event to the list
+            this.eventsList.push(event);
+          } //end of if
+        }); //end of iterator
+      }//end of else
+      }, err => {
+        window.alert(err.error.message);
+      });
 
     // Get list of all events this user is a volunteer for
     //get all of the EventIDs that this volunteer is volunteered to (includes cancelled)
