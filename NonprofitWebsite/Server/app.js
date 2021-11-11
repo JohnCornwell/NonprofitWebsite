@@ -67,12 +67,10 @@ app.post('/login', (req, res) => {
               .update(req.body.Password)
               .digest('hex');
             console.log(hash);
-            console.log("Person is " + person[0]);
             //check the stored password against the hash
             //todo
             if (person[0].Password == password) {
               req.session.User = person[0];
-              console.log(person[0]);
               res.status(200).send(person[0])
             } else {
               res.status(400).send({ message: "Incorrect Password" });
@@ -129,7 +127,9 @@ app.post('/getEventById', (req, res, next) => {//req.body needs EventId
   res.send(JSON.stringify(eventController.findById(req.body.EventId)));
 });
 
-app.post('/event/retrieve', eventController.retrieve); //anyone can retrieve an event by name
+//anyone can retrieve an event by name or id
+app.post('/event/retrieveByName', eventController.retrieveByName);
+app.post('/event/retrieveById', eventController.retrieveById); 
 app.get('/event/list', eventController.list) //anyone can view any event
 app.post('/program/retrieve', programController.retrieve); //anyone can retrieve a program by name
 app.get('/program/list', programController.list) //anyone can view any program

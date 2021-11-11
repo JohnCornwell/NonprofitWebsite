@@ -137,3 +137,9 @@ VALUES (1, 1);
 INSERT INTO hosts (ProgID, EventID)
 VALUES (2, 2);
 
+INSERT INTO volunteers (UserID, EventID, Deleted)
+VALUES (4, 2, false);
+
+INSERT INTO volunteers (UserID, EventID, Deleted)
+VALUES (4, 1, true);
+

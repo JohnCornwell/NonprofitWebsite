@@ -242,7 +242,7 @@ app.all('/donates/create', (req, res, next) => {
   app.post('/volunteers/retrieveEvents', volunteersController.retrieveEvents);
 
   app.all('/volunteers/update', (req, res, next) => {
-    if (req.session.User == null || req.session.User.UserType != 'Volunteer' ||
+    if (req.session.User == null || req.session.User.UserType == 'Donor' ||
       (req.body.UserId != req.session.User.UserID && req.session.User.UserType != 'Admin')) {
       res.status(401).send({ message: "Need to be a volunteer or admin for this request." });
     } else {
