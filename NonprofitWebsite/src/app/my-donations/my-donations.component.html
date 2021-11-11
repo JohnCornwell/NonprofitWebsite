@@ -1,0 +1,27 @@
+<h3>Your Donations</h3>
+<!-- Table with all events this volunteer has signed up for -->
+<div class="container">
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Amount (USD)</th>
+          <th scope="col">Date</th>
+          <th scope="col">Type</th>
+          <th scope="col">Event</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let donation of donationData; let i=index;" (click)="Select(i);">
+          <td scope="row">{{ donation.Amount }}</td>
+          <td>{{ donation.MonthString + '/' + donation.DayString + '/' + donation.YearString }}</td>
+          <td>{{ donation.Type }}</td>
+          <td>{{donation.EventName}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="well">
+  {{this.wellText}}
+</div>

@@ -66,10 +66,8 @@ app.post('/login', (req, res) => {
             const hash = crypto.createHmac('sha256', secret)
               .update(req.body.Password)
               .digest('hex');
-            console.log(hash);
             //check the stored password against the hash
-            //todo
-            if (person[0].Password == password) {
+            if (person[0].Password == hash) {
               req.session.User = person[0];
               res.status(200).send(person[0])
             } else {
@@ -100,9 +98,8 @@ app.post('/signup', function (req, res) {
           const hash = crypto.createHmac('sha256', secret)
             .update(req.body.Password)
             .digest('hex');
-          console.log(hash);
           //set the password to the generated hash
-          //todo
+          req.body.Password = hash;
           userController.create(req, res)
         } else {
           // user exists, so give error
@@ -123,13 +120,10 @@ const userController = require('./server/controllers/userController');
 //call /getHosts once, then getEventById for each Id returned
 app.post('/hosts/retrievePrograms', hostsController.retrievePrograms); //req.body needs EventId
 app.post('/hosts/retrieveEvents', hostsController.retrieveEvents); //req.body needs ProgId
-app.post('/getEventById', (req, res, next) => {//req.body needs EventId
-  res.send(JSON.stringify(eventController.findById(req.body.EventId)));
-});
 
 //anyone can retrieve an event by name or id
 app.post('/event/retrieveByName', eventController.retrieveByName);
-app.post('/event/retrieveById', eventController.retrieveById); 
+app.post('/event/retrieveById', eventController.retrieveById);
 app.get('/event/list', eventController.list) //anyone can view any event
 app.post('/program/retrieve', programController.retrieve); //anyone can retrieve a program by name
 app.get('/program/list', programController.list) //anyone can view any program

@@ -121,8 +121,7 @@ app.all('/donation/create', (req, res, next) => {
   app.post('/donation/create', donationController.create);
 
   app.all('/donation/retrieve', (req, res, next) => {
-    if (req.session.User == null || (req.session.User.UserType != 'Donor' &&
-      req.session.User.UserType != 'Admin')) {
+    if (req.session.User == null || req.session.User.UserType == 'Volunteer') {
       res.status(401).send({ message: "Need to be a donor or admin for this request." });
     } else {
       next();
@@ -206,6 +205,7 @@ app.all('/donates/create', (req, res, next) => {
   });
 
   app.post('/needs/create', needsController.create); //add donation to event
+  app.post('/needs/retrieveEvents', needsController.retrieveEvents); //retrieve event from donation
 
   /* all user functions after this point require admin status */
   app.all('/needs/*', (req, res, next) => {
@@ -217,7 +217,6 @@ app.all('/donates/create', (req, res, next) => {
   });
 
   app.get('/needs/list', needsController.list);
-  app.post('/needs/retrieveEvents', needsController.retrieveEvents);
   app.post('/needs/retrieveDonations', needsController.retrieveDonations);
 
   ////////////////////////Volunteers SECTION/////////////////////////////

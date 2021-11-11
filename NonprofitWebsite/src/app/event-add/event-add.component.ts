@@ -36,7 +36,7 @@ export class EventAddComponent implements OnInit {
     //collect validated data from form and attempt to add it to the database
     const date: Date = new Date(this.form.get('date')?.value);
     const month: number = date.getMonth();
-    const day: number = date.getDay();
+    const day: number = date.getDate();
     const year: number = date.getFullYear()
     const startHour: number = parseInt(this.form.get('Start')?.value.substring(0, 2));
     const startMin: number = parseInt(this.form.get('Start')?.value.substring(3));
@@ -57,7 +57,7 @@ export class EventAddComponent implements OnInit {
     var body = {
       EventName: EventName,
       VolunteerNeed: VolunteerNeed ,
-      DonationGoal: VolunteerNeed,
+      DonationGoal: DonationGoal,
       Month: Month,
       Day: Day,
       Year: Year,

@@ -65,6 +65,7 @@ module.exports = {
   },
 
   create(req, res) {
+    console.log(req.body);
     return Donates
       .create({
         UserID: req.body.UserId,

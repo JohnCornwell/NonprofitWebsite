@@ -1,5 +1,5 @@
 /* Interface describing the volunteers table in the database. This
- * interface is used to assist the volunteer pages in diplaying
+ * interface is used to assist the volunteer pages in displaying
  * events that the volunter had signed up for at some time.
  */
 

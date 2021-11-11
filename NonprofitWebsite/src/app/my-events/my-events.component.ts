@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Event } from '../interfaces/Event';
 import { Volunteers } from '../interfaces/Volunteers';
-import { CommonModule } from "@angular/common";
 
 @Component({
   selector: 'app-my-events',
@@ -73,7 +72,7 @@ export class MyEventsComponent implements OnInit {
         } else {
           //we have an event, so pair it with the volunteers entry
           var event: Event = result.body[0];
-          //only add dates that are for today or the future
+          //consider only adding dates that are for today or the future
           let m: String = event.Month.toString(10);
           let d: String = event.Day.toString(10);
           let sh: String = event.StartHour.toString(10);

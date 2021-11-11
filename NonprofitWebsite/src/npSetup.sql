@@ -97,17 +97,20 @@ CONSTRAINT NeedsDonationID FOREIGN KEY (DonationID)
 REFERENCES Donation (DonationID)
 );
 
+/* password for admins is nonprofit */
 INSERT INTO user (Username, Password, FirstName, MiddleName, LastName, UserType, Deleted)
-VALUES ('evan', 'nonprofit', 'Evan', '', 'Witthun', 'Admin', false);
+VALUES ('evan', '8ec5565e2f3dbce734fe276a0984dd38f1783c93aad5e640cf6921759776833b', 'Evan', '', 'Witthun', 'Admin', false);
 
 INSERT INTO user (Username, Password, FirstName, MiddleName, LastName, UserType, Deleted)
-VALUES ('john', 'nonprofit', 'John', '', 'Cornwell', 'Admin', false);
+VALUES ('john', '8ec5565e2f3dbce734fe276a0984dd38f1783c93aad5e640cf6921759776833b', 'John', '', 'Cornwell', 'Admin', false);
 
+/* password for donor is donor */
 INSERT INTO user (Username, Password, FirstName, MiddleName, LastName, UserType, Deleted)
-VALUES ('donor', 'donor', 'John', '', 'Cornwell', 'Donor', false);
+VALUES ('donor', '62bd426180d319f9f847873183c590103cb6a07918f083787c44494d989737be', 'John', '', 'Cornwell', 'Donor', false);
 
+/* password for volunteer is volunteer */
 INSERT INTO user (Username, Password, FirstName, MiddleName, LastName, UserType, Deleted)
-VALUES ('volunteer', 'volunteer', 'John', '', 'Cornwell', 'Volunteer', false);
+VALUES ('volunteer', '16ad93f4b4d19514ead37291a4d112186e47ee51d6d5409947833c4d15961100', 'John', '', 'Cornwell', 'Volunteer', false);
 
 INSERT INTO Program (Name, About)
 VALUES ('Nonprofit Org 1', 'This is an example of a nonprofit Program in the system.

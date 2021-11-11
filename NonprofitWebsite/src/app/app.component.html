@@ -41,7 +41,7 @@
   </li>
   <!-- Disply donor dropdown if the current user is a donor -->
   <li *ngIf="(type | async) == 'Donor'" style="float:right">
-    <a class="active" id="op1" [routerLink]="'Donations'">My Donations</a>
+    <a class="active" id="op1" [routerLink]="'MyDonations'">My Donations</a>
     <a class="active" id="op1" [routerLink]="'Donation/create'">Make Donation</a>
     <a class="active" id="op1" [routerLink]="'Me'">Profile</a>
     <a class="active" id="op1" [routerLink]="'Home/donor'">Home</a>
