@@ -40,6 +40,10 @@ export class AdminHomeComponent implements OnInit {
     this.router.navigate(['/Event/edit/' + this.form.get('SelectEvent')?.value]);
   }
 
+  editEvent(ID: number){
+    this.router.navigate(['/Event/edit/' + ID]);
+  }
+
   ngOnInit(): void {
     this.http.get<any>("/event/list", { observe: "response" }).subscribe(result => {
       if (result.status != 200) {
