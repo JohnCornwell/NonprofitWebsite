@@ -1,6 +1,6 @@
+import { Event } from './../interfaces/Event';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Event } from '../interfaces/Event';
 import { Volunteer } from '../interfaces/Volunteer';
 
 @Component({
@@ -34,18 +34,31 @@ export class VolunteerComponent implements OnInit {
     }, err => {
       window.alert(err.error.message);
     });
-  }
 
-  unvolunteer(ID: Number)
-  {
-    console.log("UnVolunteer for "+ ID);
-    var body = {
-      UserId: Number(sessionStorage.getItem("id")),
-      EventId: ID,
-      Deleted: true
-    }
+    let postbody = {}
+    this.eventsList.forEach((event: Event) => {
+      if(Number(event.EventID) === ID){
+        postbody = {
+          EventId: event.EventID,
+          Name: event.Name,
+          VolunteerNeed: event.VolunteerNeed - 1,
+          DonationGoal: event.DonationGoal,
+          Month: event.Month,
+          Day: event.Day,
+          Year: event.Year,
+          StartHour: event.StartHour,
+          StartMinute: event.StartMinute,
+          EndHour: event.EndHour,
+          EndMinute: event.EndMinute,
+          Description: event.Description
+        }
+      }
+    });
 
-    this.http.post<any>("/volunteers/update", body, { observe: "response" }).subscribe(result => {
+    console.log("POSTBODY:");
+    console.log(postbody);
+
+    this.http.post<any>("event/volunteer", postbody, { observe: "response" }).subscribe(result => {
       if (result.status != 200) {
         window.alert("Error in posting new volunteer entry.");
       } else {
@@ -132,7 +145,7 @@ export class VolunteerComponent implements OnInit {
   checkVolunteered(ID: number){
     let returnVal: boolean = false;
     this.volunteersList.forEach(element => {
-      if (element.EventID === ID && !element.Deleted){
+      if (element.EventID === ID){
         returnVal = true;
       }
     });

@@ -103,7 +103,6 @@ function volunteer(req, res) {
             Name: Event[0].Name,
             VolunteerNeed: req.body.VolunteerNeed,
             DonationGoal: Event[0].DonationGoal,
-            NightNeed: Event[0].NightNeed,
             Month: Event[0].Month,
             Day: Event[0].Day,
             Year: Event[0].Year,
