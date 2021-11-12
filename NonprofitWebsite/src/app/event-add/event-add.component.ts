@@ -35,8 +35,8 @@ export class EventAddComponent implements OnInit {
   onSubmit() {
     //collect validated data from form and attempt to add it to the database
     const date: Date = new Date(this.form.get('date')?.value);
-    const month: number = date.getMonth();
-    const day: number = date.getDate();
+    const month: number = date.getMonth() + 1;
+    const day: number = date.getDate() + 1;
     const year: number = date.getFullYear()
     const startHour: number = parseInt(this.form.get('Start')?.value.substring(0, 2));
     const startMin: number = parseInt(this.form.get('Start')?.value.substring(3));

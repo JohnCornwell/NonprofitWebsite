@@ -122,7 +122,29 @@ export class MyEventsComponent implements OnInit {
     //this method is called when the volunteer wants to attend a cancelled volunteer slot
     //we need to do some checking in order to ensure that there is space for the volunteer
     //to attend the event
+    var conflict: boolean = true;
     if (this.eventsData[i].VolunteerNeed >= 1) {
+      for (var index = 0; index < this.eventsData.length; index++) {
+        if (this.volunteers[index].Deleted == false && i != index) {
+          //possible conflict
+          var myEvent: Event = this.eventsData[i];
+          var event: Event = this.eventsData[index];
+          var myStartTime = new Date(myEvent.Year, myEvent.Month, myEvent.Day, myEvent.StartHour, myEvent.StartMinute);
+          var myEndTime = new Date(myEvent.Year, myEvent.Month, myEvent.Day, myEvent.EndHour, myEvent.EndMinute);
+          var eventStartTime = new Date(event.Year, event.Month, event.Day, event.StartHour, event.StartMinute);
+          var eventEndTime = new Date(event.Year, event.Month, event.Day, event.EndHour, event.EndMinute);
+          if (myStartTime.getTime() > eventEndTime.getTime() || myEndTime.getTime() < eventStartTime.getTime()) {
+            //my event is after or my event ends before event
+          } else {
+            //my event starts before event end but does not end before event
+            //start, so this is a conflict
+            conflict = true;
+          }
+        }
+      } //end of iterator
+      if (conflict) {
+        window.alert("Cannot volunteer due to a scheduling conflict with another event.");
+      }
       //there is an open slot to volunteer
       const userId = +(sessionStorage?.getItem("id") || '-1'); //convert to number
       //we will use body to send data to the server
@@ -144,7 +166,7 @@ export class MyEventsComponent implements OnInit {
             } else {
               //we have sucessfully cancelled the volunteer slot
               window.alert("Sucessfully volunteered for the event.")
-              this.router.navigate(["Home"]);
+              this.router.navigate(["/Home"]);
             }
           }, err => {
             window.alert(err.body.message);
