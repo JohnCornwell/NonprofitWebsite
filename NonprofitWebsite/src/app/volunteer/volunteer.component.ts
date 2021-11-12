@@ -1,6 +1,6 @@
+import { Event } from './../interfaces/Event';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Event } from '../interfaces/Event';
 import { Volunteer } from '../interfaces/Volunteer';
 
 @Component({
@@ -26,6 +26,35 @@ export class VolunteerComponent implements OnInit {
     }
 
     this.http.post<any>("/volunteers/create", body, { observe: "response" }).subscribe(result => {
+      if (result.status != 200) {
+        window.alert("Error in posting new volunteer entry.");
+      } else {
+        console.log(result.body);
+      }
+    }, err => {
+      window.alert(err.error.message);
+    });
+
+    let event : Event = this.eventsList[ID as number];
+
+    console.log(event.VolunteerNeed - 1);
+
+    let postbody = {
+      EventID: event.EventID,
+      Name: event.Name,
+      VolunteerNeed: event.VolunteerNeed - 1,
+      DonationGoal: event.DonationGoal,
+      Month: event.Month,
+      Day: event.Day,
+      Year: event.Year,
+      StartHour: event.StartHour,
+      StartMinute: event.StartMinute,
+      EndHour: event.EndHour,
+      EndMinute: event.EndMinute,
+      Description: event.Description
+    }
+
+    this.http.post<any>("event/volunteer", postbody, { observe: "response" }).subscribe(result => {
       if (result.status != 200) {
         window.alert("Error in posting new volunteer entry.");
       } else {
