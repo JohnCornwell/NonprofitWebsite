@@ -35,24 +35,28 @@ export class VolunteerComponent implements OnInit {
       window.alert(err.error.message);
     });
 
-    let event : Event = this.eventsList[ID as number];
+    let postbody = {}
+    this.eventsList.forEach((event: Event) => {
+      if(Number(event.EventID) === ID){
+        postbody = {
+          EventId: event.EventID,
+          Name: event.Name,
+          VolunteerNeed: event.VolunteerNeed - 1,
+          DonationGoal: event.DonationGoal,
+          Month: event.Month,
+          Day: event.Day,
+          Year: event.Year,
+          StartHour: event.StartHour,
+          StartMinute: event.StartMinute,
+          EndHour: event.EndHour,
+          EndMinute: event.EndMinute,
+          Description: event.Description
+        }
+      }
+    });
 
-    console.log(event.VolunteerNeed - 1);
-
-    let postbody = {
-      EventID: event.EventID,
-      Name: event.Name,
-      VolunteerNeed: event.VolunteerNeed - 1,
-      DonationGoal: event.DonationGoal,
-      Month: event.Month,
-      Day: event.Day,
-      Year: event.Year,
-      StartHour: event.StartHour,
-      StartMinute: event.StartMinute,
-      EndHour: event.EndHour,
-      EndMinute: event.EndMinute,
-      Description: event.Description
-    }
+    console.log("POSTBODY:");
+    console.log(postbody);
 
     this.http.post<any>("event/volunteer", postbody, { observe: "response" }).subscribe(result => {
       if (result.status != 200) {
