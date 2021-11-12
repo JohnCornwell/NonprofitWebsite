@@ -122,12 +122,12 @@ export class MyEventsComponent implements OnInit {
     //this method is called when the volunteer wants to attend a cancelled volunteer slot
     //we need to do some checking in order to ensure that there is space for the volunteer
     //to attend the event
-    var conflict: boolean = true;
+    var conflict: boolean = false;
     if (this.eventsData[i].VolunteerNeed >= 1) {
+      var myEvent: Event = this.eventsData[i];
       for (var index = 0; index < this.eventsData.length; index++) {
         if (this.volunteers[index].Deleted == false && i != index) {
           //possible conflict
-          var myEvent: Event = this.eventsData[i];
           var event: Event = this.eventsData[index];
           var myStartTime = new Date(myEvent.Year, myEvent.Month, myEvent.Day, myEvent.StartHour, myEvent.StartMinute);
           var myEndTime = new Date(myEvent.Year, myEvent.Month, myEvent.Day, myEvent.EndHour, myEvent.EndMinute);
@@ -144,6 +144,7 @@ export class MyEventsComponent implements OnInit {
       } //end of iterator
       if (conflict) {
         window.alert("Cannot volunteer due to a scheduling conflict with another event.");
+        return;
       }
       //there is an open slot to volunteer
       const userId = +(sessionStorage?.getItem("id") || '-1'); //convert to number
