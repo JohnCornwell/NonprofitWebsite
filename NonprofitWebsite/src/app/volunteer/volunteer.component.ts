@@ -58,7 +58,6 @@ export class VolunteerComponent implements OnInit {
 
   ngOnInit(): void {
     // Get list of all events
-    console.log("ID: " + sessionStorage.getItem("id"));
     this.http.get<any>("/event/list", { observe: "response" }).subscribe(result => {
       if (result.status != 200) {
         window.alert("Error in requesting event list from server.");
