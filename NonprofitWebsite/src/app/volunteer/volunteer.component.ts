@@ -2,6 +2,7 @@ import { Event } from './../interfaces/Event';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Volunteer } from '../interfaces/Volunteer';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-volunteer',
@@ -9,68 +10,24 @@ import { Volunteer } from '../interfaces/Volunteer';
   styleUrls: ['./volunteer.component.css']
 })
 export class VolunteerComponent implements OnInit {
+  //list of events that the user can volunteer for
   eventsList: Array<Event> = new Array<Event>();
-  volunteersList: Array<Volunteer> = new Array<Volunteer>();
+  //copy of event list that will copy event list for display purposes
+  displayList: Array<Event> = new Array<Event>();
+  //list of events in the future that the user is volunteered for
+  volunteeredEvents: Array<Event> = new Array<Event>();
+  //map of links to cancelled volunteer slots. Indexed by EventID
+  volunteersList: Map<number, Volunteer> = new Map();
 
-  constructor(private http: HttpClient) { 
+  wellText: String = "Click on an event to see its description";
 
-  }
+  constructor(private http: HttpClient, private router: Router) {
 
-  volunteer(ID: Number)
-  {
-    console.log("Volunteer for "+ ID);
-    var body = {
-      UserId: Number(sessionStorage.getItem("id")),
-      EventId: ID,
-      Deleted: false
-    }
-
-    this.http.post<any>("/volunteers/create", body, { observe: "response" }).subscribe(result => {
-      if (result.status != 200) {
-        window.alert("Error in posting new volunteer entry.");
-      } else {
-        console.log(result.body);
-      }
-    }, err => {
-      window.alert(err.error.message);
-    });
-
-    let postbody = {}
-    this.eventsList.forEach((event: Event) => {
-      if(Number(event.EventID) === ID){
-        postbody = {
-          EventId: event.EventID,
-          Name: event.Name,
-          VolunteerNeed: event.VolunteerNeed - 1,
-          DonationGoal: event.DonationGoal,
-          Month: event.Month,
-          Day: event.Day,
-          Year: event.Year,
-          StartHour: event.StartHour,
-          StartMinute: event.StartMinute,
-          EndHour: event.EndHour,
-          EndMinute: event.EndMinute,
-          Description: event.Description
-        }
-      }
-    });
-
-    console.log("POSTBODY:");
-    console.log(postbody);
-
-    this.http.post<any>("event/volunteer", postbody, { observe: "response" }).subscribe(result => {
-      if (result.status != 200) {
-        window.alert("Error in posting new volunteer entry.");
-      } else {
-        console.log(result.body);
-      }
-    }, err => {
-      window.alert(err.error.message);
-    });
   }
 
   ngOnInit(): void {
-    // Get list of all events
+    // Get list of all events that the user can volunteer for (in the future, not currently
+    // attending, and has space).
     this.http.get<any>("/event/list", { observe: "response" }).subscribe(result => {
       if (result.status != 200) {
         window.alert("Error in requesting event list from server.");
@@ -80,8 +37,8 @@ export class VolunteerComponent implements OnInit {
           let eventDate = new Date(event.Year, event.Month, event.Day);
           let today = new Date(); //the current date
           let todayStart = new Date(today.getDate()); //this is today without the current time
-          //only display events that are happening now or in the future
-          if (todayStart.getTime() <= eventDate.getTime()) {
+          //only display events that are happening now or in the future and have space
+          if (todayStart.getTime() <= eventDate.getTime() && event.VolunteerNeed > 0) {
             //only add dates that are for today or the future
             let m: String = event.Month.toString(10);
             let d: String = event.Day.toString(10);
@@ -118,39 +75,132 @@ export class VolunteerComponent implements OnInit {
             this.eventsList.push(event);
           } //end of if
         }); //end of iterator
+        // Get list of all events this user is a volunteer for
+        //get all of the EventIDs that this volunteer is volunteered to (includes cancelled)
+        //get this user's id. If there is none in storage, send the invalid -1 id
+        const userId = +(sessionStorage?.getItem("id") || '-1'); //convert to number
+        var body = {
+          UserId: userId
+        }
+        this.http.post<any>("/volunteers/retrieveEvents", body, { observe: "response" }).subscribe(result => {
+          if (result.status != 200) {
+            window.alert(result.body.message + "Unable to find volunteer data.");
+          } else {
+            result.body.forEach((volunteers: Volunteer) => {
+              //if the user is currently volunteering for an event, remove it
+              if (volunteers.Deleted == false) {
+                //this event is already volunteered for by the user
+                for (var i = 0; i < this.eventsList.length; i++) {
+                  if (this.eventsList[i].EventID == volunteers.EventID) {
+                    //this is an event that we will need to check for conflicts with later
+                    this.volunteeredEvents.push(this.eventsList[i]);
+                    //remove the conflict from the option list
+                    this.eventsList = this.eventsList.slice(0, i).concat(this.eventsList.slice(-i));
+                    break;
+                  }
+                } //end of iterator
+              } else {
+                //we need to update this entry if the user volunteers for the associated event
+                this.volunteersList.set(volunteers.EventID, volunteers);
+              }
+            }); //end of iterator
+          }
+        }, err => {
+          window.alert(err.error.message);
+        }); //end of http volunteers/retrieveEvents request
       }//end of else
-      }, err => {
-        window.alert(err.error.message);
-      });
-
-    // Get list of all events this user is a volunteer for
-    //get all of the EventIDs that this volunteer is volunteered to (includes cancelled)
-    //get this user's id. If there is none in storage, send the invalid -1 id
-    const userId = +(sessionStorage?.getItem("id") || '-1'); //convert to number
-    var body = {
-      UserId: userId
-    }
-    this.http.post<any>("/volunteers/retrieveEvents", body, { observe: "response" }).subscribe(result => {
-      if (result.status != 200) {
-        window.alert(result.body.message + "Unable to display event data.");
-      } else {
-        console.log(result.body);
-        this.volunteersList = result.body;
-      }
     }, err => {
       window.alert(err.error.message);
     });
+    this.displayList = this.eventsList; //copy events to be displayed (done for UX effect)
   }
 
-  checkVolunteered(ID: number){
-    let returnVal: boolean = false;
-    this.volunteersList.forEach(element => {
-      if (element.EventID === ID){
-        returnVal = true;
+  Select(i: number) {
+    //user has clicked on an event row
+    this.wellText = this.eventsList[i].Description;
+  }
+
+  Volunteer(i: number) {
+    //user has requested to volunteer for an event. Since we hav displayed
+    //events in the future with space, we only need to check that there is
+    //not a scheduling conflict
+    var myEvent: Event = this.eventsList[i]; //the event we want to volunteer for
+    var conflict: boolean = false; //indicates a conflict with a volunteered event
+    this.volunteeredEvents.forEach((event: Event) => {
+      //check for conflicting times with events the user has already volunteered for
+      var myStartTime = new Date(myEvent.Year, myEvent.Month, myEvent.Day, myEvent.StartHour, myEvent.StartMinute);
+      var myEndTime = new Date(myEvent.Year, myEvent.Month, myEvent.Day, myEvent.EndHour, myEvent.EndMinute);
+      var eventStartTime = new Date(event.Year, event.Month, event.Day, event.EndHour, event.EndMinute);
+      var eventEndTime = new Date(event.Year, event.Month, event.Day, event.EndHour, event.EndMinute);
+      if (myStartTime.getMilliseconds() > eventEndTime.getMilliseconds() || myEndTime < eventStartTime) {
+        //my event is after or my event ends before event
+      } else {
+        //my event starts before event end but does not end before event
+        //start, so this is a conflict
+        conflict = true;
       }
-    });
-    console.log("ID: " + ID + "RET: " + returnVal);
-    return returnVal;
+    }); //end of iterator
+    //only reachable by events that do not have a scheduling conflict
+    //check if the user has a concelled volunteers table entry befre creating a new one
+    if (conflict) {
+      window.alert("Cannot volunteer due to scheduling conflicts with a " +
+        "previoulsy volunteered event.");
+    } else {
+      //see if there is a cancelled volunteers entry
+      let entry: any = this.volunteersList.get(myEvent.EventID);
+      const userId = +(sessionStorage?.getItem("id") || '-1'); //convert to number
+      //we will use body to send data to the server
+      var body = {
+        UserId: userId,
+        EventId: myEvent.EventID,
+        Deleted: false,
+        VolunteerNeed: myEvent.VolunteerNeed -1 //new volunteer need after this slot is taken
+      }
+      if (entry == undefined) {
+        //make a new volunteer entry and update the event
+        this.http.post<any>("volunteers/create", body, { observe: "response" }).subscribe(result => {
+          if (result.status != 200) {
+            window.alert(result.body.message + "Unable to update volunteer data.");
+          } else {
+            //successfully created the volunteers entry, so update the event
+            this.http.post<any>("event/volunteer", body, { observe: "response" }).subscribe(result => {
+              if (result.status != 200) {
+                window.alert(result.body.message + "Unable to update event data.");
+              } else {
+                //we have sucessfully cancelled the volunteer slot
+                window.alert("Sucessfully volunteered.")
+                this.router.navigate(["Home"]);
+              }
+            }, err => {
+              window.alert(err.body.message);
+            }); //end of http events/volunteer request
+          } //end of else
+        }, err => {
+          window.alert(err.message);
+        }); //end of http volunteers/create request
+      } else {
+        //update the existing volunteers entry and event
+        this.http.post<any>("volunteers/update", body, { observe: "response" }).subscribe(result => {
+          if (result.status != 200) {
+            window.alert(result.body.message + "Unable to update volunteer data.");
+          } else {
+            //successfully updated the volunteers table, so update the event
+            this.http.post<any>("event/volunteer", body, { observe: "response" }).subscribe(result => {
+              if (result.status != 200) {
+                window.alert(result.body.message + "Unable to update event data.");
+              } else {
+                //we have sucessfully cancelled the volunteer slot
+                window.alert("Sucessfully volunteered.")
+                this.router.navigate(["Home"]);
+              }
+            }, err => {
+              window.alert(err.body.message);
+            }); //end of http events/volunteer request
+          } //end of else
+        }, err => {
+          window.alert(err.message);
+        }); //end of http volunteers/create request
+      } //end of else entry not undefined
+    } //end of else no conflict
   }
-
 }

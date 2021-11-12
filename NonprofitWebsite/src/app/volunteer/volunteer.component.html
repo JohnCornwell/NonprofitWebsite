@@ -1,4 +1,4 @@
-<div *ngFor="let event of eventsList; let i = index" class="panel-group">
+<!--<div *ngFor="let event of eventsList; let i = index" class="panel-group">
     <div class="panel panel-default">
         <div class="panel-heading" *ngIf="!checkVolunteered(eventsList[i].EventID)">
             <h4 class="panel-title">
@@ -17,4 +17,34 @@
             <div class="panel-footer">{{eventsList[i].StartHour}}:{{eventsList[i].StartMinute}}-{{eventsList[i].EndHour}}:{{eventsList[i].EndMinute}}</div>
         </div>
     </div>
+</div>-->
+<div class="container">
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Event Name</th>
+          <th scope="col">Date</th>
+          <th scope="col">Start</th>
+          <th scope="col">End</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let event of eventsList; let i=index;" (click)="Select(i);">
+          <td scope="row">{{ event.Name }}</td>
+          <td>{{ event.MonthString + '/' + event.DayString + '/' + event.YearString }}</td>
+          <td>{{ event.StartHourString + ':' + event.StartMinuteString }}</td>
+          <td>{{ event.EndHourString + ':' + event.EndMinuteString }}</td>
+          <td><button style="float:right" (click)="Volunteer(i)">
+              Volunteer
+              <span class="badge badge-secondary">Need: {{eventsList[i].VolunteerNeed}}</span>
+              </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="well">
+  {{this.wellText}}
 </div>
