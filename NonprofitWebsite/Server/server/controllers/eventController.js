@@ -66,7 +66,38 @@ function update(req, res) {
           StartMinute: req.body.StartMinute || Event[0].StartMinute,
           EndHour: req.body.EndHour || Event[0].EndHour,
           EndMinute: req.body.EndMinute || Event[0].EndMinute,
-          Description: req.body.Description || Event[0].Description
+          Description: req.body.Description || Event[0].Description,
+          Deleted: req.body.Deleted || Event[0].Deleted
+        })
+        .then(event => res.status(200).send(JSON.stringify(event)))
+        .catch((error) => res.status(400).send(error));
+    })
+    .catch((error) => res.status(400).send(error));
+}
+
+function cancel(req, res) {
+  return findByName(req.body.EventName)
+    .then(Event => {
+      if (Event.length == 0) {
+        return res.status(404).send({
+          message: 'Event Not Found',
+        });
+      }
+      return Event[0]
+        .update({
+          Name: Event[0].Name,
+          VolunteerNeed: Event[0].VolunteerNeed,
+          DonationGoal: Event[0].DonationGoal,
+          Month: Event[0].Month,
+          Day: Event[0].Day,
+          Year: Event[0].Year,
+          StartHour: Event[0].StartHour,
+          StartMinute: Event[0].StartMinute,
+          EndHour: Event[0].EndHour,
+          EndMinute: Event[0].EndMinute,
+          Description: Event[0].Description,
+          //allows admin to "un-cancel" event. This is not yet implemented
+          Deleted: req.body.Deleted
         })
         .then(event => res.status(200).send(JSON.stringify(event)))
         .catch((error) => res.status(400).send(error));
@@ -110,7 +141,8 @@ function volunteer(req, res) {
             StartMinute: Event[0].StartMinute,
             EndHour: Event[0].EndHour,
             EndMinute: Event[0].EndMinute,
-            Description: Event[0].Description
+            Description: Event[0].Description,
+            Deleted: Event[0].Deleted
           })
           .then(() => res.status(200).send({ message: 'Volunteered successfully.' }))
           .catch(error => res.status(400).send(error));
@@ -140,7 +172,8 @@ function donate(req, res) {
             StartMinute: Event[0].StartMinute,
             EndHour: Event[0].EndHour,
             EndMinute: Event[0].EndMinute,
-            Description: Event[0].Description
+            Description: Event[0].Description,
+            Deleted: Event[0].Deleted
           })
           .then(() => res.status(200).send({ message: 'Donated successfully.' }))
           .catch(error => res.status(400).send(error));
@@ -179,7 +212,8 @@ module.exports = {
         StartMinute: req.body.StartMinute,
         EndHour: req.body.EndHour,
         EndMinute: req.body.EndMinute,
-        Description: req.body.Description
+        Description: req.body.Description,
+        Deleted: false
       })
       .then(Event => res.status(200).send(JSON.stringify(Event)))
       .catch(error => res.status(400).send(error));
@@ -197,6 +231,8 @@ module.exports = {
   retrieveById,
 
   update,
+
+  cancel,
 
   destroy,
 

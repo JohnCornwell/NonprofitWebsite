@@ -47,7 +47,8 @@ StartHour INTEGER NOT NULL,
 StartMinute INTEGER NOT NULL,
 EndHour INTEGER NOT NULL,
 EndMinute INTEGER NOT NULL,
-Description TEXT
+Description TEXT,
+Deleted BOOLEAN NOT NULL
 );
 
 CREATE TABLE Volunteers (
@@ -121,18 +122,18 @@ VALUES ('Nonprofit Org 2', 'This is an example of a nonprofit Program in the sys
 Unlike Nonprofit Org 1, this Program cares about something.');
 
 INSERT INTO event (Name, VolunteerNeed, DonationGoal, Month, Day, Year, StartHour, 
-StartMinute, EndHour, EndMinute, Description)
+StartMinute, EndHour, EndMinute, Description, Deleted)
 VALUES ('Nonprofit Org 1\'s Annual Event', 2, 300, 11, 21, 2021, 09, 00, 17, 00, 
-'This is the annual event for Nonprofit Org 1 where we talk about things and stuff.');
+'This is the annual event for Nonprofit Org 1 where we talk about things and stuff.', false);
 
 INSERT INTO event (Name, VolunteerNeed, DonationGoal, Month, Day, Year, StartHour, 
-StartMinute, EndHour, EndMinute, Description)
+StartMinute, EndHour, EndMinute, Description, Deleted)
 VALUES ('Nonprofit Org 2\'s Annual Event', 2, 300, 11, 22, 2021, 08, 00, 16, 00, 
-'This is the annual event for Nonprofit Org 2 where we talk about something.');
+'This is the annual event for Nonprofit Org 2 where we talk about something.', false);
 
 INSERT INTO event (Name, VolunteerNeed, DonationGoal, Month, Day, Year, StartHour, 
-StartMinute, EndHour, EndMinute, Description)
-VALUES ('Event 3', 2, 300, 11, 22, 2021, 08, 00, 16, 00, 'NA');
+StartMinute, EndHour, EndMinute, Description, Deleted)
+VALUES ('Event 3', 2, 300, 11, 22, 2021, 08, 00, 16, 00, 'NA', false);
 
 INSERT INTO hosts (ProgID, EventID)
 VALUES (1, 1);

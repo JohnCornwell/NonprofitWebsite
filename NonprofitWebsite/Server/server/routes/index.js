@@ -87,8 +87,9 @@ module.exports = (app) => {
     }
   });
 
+  app.post('/event/cancel', eventController.cancel); //cancel an exising event
   app.post('/event/create', eventController.create);  //used to create events by admins
-  app.delete('/user/delete', eventController.destroy); //this should probably never be called
+  app.delete('/user/delete', eventController.destroy); //this should never be called
 
 ////////////////////////Program SECTION/////////////////////////////
 

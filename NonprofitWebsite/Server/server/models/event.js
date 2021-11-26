@@ -51,6 +51,10 @@ module.exports = function(sequelize, DataTypes) {
     Description: {
       type: DataTypes.TEXT,
       allowNull: true
+    },
+    Deleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false
     }
   }, {
     sequelize,

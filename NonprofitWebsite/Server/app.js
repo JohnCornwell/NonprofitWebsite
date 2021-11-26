@@ -58,7 +58,10 @@ app.post('/login', (req, res) => {
           if (person.length == 0) {
             // user does not exist
             res.status(404).send({ message: "User does not exist" });
-          } else {
+          } else if(person[0].Deleted == true){
+            // user was deleted
+            res.status(404).send({ message: "User no longer exists" });
+          }else {
             // user exists
             //hash the password before adding it to the database
             const crypto = require('crypto');
