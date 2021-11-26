@@ -143,6 +143,10 @@ INSERT INTO event (Name, VolunteerNeed, DonationGoal, Month, Day, Year, StartHou
 StartMinute, EndHour, EndMinute, Description, Deleted)
 VALUES ('C2', 2, 300, 12, 24, 2021, 09, 00, 17, 00, 'NA', false);
 
+INSERT INTO event (Name, VolunteerNeed, DonationGoal, Month, Day, Year, StartHour, 
+StartMinute, EndHour, EndMinute, Description, Deleted)
+VALUES ('Deleted Event', 2, 300, 12, 24, 2021, 09, 00, 17, 00, 'NA', true);
+
 INSERT INTO hosts (ProgID, EventID)
 VALUES (1, 1);
 
@@ -154,4 +158,7 @@ VALUES (4, 2, false);
 
 INSERT INTO volunteers (UserID, EventID, Deleted)
 VALUES (4, 1, true);
+
+INSERT INTO volunteers (UserID, EventID, Deleted)
+VALUES (4, 6, false);
 

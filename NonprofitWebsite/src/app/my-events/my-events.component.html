@@ -14,14 +14,16 @@
       </thead>
       <tbody>
         <tr *ngFor="let event of eventsData; let i=index;" (click)="Select(i);">
-          <td scope="row">{{ event.Name }}</td>
+          <td *ngIf="event.Deleted==false && this.volunteers[i].Deleted==false" scope="row">{{ event.Name }}</td>
+          <td *ngIf="event.Deleted==true || this.volunteers[i].Deleted==true" scope="row"><p><s>{{ event.Name }}</s></p></td>
           <td>{{ event.MonthString + '/' + event.DayString + '/' + event.YearString }}</td>
           <td>{{ event.StartHourString + ':' + event.StartMinuteString }}</td>
           <td>{{ event.EndHourString + ':' + event.EndMinuteString }}</td>
-          <td *ngIf="this.volunteers[i].Deleted==true"><p style="color:#fc039d">Cancelled</p></td>
-          <td *ngIf="this.volunteers[i].Deleted==false"><p style="color: #03fcb1">Volunteered</p></td>
-          <td *ngIf="this.volunteers[i].Deleted==true"><button class="btn btn-success"(click)="Attend(i);">Volunteer</button></td>
-          <td *ngIf="this.volunteers[i].Deleted==false"><button class="btn btn-danger" (click)="Cancel(i);">Cancel</button></td>
+          <td *ngIf="this.volunteers[i].Deleted==true && event.Deleted==false"><p style="color:#fc039d">Cancelled Slot</p></td>
+          <td *ngIf="this.volunteers[i].Deleted==false && event.Deleted==false"><p style="color: #03fcb1">Volunteered</p></td>
+          <td *ngIf="event.Deleted==true"><p style="color: #eb5a1c">Event Cancelled</p></td>
+          <td *ngIf="this.volunteers[i].Deleted==true && event.Deleted == false"><button class="btn btn-success" (click)="Attend(i);">Volunteer</button></td>
+          <td *ngIf="this.volunteers[i].Deleted==false && event.Deleted == false"><button class="btn btn-danger" (click)="Cancel(i);">Cancel</button></td>
         </tr>
       </tbody>
     </table>

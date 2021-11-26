@@ -101,7 +101,12 @@ export class AdminHomeComponent implements OnInit {
   }
 
   Select(i: number) {
+    //used to update event description
     this.wellText = this.eventsData[i].Description;
+  }
+
+  Delete(i: number) {
+    //Delete the given event only if it is in the future
   }
 
 }
