@@ -127,7 +127,7 @@ export class MyEventsComponent implements OnInit {
     let eventDate = new Date(myEvent.Year, myEvent.Month - 1, myEvent.Day, 0, 0, 0);
     let today = new Date(); //the current date
     //this is today without the current time
-    let todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    let todayStart = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
     if (todayStart.valueOf() > eventDate.valueOf()) {
       window.alert("Cannot volunteer for an event in the past.");
       return;

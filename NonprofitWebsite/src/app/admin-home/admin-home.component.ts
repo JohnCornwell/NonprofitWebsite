@@ -51,11 +51,8 @@ export class AdminHomeComponent implements OnInit {
       } else {
         //set up readable strings for every Event before adding it to the array for display
         result.body.forEach((event: Event) => {
-          let eventDate = new Date(event.Year, event.Month, event.Day);
-          let today = new Date(); //the current date
-          let todayStart = new Date(today.getDate()); //this is today without the current time
-          //only display events that are happening now or in the future
-          if (todayStart.getTime() <= eventDate.getTime()) {
+          //only display events that are not deleted
+          if (event.Deleted == false) {
             //only add dates that are for today or the future
             let m: String = event.Month.toString(10);
             let d: String = event.Day.toString(10);
@@ -105,8 +102,32 @@ export class AdminHomeComponent implements OnInit {
     this.wellText = this.eventsData[i].Description;
   }
 
-  Delete(i: number) {
-    //Delete the given event only if it is in the future
+  Cancel(i: number) {
+    //Cancel the given event only if it is in the future
+    //months are zero indexed
+    var myEvent: Event = this.eventsData[i];
+    let eventDate = new Date(myEvent.Year, myEvent.Month - 1, myEvent.Day, 0, 0, 0);
+    let today = new Date(); //the current date
+    //this is today without the current time
+    let todayStart = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+    if (todayStart.valueOf() > eventDate.valueOf()) {
+      window.alert("Cannot cancel an event in the past.");
+      return;
+    }
+    var body = {
+      EventId: myEvent.EventID,
+      Deleted: true
+    }
+    this.http.post('/event/cancel', body, { observe: "response" }).subscribe(result => {
+      if (result.status != 200) {
+        window.alert("Unable to cancel event.");
+      } else {
+        window.alert("Event cancelled.")
+        this.router.navigate(["Home"]);
+      }
+    }, err => {
+      window.alert(err.error.message);
+    });
   }
 
 }

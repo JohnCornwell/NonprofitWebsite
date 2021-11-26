@@ -1,5 +1,5 @@
 <h3>Welcome, Admin person!</h3>
-<form [formGroup]="form">
+<!--<form [formGroup]="form">
   <div class="form-group">
     <label class="col-md-4">Select an event to edit:</label>
     <br>
@@ -9,7 +9,7 @@
   </div>
   <button class="btn btn-default" (click)="navigateToEventEdit()" [disabled]="form.get('SelectEvent')?.value === ''">Edit</button>
   <button class="btn btn-default" Style="float:right" (click)="navigateToEventAdd()">Add New Event</button>
-</form>
+</form>-->
 <!-- Table with all events happening today or in the future -->
 <div class="container">
   <div class="table-responsive">
@@ -33,6 +33,7 @@
           <td>{{ event.StartHourString + ':' + event.StartMinuteString }}</td>
           <td>{{ event.EndHourString + ':' + event.EndMinuteString }}</td>
           <td><button class="btn btn-default" (click)="editEvent(event.EventID)">Edit</button></td>
+          <td><button class="btn btn-danger" (click)="Cancel(i)">Cancel</button></td>
         </tr>
       </tbody>
     </table>

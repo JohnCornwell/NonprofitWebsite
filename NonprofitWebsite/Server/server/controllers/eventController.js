@@ -76,7 +76,7 @@ function update(req, res) {
 }
 
 function cancel(req, res) {
-  return findByName(req.body.EventName)
+  return findById(req.body.EventId)
     .then(Event => {
       if (Event.length == 0) {
         return res.status(404).send({
