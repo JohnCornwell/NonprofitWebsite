@@ -133,11 +133,10 @@ export class MyEventsComponent implements OnInit {
           var myEndTime = new Date(myEvent.Year, myEvent.Month, myEvent.Day, myEvent.EndHour, myEvent.EndMinute);
           var eventStartTime = new Date(event.Year, event.Month, event.Day, event.StartHour, event.StartMinute);
           var eventEndTime = new Date(event.Year, event.Month, event.Day, event.EndHour, event.EndMinute);
-          if (myStartTime.getTime() > eventEndTime.getTime() || myEndTime.getTime() < eventStartTime.getTime()) {
-            //my event is after or my event ends before event
+          if (myStartTime.getTime() >= eventEndTime.getTime() || myEndTime.getTime() <= eventStartTime.getTime()) {
+            //my event starts after or at the end of event or my event ends before or at event start
           } else {
-            //my event starts before event end but does not end before event
-            //start, so this is a conflict
+            //this is a conflict
             conflict = true;
           }
         }

@@ -17,6 +17,7 @@ export interface Event {
     EndHour: number,
     EndMinute: number,
     Description: String,
+    Deleted: boolean,
     MonthString: String,
     DayString: String,
     YearString: String,

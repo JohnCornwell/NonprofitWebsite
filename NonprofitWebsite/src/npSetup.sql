@@ -135,6 +135,14 @@ INSERT INTO event (Name, VolunteerNeed, DonationGoal, Month, Day, Year, StartHou
 StartMinute, EndHour, EndMinute, Description, Deleted)
 VALUES ('Event 3', 2, 300, 11, 22, 2021, 08, 00, 16, 00, 'NA', false);
 
+INSERT INTO event (Name, VolunteerNeed, DonationGoal, Month, Day, Year, StartHour, 
+StartMinute, EndHour, EndMinute, Description, Deleted)
+VALUES ('C1', 1, 300, 12, 24, 2021, 09, 00, 17, 00, 'NA', false);
+
+INSERT INTO event (Name, VolunteerNeed, DonationGoal, Month, Day, Year, StartHour, 
+StartMinute, EndHour, EndMinute, Description, Deleted)
+VALUES ('C2', 2, 300, 12, 24, 2021, 09, 00, 17, 00, 'NA', false);
+
 INSERT INTO hosts (ProgID, EventID)
 VALUES (1, 1);
 

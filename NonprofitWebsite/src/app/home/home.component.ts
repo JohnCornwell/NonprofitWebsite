@@ -37,11 +37,11 @@ export class HomeComponent implements OnInit {
       } else {
         //set up readable strings for every Event before adding it to the array for display
         result.body.forEach((event: Event) => {
-          let eventDate = new Date(event.Year, event.Month, event.Day);
+          let eventDate = new Date(event.Year, event.Month - 1, event.Day);
           let today = new Date(); //the current date
-          let todayStart = new Date(today.getDate()); //this is today without the current time
+          let todayStart = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate()); //this is today without the current time
           //only display events that are happening now or in the future
-          if (todayStart.getTime() <= eventDate.getTime()) {
+          if (todayStart.valueOf() <= eventDate.valueOf() && event.Deleted == false) {
             //only add dates that are for today or the future
             let m: String = event.Month.toString(10);
             let d: String = event.Day.toString(10);

@@ -34,12 +34,16 @@ export class VolunteerComponent implements OnInit {
       } else {
         //set up readable strings for every Event before adding it to the array for display
         result.body.forEach((event: Event) => {
-          let eventDate = new Date(event.Year, event.Month, event.Day);
+          //date months are zero indexed
+          let eventDate = new Date(event.Year, event.Month - 1, event.Day,0,0,0);
           let today = new Date(); //the current date
-          let todayStart = new Date(today.getDate()); //this is today without the current time
+          //this is today without the current time
+          let todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
           //only display events that are happening now or in the future and have space
-          if (todayStart.getTime() <= eventDate.getTime() && event.VolunteerNeed > 0) {
-            //only add dates that are for today or the future
+          if (todayStart.valueOf() <= eventDate.valueOf() && event.VolunteerNeed > 0
+            && event.Deleted == false) {
+            //only add events that are happening today or in the future that have a positive
+            //need and are not deleted
             let m: String = event.Month.toString(10);
             let d: String = event.Day.toString(10);
             let sh: String = event.StartHour.toString(10);
@@ -91,20 +95,23 @@ export class VolunteerComponent implements OnInit {
               if (volunteers.Deleted == false) {
                 //this event is already volunteered for by the user
                 var newEvents = new Array<Event>();
+                //remove this event from the event display list and add it to the volunteered list
                 for (var i = 0; i < this.eventsList.length; i++) {
                   if (this.eventsList[i].EventID == volunteers.EventID) {
-                    //this is an event that we will need to check for conflicts with later
-                    this.volunteeredEvents.push(this.eventsList[i]);
-                    //remove the conflict from the option list
+                    //remove the conflict from the option list by not adding it to newEvents
                   } else {
+                    //this is not the conflict, so add it to the new events display list
                     newEvents.push(this.eventsList[i]);
                   }
                 } //end of iterator
+                //update the events display list with the new list
                 this.eventsList = new Array<Event>();
                 for (var i = 0; i < newEvents.length; i++) {
                   this.eventsList.push(newEvents[i]);
                 }
                 newEvents = new Array<Event>();
+                //add the conflict to the volunteeredEvents array
+                this.populateVolunteerEvents(volunteers.EventID);
               } else {
                 //we need to update this entry if the user volunteers for the associated event
                 this.volunteersList.set(volunteers.EventID, volunteers);
@@ -121,28 +128,47 @@ export class VolunteerComponent implements OnInit {
     this.displayList = this.eventsList; //copy events to be displayed (done for UX effect)
   }
 
+  populateVolunteerEvents(EventId: number) {
+    //get the event from the server that this user has volunteered for
+    var body = {
+      EventId: EventId
+    }
+    this.http.post<any>("/event/retrieveById", body, { observe: "response" }).subscribe(result => {
+      if (result.status != 200) {
+        window.alert(result.body.message + "Unable to find volunteeed event.");
+      } else {
+        result.body.forEach((event: Event) => {
+          //there should only be one event returned
+          this.volunteeredEvents.push(event);
+        });
+      }
+    }, err => {
+      window.alert(err.body.message);
+    });
+  }
+
   Select(i: number) {
     //user has clicked on an event row
     this.wellText = this.eventsList[i].Description;
   }
 
   Volunteer(i: number) {
-    //user has requested to volunteer for an event. Since we hav displayed
+    //user has requested to volunteer for an event. Since we have displayed
     //events in the future with space, we only need to check that there is
     //not a scheduling conflict
     var myEvent: Event = this.eventsList[i]; //the event we want to volunteer for
     var conflict: boolean = false; //indicates a conflict with a volunteered event
     this.volunteeredEvents.forEach((event: Event) => {
       //check for conflicting times with events the user has already volunteered for
-      var myStartTime = new Date(myEvent.Year, myEvent.Month, myEvent.Day, myEvent.StartHour, myEvent.StartMinute);
-      var myEndTime = new Date(myEvent.Year, myEvent.Month, myEvent.Day, myEvent.EndHour, myEvent.EndMinute);
-      var eventStartTime = new Date(event.Year, event.Month, event.Day, event.StartHour, event.StartMinute);
-      var eventEndTime = new Date(event.Year, event.Month, event.Day, event.EndHour, event.EndMinute);
-      if (myStartTime.getTime() > eventEndTime.getTime() || myEndTime.getTime() < eventStartTime.getTime()) {
-        //my event is after or my event ends before event
+      //date months are zero indexed
+      var myStartTime = new Date(myEvent.Year, myEvent.Month - 1, myEvent.Day, myEvent.StartHour, myEvent.StartMinute);
+      var myEndTime = new Date(myEvent.Year, myEvent.Month - 1, myEvent.Day, myEvent.EndHour, myEvent.EndMinute);
+      var eventStartTime = new Date(event.Year, event.Month - 1, event.Day, event.StartHour, event.StartMinute);
+      var eventEndTime = new Date(event.Year, event.Month - 1, event.Day, event.EndHour, event.EndMinute);
+      if (myStartTime.valueOf() > eventEndTime.valueOf() || myEndTime.valueOf() < eventStartTime.valueOf()) {
+        //my event starts after or at the end of event or my event ends before or at event start
       } else {
-        //my event starts before event end but does not end before event
-        //start, so this is a conflict
+        //this is a conflict
         conflict = true;
       }
     }); //end of iterator
