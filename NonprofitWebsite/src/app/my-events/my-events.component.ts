@@ -121,10 +121,20 @@ export class MyEventsComponent implements OnInit {
   Attend(i: number) {
     //this method is called when the volunteer wants to attend a cancelled volunteer slot
     //we need to do some checking in order to ensure that there is space for the volunteer
-    //to attend the event
+    //to attend the event and that the event is in the future
+    //date months are zero indexed
+    var myEvent: Event = this.eventsData[i];
+    let eventDate = new Date(myEvent.Year, myEvent.Month - 1, myEvent.Day, 0, 0, 0);
+    let today = new Date(); //the current date
+    //this is today without the current time
+    let todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    if (todayStart.valueOf() > eventDate.valueOf()) {
+      window.alert("Cannot volunteer for an event in the past.");
+      return;
+    }
+    //only display events that are happening now or in the future and have space
     var conflict: boolean = false;
     if (this.eventsData[i].VolunteerNeed >= 1) {
-      var myEvent: Event = this.eventsData[i];
       for (var index = 0; index < this.eventsData.length; index++) {
         if (this.volunteers[index].Deleted == false && i != index) {
           //possible conflict
@@ -182,9 +192,19 @@ export class MyEventsComponent implements OnInit {
   }
 
   Cancel(i: number) {
-    //this method is called when a volunteer wants to cancel their volunteered slot
-    //no checking is needed here, we only need to update the volunteers table and add 
-    //a slot to the related event
+    //this method is called when a volunteer wants to cancel their volunteered slot.
+    //We must check that the event is in the future. Then, update the volunteers table
+    //and add a slot to the related event
+    //date months are zero indexed
+    var myEvent: Event = this.eventsData[i];
+    let eventDate = new Date(myEvent.Year, myEvent.Month - 1, myEvent.Day, 0, 0, 0);
+    let today = new Date(); //the current date
+    //this is today without the current time
+    let todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    if (todayStart.valueOf() > eventDate.valueOf()) {
+      window.alert("Cannot cancel volunteer slot for an event in the past.");
+      return;
+    }
     const userId = +(sessionStorage?.getItem("id") || '-1'); //convert to number
     //we will use body to send data to the server
     var body = {
