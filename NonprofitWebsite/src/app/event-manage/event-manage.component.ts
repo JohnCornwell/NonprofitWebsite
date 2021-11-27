@@ -8,10 +8,10 @@ import { Event } from '../interfaces/Event';
 
 @Component({
   selector: 'app-admin-home',
-  templateUrl: './admin-home.component.html',
-  styleUrls: ['./admin-home.component.css']
+  templateUrl: './event-manage.component.html',
+  styleUrls: ['./event-manage.component.css']
 })
-export class AdminHomeComponent implements OnInit {
+export class EventManageComponent implements OnInit {
   wellText: String = "Click on an event to see its description";
   form: FormGroup;
   eventsData: Array<Event> = new Array<Event>();
