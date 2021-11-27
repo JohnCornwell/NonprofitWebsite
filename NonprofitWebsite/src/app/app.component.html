@@ -19,6 +19,10 @@
       </svg>
     </a>
   </li>
+  <!-- Help Button -->
+  <li style="float:right">
+    <a class="active" id="op1" [routerLink]="'Help'">Help</a>
+  </li>
   <!-- Disply login button if there is no current user -->
   <li *ngIf="(type | async) == 'none'" style="float:right">
     <a class="active" href="Login" id="op1">Login</a>

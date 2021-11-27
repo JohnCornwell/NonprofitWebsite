@@ -26,6 +26,7 @@ import { DonorHomeComponent } from './donor-home/donor-home.component';
 import { VolunteerComponent } from './volunteer/volunteer.component';
 import { MyEventsComponent } from './my-events/my-events.component';
 import { MyDonationsComponent } from './my-donations/my-donations.component';
+import { HelpComponent } from './help/help.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { MyDonationsComponent } from './my-donations/my-donations.component';
     DonorHomeComponent,
     VolunteerComponent,
     MyEventsComponent,
-    MyDonationsComponent
+    MyDonationsComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,

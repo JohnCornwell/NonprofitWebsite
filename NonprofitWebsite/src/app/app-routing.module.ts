@@ -19,6 +19,12 @@ import { DonorHomeComponent } from './donor-home/donor-home.component';
 import { MyEventsComponent } from './my-events/my-events.component';
 import { MyDonationsComponent } from './my-donations/my-donations.component';
 import { VolunteerComponent } from './volunteer/volunteer.component';
+import { HelpComponent } from "./help/help.component";
+
+/*
+ * This class is responsible for directing a user to a specific page based on the
+ * given http address.
+ */
 
 const routes: Routes = [ 
   { 
@@ -92,6 +98,10 @@ const routes: Routes = [
   {
     path: 'Test',
     component: TestComponent
+  },
+  {
+    path: 'Help',
+    component: HelpComponent
   },
   { 
     path: '**', 
