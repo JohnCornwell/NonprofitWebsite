@@ -27,6 +27,7 @@ import { VolunteerComponent } from './volunteer/volunteer.component';
 import { MyEventsComponent } from './my-events/my-events.component';
 import { MyDonationsComponent } from './my-donations/my-donations.component';
 import { HelpComponent } from './help/help.component';
+import { UsersListComponent } from './users-list/users-list.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { HelpComponent } from './help/help.component';
     VolunteerComponent,
     MyEventsComponent,
     MyDonationsComponent,
-    HelpComponent
+    HelpComponent,
+    UsersListComponent
   ],
   imports: [
     BrowserModule,
