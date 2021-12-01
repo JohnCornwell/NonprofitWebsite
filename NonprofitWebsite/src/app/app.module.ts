@@ -51,7 +51,7 @@ import { UsersListComponent } from './users-list/users-list.component';
     VolunteerComponent,
     MyEventsComponent,
     MyDonationsComponent,
-    UsersListComponent
+    UsersListComponent,
     HelpComponent,
     ViewDonorComponent,
     ViewVolunteerComponent
