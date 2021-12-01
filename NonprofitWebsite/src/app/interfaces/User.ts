@@ -4,12 +4,12 @@
  */
 
 export interface User {
-  UserID: number,
-  Username: String,
-  //we will not save the user password in memory
-  FirstName: String,
-  MiddleName: String,
-  LastName: String,
-  UserType: String,
-  Deleted: boolean
-}
+    UserID: number,
+    Username: number,
+    FirstName: string,
+    MiddleName: string,
+    LastName: string,
+    UserType: string,
+    Deleted: boolean,
+    Password: string
+  }

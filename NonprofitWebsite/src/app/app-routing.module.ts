@@ -21,6 +21,7 @@ import { MyDonationsComponent } from './my-donations/my-donations.component';
 import { VolunteerComponent } from './volunteer/volunteer.component';
 import { HelpComponent } from "./help/help.component";
 import { ViewDonorComponent } from "./view-donor/view-donor.component";
+import { UsersListComponent } from './users-list/users-list.component';
 
 /*
  * This class is responsible for directing a user to a specific page based on the
@@ -107,6 +108,10 @@ const routes: Routes = [
   {
     path: 'Help',
     component: HelpComponent
+  },
+  {
+    path: 'Users',
+    component: UsersListComponent
   },
   { 
     path: '**', 
