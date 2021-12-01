@@ -13,8 +13,30 @@ function findByUsername (username) {
   })
 }
 
+function findById(id) {
+  return User.findAll({
+    where: {
+      UserID: id
+    }
+  })
+}
+
 function retrieve(req, res) {
   return findByUsername(req.body.Username)
+    .then(User => {
+      if (User.length == 0) {
+        return res.status(404).send({
+          message: 'User Not Found',
+        });
+      }
+      return res.status(200).send(JSON.stringify(User));
+    })
+    .catch(error => res.status(400).send(error));
+}
+
+function retrieveById(req, res) {
+  console.log("User id is " + req.body.UserId);
+  return findById(req.body.UserId)
     .then(User => {
       if (User.length == 0) {
         return res.status(404).send({
@@ -97,6 +119,8 @@ module.exports = {
   },
 
   retrieve,
+
+  retrieveById,
 
   update,
 

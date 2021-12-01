@@ -1,4 +1,4 @@
-<h3>Your Donations</h3>
+<h3>{{myUser.Username}}'s Donations</h3>
 <!-- Table with all donations this donor has made -->
 <div class="container">
   <div class="table-responsive">
@@ -12,7 +12,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let donation of donationData; let i=index;" (click)="Select(i);">
+        <tr *ngFor="let donation of donationData; let i=index;">
           <td scope="row">{{ donation.Amount }}</td>
           <td>{{ donation.MonthString + '/' + donation.DayString + '/' + donation.YearString }}</td>
           <td>{{ donation.Type }}</td>
@@ -21,7 +21,4 @@
       </tbody>
     </table>
   </div>
-</div>
-<div class="well">
-  {{this.wellText}}
 </div>

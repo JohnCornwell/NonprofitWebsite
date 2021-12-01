@@ -20,6 +20,7 @@ import { MyEventsComponent } from './my-events/my-events.component';
 import { MyDonationsComponent } from './my-donations/my-donations.component';
 import { VolunteerComponent } from './volunteer/volunteer.component';
 import { HelpComponent } from "./help/help.component";
+import { ViewDonorComponent } from "./view-donor/view-donor.component";
 
 /*
  * This class is responsible for directing a user to a specific page based on the
@@ -82,6 +83,10 @@ const routes: Routes = [
   {
     path: 'Event/edit',
     component: EventEditComponent
+  },
+  {
+    path: 'Donor/:id',
+    component: ViewDonorComponent
   },
   {
     path: 'Events',

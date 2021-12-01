@@ -2,14 +2,14 @@
   "ExpandedNodes": [
     "",
     "\\NonprofitWebsite",
+    "\\NonprofitWebsite\\Server",
+    "\\NonprofitWebsite\\Server\\server",
     "\\NonprofitWebsite\\Server\\server\\routes",
     "\\NonprofitWebsite\\src",
     "\\NonprofitWebsite\\src\\app",
-    "\\NonprofitWebsite\\src\\app\\event-add",
-    "\\NonprofitWebsite\\src\\app\\home",
-    "\\NonprofitWebsite\\src\\app\\my-events",
-    "\\NonprofitWebsite\\src\\app\\volunteer"
+    "\\NonprofitWebsite\\src\\app\\event-manage",
+    "\\NonprofitWebsite\\src\\app\\help",
+    "\\NonprofitWebsite\\src\\app\\my-events"
   ],
-  "SelectedNode": "\\NonprofitWebsite\\src\\app\\my-events\\my-events.component.ts",
   "PreviewInSolutionExplorer": false
 }

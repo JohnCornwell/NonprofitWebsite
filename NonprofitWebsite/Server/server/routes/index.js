@@ -26,7 +26,19 @@ module.exports = (app) => {
     }
   });
 
-  app.get('/user/retrieve', userController.retrieve);
+  app.post('/user/retrieve', userController.retrieve);
+
+  app.all('/user/retrieveById', (req, res, next) => {
+    if (req.session.User == null || (req.session.User.UserID != req.body.UserId &&
+      req.session.User.UserType != 'Admin')) {
+      //cannot view another user's info unless you are an admin
+      res.status(401).send({ message: "Need to be an admin for this request." });
+    } else {
+      next();
+    }
+  });
+
+  app.post('/user/retrieveById', userController.retrieveById);
 
   app.all('/user/update', (req, res, next) => {
     if (req.session.UserType == null || req.session.User.UserType != req.body.UserType ||
@@ -37,7 +49,7 @@ module.exports = (app) => {
       next();
     }
   });
-  app.put('/user/update', userController.update);
+  app.post('/user/update', userController.update);
 
   /* all user functions after this point require admin status */
   app.all('/user/*', (req, res, next) => {
@@ -105,7 +117,7 @@ app.all('/program/*', (req, res, next) => {
   }
 });
 
-app.put('/program/update', programController.update);
+app.post('/program/update', programController.update);
 app.post('/program/create', programController.create);  //used to create admins
 app.delete('/program/delete', programController.destroy); //would need to delete hosts table entries first
 
@@ -156,7 +168,7 @@ app.all('/donates/create', (req, res, next) => {
   app.post('/donates/create', donatesController.create);
 
   app.all('/donates/retrieveDonations', (req, res, next) => {
-    if (req.session.User == null || req.session.User.UserType != 'Donor' ||
+    if (req.session.User == null || req.session.User.UserType == 'Volunteer' ||
       (req.body.UserId != req.session.User.UserID && req.session.User.UserType != 'Admin')) {
       // cannot get donations of other users unless you are an admin
       res.status(401).send({ message: "Need to be a donor or admin for this request." });
