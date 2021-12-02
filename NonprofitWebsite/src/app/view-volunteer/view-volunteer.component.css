@@ -1,0 +1,50 @@
+/* Change the color of the row being hovered over */
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #03fcb1;
+}
+
+/* color header text and center its content */
+
+h4 {
+  text-align: center;
+}
+
+strong {
+  color: #fc039d;
+}
+
+#del {
+  color: #fc039d;
+}
+
+#act {
+  color: #03fcb1;
+}
+
+
+b {
+  color: #03fcb1;
+}
+
+h3 {
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+}
+
+/* align flex-box that contains buttons */
+.flex-contianer {
+  display: flex;
+  justify-content: space-between; /* one button on each side of page */
+}
+
+.left-btn {
+  width: 100px;
+}
+
+.right-btn {
+  width: 100px;
+}

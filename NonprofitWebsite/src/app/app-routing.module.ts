@@ -21,6 +21,7 @@ import { MyDonationsComponent } from './my-donations/my-donations.component';
 import { VolunteerComponent } from './volunteer/volunteer.component';
 import { HelpComponent } from "./help/help.component";
 import { ViewDonorComponent } from "./view-donor/view-donor.component";
+import { ViewVolunteerComponent } from "./view-volunteer/view-volunteer.component";
 import { UsersListComponent } from './users-list/users-list.component';
 
 /*
@@ -88,6 +89,10 @@ const routes: Routes = [
   {
     path: 'Donor/:id',
     component: ViewDonorComponent
+  },
+  {
+    path: 'Volunteer/:id',
+    component: ViewVolunteerComponent
   },
   {
     path: 'Events',

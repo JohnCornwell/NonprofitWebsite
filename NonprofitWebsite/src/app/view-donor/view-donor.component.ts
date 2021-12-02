@@ -67,6 +67,7 @@ export class ViewDonorComponent implements OnInit {
           UserType: result.body[0].UserType,
           Deleted: result.body[0].Deleted
         };
+        //now that we have a valid user, get its relevant data
         this.populateArrays();
       }
     }, err => {

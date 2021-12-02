@@ -35,7 +35,6 @@ function retrieve(req, res) {
 }
 
 function retrieveById(req, res) {
-  console.log("User id is " + req.body.UserId);
   return findById(req.body.UserId)
     .then(User => {
       if (User.length == 0) {

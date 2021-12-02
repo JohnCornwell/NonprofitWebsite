@@ -1,1 +1,51 @@
-<p>view-volunteer works!</p>
+<h1>Volunteer Details</h1>
+<h3>Username: <strong>{{myUser.Username}}</strong></h3>
+<h3>First Name: <strong>{{myUser.FirstName}}</strong></h3>
+<h3>Last Name: <strong>{{myUser.LastName}}</strong></h3>
+
+<h3>
+  Status: <strong id="del" *ngIf="myUser.Deleted == true">Deleted</strong>
+  <strong id="act" *ngIf="myUser.Deleted == false">Active</strong>
+</h3>
+
+<h3>Total volunteer hours for {{myUser.Username}}: <b>{{totalHours}}</b></h3>
+
+<h4>{{myUser.FirstName}} {{myUser.LastName}}'s Events</h4>
+<!-- Table with all events this volunteer has signed up for -->
+<div class="container">
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Event Name</th>
+          <th scope="col">Date</th>
+          <th scope="col">Start</th>
+          <th scope="col">End</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let event of eventsData; let i=index;">
+          <td *ngIf="event.Deleted==false && this.volunteers[i].Deleted==false" scope="row">{{ event.Name }}</td>
+          <td *ngIf="event.Deleted==true || this.volunteers[i].Deleted==true" scope="row"><p><s>{{ event.Name }}</s></p></td>
+          <td>{{ event.MonthString + '/' + event.DayString + '/' + event.YearString }}</td>
+          <td>{{ event.StartHourString + ':' + event.StartMinuteString }}</td>
+          <td>{{ event.EndHourString + ':' + event.EndMinuteString }}</td>
+          <td *ngIf="this.volunteers[i].Deleted==true && event.Deleted==false"><p style="color:#fc039d">Cancelled Slot</p></td>
+          <td *ngIf="this.volunteers[i].Deleted==false && event.Deleted==false"><p style="color: #03fcb1">Volunteered</p></td>
+          <td *ngIf="event.Deleted==true"><p style="color: #eb5a1c">Event Cancelled</p></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- Buttons to go back and delete/renew user-->
+<div class="flex-contianer">
+  <div id="left-btn">
+    <button class="btn btn-info" [routerLink]="'/Users'">Back</button>
+  </div>
+  <div id="right-btn">
+    <button *ngIf="myUser.Deleted == true" class="btn btn-success" (click)="Renew();">Renew</button>
+    <button *ngIf="myUser.Deleted == false" class="btn btn-danger" (click)="Delete();">Delete</button>
+  </div>
+</div>

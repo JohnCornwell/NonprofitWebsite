@@ -4,11 +4,13 @@
     "\\NonprofitWebsite",
     "\\NonprofitWebsite\\Server",
     "\\NonprofitWebsite\\Server\\server",
-    "\\NonprofitWebsite\\Server\\server\\controllers",
     "\\NonprofitWebsite\\Server\\server\\routes",
     "\\NonprofitWebsite\\src",
-    "\\NonprofitWebsite\\src\\app"
+    "\\NonprofitWebsite\\src\\app",
+    "\\NonprofitWebsite\\src\\app\\home",
+    "\\NonprofitWebsite\\src\\app\\my-events",
+    "\\NonprofitWebsite\\src\\app\\view-donor"
   ],
-  "SelectedNode": "\\NonprofitWebsite\\src\\app\\interfaces",
+  "SelectedNode": "\\NonprofitWebsite\\src\\app\\view-donor\\view-donor.component.ts",
   "PreviewInSolutionExplorer": false
 }
