@@ -24,6 +24,9 @@ export class ViewDonorComponent implements OnInit {
   };
   donationData: Array<Donation> = new Array<Donation>(); //list of donations made by the donor
   donates: Array<Donates> = new Array<Donates>(); //holds id of the donatins made by the donor
+  totalDonated = 0;
+  totalEvents = 0;
+  totalOrg = 0;
 
   get eventsFormArray() {
     return this.form.controls.events as FormArray;
@@ -53,7 +56,7 @@ export class ViewDonorComponent implements OnInit {
     this.http.post<any>("/user/retrieveById", body, { observe: "response" }).subscribe(result => {
       if (result.status != 200) {
         window.alert("Unable to retrieve user info.");
-        this.router.navigate(['Users']);
+        this.router.navigate(['/Users']);
       } else {
         this.myUser = {
           UserID: result.body[0].UserID,
@@ -68,7 +71,7 @@ export class ViewDonorComponent implements OnInit {
       }
     }, err => {
       window.alert(err.error.message);
-      this.router.navigate(['Users']);
+      this.router.navigate(['/Users']);
     });
   }
 
@@ -122,9 +125,14 @@ export class ViewDonorComponent implements OnInit {
           donation.EventName = "--"; //default string for unrestricted
           //now that we have the donation, add it to our list
           this.donationData.push(donation);
+          //add donation amount to the appropriate totals
+          this.totalDonated += donation.Amount;
           //if this is a restricted donation, we need the event that was donated to
           if (donation.Type == "Restricted") {
-            this.findEvent(donation)
+            this.findEvent(donation);
+            this.totalEvents += donation.Amount;
+          } else {
+            this.totalOrg += donation.Amount;
           }
         }
       }, err => {
@@ -164,5 +172,41 @@ export class ViewDonorComponent implements OnInit {
     }, err => {
       window.alert(err.error.message);
     }); //end of http needs/retrieveEvents request
+  }
+
+  Renew() {
+    //this method is called when this user is deleted and the admin clicks Renew
+    var body = {
+      UserId: this.myUser.UserID,
+      Deleted: false
+    }
+    this.http.post<any>("/user/delete", body, { observe: "response" }).subscribe(result => {
+      if (result.status != 200) {
+        window.alert("Unable to renew user.");
+      } else {
+        window.alert("Successfully renewed user.");
+        this.router.navigate(['/Users']);
+      }
+    }, err => {
+      window.alert(err.error.message);
+    });
+  }
+
+  Delete() {
+    //this method is called when this user is active and the admin clicks Delete
+    var body = {
+      UserId: this.myUser.UserID,
+      Deleted: true
+    }
+    this.http.post<any>("/user/delete", body, { observe: "response" }).subscribe(result => {
+      if (result.status != 200) {
+        window.alert("Unable to delete user.");
+      } else {
+        window.alert("Successfully deleted user.");
+        this.router.navigate(['/Users']);
+      }
+    }, err => {
+      window.alert(err.error.message);
+    });
   }
 }

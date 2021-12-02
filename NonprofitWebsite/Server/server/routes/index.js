@@ -62,7 +62,7 @@ module.exports = (app) => {
 
   app.post('/user/create', userController.create);  //used to create admins
   app.get('/user/list', userController.list); // get all
-  app.delete('/user/delete', userController.destroy); //do not call this. Use update to soft delete
+  app.post('/user/delete', userController.del); //used to soft-delete and activate a user
 
   ////////////////////////Event SECTION/////////////////////////////
 

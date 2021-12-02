@@ -4,12 +4,11 @@
     "\\NonprofitWebsite",
     "\\NonprofitWebsite\\Server",
     "\\NonprofitWebsite\\Server\\server",
+    "\\NonprofitWebsite\\Server\\server\\controllers",
     "\\NonprofitWebsite\\Server\\server\\routes",
     "\\NonprofitWebsite\\src",
-    "\\NonprofitWebsite\\src\\app",
-    "\\NonprofitWebsite\\src\\app\\event-manage",
-    "\\NonprofitWebsite\\src\\app\\help",
-    "\\NonprofitWebsite\\src\\app\\my-events"
+    "\\NonprofitWebsite\\src\\app"
   ],
+  "SelectedNode": "\\NonprofitWebsite\\src\\app\\interfaces",
   "PreviewInSolutionExplorer": false
 }

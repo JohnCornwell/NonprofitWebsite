@@ -6,10 +6,10 @@
 export interface User {
   UserID: number,
   //we will not store the user password in memory
-    Username: String,
+  Username: String,
   FirstName: String,
   MiddleName: String,
   LastName: String,
   UserType: String,
-    Deleted: boolean
-  }
+  Deleted: boolean
+}

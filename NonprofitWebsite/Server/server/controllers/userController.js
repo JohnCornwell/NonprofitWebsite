@@ -72,8 +72,8 @@ function update(req, res) {
     .catch((error) => res.status(400).send(error));
 }
 
-function destroy(req, res) {
-  return findByUsername(req.body.Username)
+function del(req, res) {
+  return findById(req.body.UserId)
     .then(User => {
       if (User.length == 0) {
         return res.status(400).send({
@@ -81,11 +81,20 @@ function destroy(req, res) {
         });
       }
       return User[0]
-        .destroy()
-        .then(() => res.status(200).send({ message: 'User deleted successfully.' }))
-        .catch(error => res.status(400).send(error));
+        .update({
+          Username: User[0].Username,
+          Password: User[0].Password,
+          FirstName: User[0].FirstName,
+          MiddleName: User[0].MiddleName,
+          LastName: User[0].LastName,
+          UserType: User[0].UserType,
+          //used for both delete and renew
+          Deleted: req.body.Deleted
+        })
+        .then(user => res.status(200).send(JSON.stringify(user)))  // Send back the updated User.
+        .catch((error) => res.status(400).send(error));
     })
-    .catch(error => res.status(400).send(error));
+    .catch((error) => res.status(400).send(error));
 }
 
 module.exports = {
@@ -124,5 +133,5 @@ module.exports = {
 
   update,
 
-  destroy
+  del
 };

@@ -1,4 +1,16 @@
-<h3>{{myUser.Username}}'s Donations</h3>
+<h1>Donor Details</h1>
+<h3>Username: <strong>{{myUser.Username}}</strong></h3>
+<h3>First Name: <strong>{{myUser.FirstName}}</strong></h3>
+<h3>Last Name: <strong>{{myUser.LastName}}</strong></h3>
+
+<h3>Status: <strong id="del" *ngIf="myUser.Deleted == true">Deleted</strong>
+            <strong id="act" *ngIf="myUser.Deleted == false">Active</strong>
+</h3>
+
+<h3>Total amount donated by {{myUser.Username}}: <b>${{totalDonated}}</b></h3>
+<h3>Total donated to events: <b>${{totalEvents}}</b></h3>
+<h3>Total donated to UWL Nonprofit: <b>${{totalOrg}}</b></h3>
+<h4>{{myUser.FirstName}} {{myUser.LastName}}'s Donations</h4>
 <!-- Table with all donations this donor has made -->
 <div class="container">
   <div class="table-responsive">
@@ -20,5 +32,15 @@
         </tr>
       </tbody>
     </table>
+  </div>
+</div>
+<!-- Buttons to go back and delete/renew user-->
+<div class="flex-contianer">
+  <div id="left-btn">
+    <button class="btn btn-info" [routerLink]="'/Users'">Back</button>
+  </div>
+  <div id="right-btn">
+    <button *ngIf="myUser.Deleted == true" class="btn btn-success" (click)="Renew();">Renew</button>
+    <button *ngIf="myUser.Deleted == false" class="btn btn-danger" (click)="Delete();">Delete</button>
   </div>
 </div>
