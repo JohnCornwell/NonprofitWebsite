@@ -51,7 +51,7 @@ export class UsersListComponent implements OnInit {
         window.alert("Unable to delete user.");
       } else {
         window.alert("Successfully deleted user.");
-        this.router.navigate(['/Users']);
+        this.router.navigate(['/Home']);
       }
   }, err => {
     window.alert(err.error.message);
@@ -69,7 +69,7 @@ export class UsersListComponent implements OnInit {
             window.alert("Unable to renew user.");
           } else {
             window.alert("Successfully renewed user.");
-            this.router.navigate(['/Users']);
+            this.router.navigate(['/Home']);
           }
         }, err => {
           window.alert(err.error.message);
