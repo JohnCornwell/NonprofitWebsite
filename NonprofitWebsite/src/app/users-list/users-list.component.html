@@ -15,16 +15,16 @@
             <td>{{ user.FirstName }}</td>
             <td>{{ user.LastName }}</td>
             <td>{{ user.UserType }}</td>
-            <td><button *ngIf="user.UserType == 'Donor'"  (click)="delete()">
-                    View Donations
+            <td><button *ngIf="user.UserType == 'Donor'" (click)="viewDonor(user.UserID)">
+                    View Donations History
                 </button>
-                <button *ngIf="user.UserType == 'Volunteer'" (click)="delete()">
+                <button *ngIf="user.UserType == 'Volunteer'" (click)="viewVolunteer(user.UserID)">
                     View Volunteer History
                 </button>
-                <button *ngIf="user.Deleted == false" style="float:right" (click)="delete()">
+                <button *ngIf="user.Deleted == false" style="float:right" (click)="delete(user.UserID)">
                     Delete
                 </button>
-                <button *ngIf="user.Deleted == true" style="float:right" (click)="renew()">
+                <button *ngIf="user.Deleted == true" style="float:right" (click)="renew(user.UserID)">
                     Renew
                 </button>
             </td>

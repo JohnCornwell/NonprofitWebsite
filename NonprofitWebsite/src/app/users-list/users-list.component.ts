@@ -32,12 +32,48 @@ export class UsersListComponent implements OnInit {
     console.log(this.userList);
   }
 
-  delete(): void{
-    console.log("Delete!")
+  viewVolunteer(ID: number){
+    this.router.navigate(['/Volunteer/' + ID]);
   }
 
-  renew(): void{
-    console.log("Renew!")
+  viewDonor(ID: number){
+    this.router.navigate(['/Donor/' + ID]);
+  }
+
+  delete(id: number): void{
+    //this method is called when this user is active and the admin clicks Delete
+    var body = {
+    UserId: id,
+    Deleted: true
+    }
+    this.http.post<any>("/user/delete", body, { observe: "response" }).subscribe(result => {
+      if (result.status != 200) {
+        window.alert("Unable to delete user.");
+      } else {
+        window.alert("Successfully deleted user.");
+        this.router.navigate(['/Users']);
+      }
+  }, err => {
+    window.alert(err.error.message);
+  });
+  }
+
+  renew(id: number): void{
+        //this method is called when this user is deleted and the admin clicks Renew
+        var body = {
+          UserId: id,
+          Deleted: false
+        }
+        this.http.post<any>("/user/delete", body, { observe: "response" }).subscribe(result => {
+          if (result.status != 200) {
+            window.alert("Unable to renew user.");
+          } else {
+            window.alert("Successfully renewed user.");
+            this.router.navigate(['/Users']);
+          }
+        }, err => {
+          window.alert(err.error.message);
+        });
   }
 
 }
