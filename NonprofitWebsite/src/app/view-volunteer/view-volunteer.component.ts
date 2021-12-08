@@ -24,6 +24,8 @@ export class ViewVolunteerComponent implements OnInit {
   };
   //total hours volunteered
   totalHours = 0.0;
+  //future hours volunteered
+  futureHours = 0.0;
 
   get eventsFormArray() {
     return this.form.controls.events as FormArray;
@@ -154,11 +156,19 @@ export class ViewVolunteerComponent implements OnInit {
             }
           }
           if (this.volunteers[j].Deleted == false && event.Deleted == false) {
-            this.totalHours += event.EndHour - event.StartHour;
-            console.log("Adding " + (event.EndHour - event.StartHour) + " hours");
-            this.totalHours += (event.EndMinute - event.StartMinute) / 60;
-            console.log("Adding " + ((event.EndMinute - event.StartMinute) / 60) + " minutes");
-            console.log("index is " + j + " and event is " + event.Name);
+            let eventDate = new Date(event.Year, event.Month - 1, event.Day, 0, 0, 0);
+            let today = new Date(); //the current date
+            //this is today without the current time
+            let todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+            if (todayStart.valueOf() > eventDate.valueOf()) {
+              //this is an event in the past, so add the volunteer hours
+              this.totalHours += event.EndHour - event.StartHour;
+              this.totalHours += (event.EndMinute - event.StartMinute) / 60;
+            } else {
+              //this is a volunteer slot for the future
+              this.futureHours += event.EndHour - event.StartHour;
+              this.futureHours += (event.EndMinute - event.StartMinute) / 60;
+            }
           }
           //now that we have the event, add it to our list
           this.eventsData.push(event);
