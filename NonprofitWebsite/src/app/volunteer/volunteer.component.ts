@@ -165,7 +165,7 @@ export class VolunteerComponent implements OnInit {
       var myEndTime = new Date(myEvent.Year, myEvent.Month - 1, myEvent.Day, myEvent.EndHour, myEvent.EndMinute);
       var eventStartTime = new Date(event.Year, event.Month - 1, event.Day, event.StartHour, event.StartMinute);
       var eventEndTime = new Date(event.Year, event.Month - 1, event.Day, event.EndHour, event.EndMinute);
-      if (myStartTime.valueOf() > eventEndTime.valueOf() || myEndTime.valueOf() < eventStartTime.valueOf()) {
+      if (event.Deleted == true || myStartTime.valueOf() > eventEndTime.valueOf() || myEndTime.valueOf() < eventStartTime.valueOf()) {
         //my event starts after or at the end of event or my event ends before or at event start
       } else {
         //this is a conflict

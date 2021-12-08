@@ -3,8 +3,11 @@
     "",
     "\\NonprofitWebsite",
     "\\NonprofitWebsite\\src",
-    "\\NonprofitWebsite\\src\\app"
+    "\\NonprofitWebsite\\src\\app",
+    "\\NonprofitWebsite\\src\\app\\my-events",
+    "\\NonprofitWebsite\\src\\app\\users-list",
+    "\\NonprofitWebsite\\src\\app\\view-volunteer"
   ],
-  "SelectedNode": "\\NonprofitWebsite\\src\\npSetup.sql",
+  "SelectedNode": "\\NonprofitWebsite\\src\\app\\view-volunteer\\view-volunteer.component.ts",
   "PreviewInSolutionExplorer": false
 }

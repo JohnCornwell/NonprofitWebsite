@@ -127,16 +127,15 @@ export class MyEventsComponent implements OnInit {
     let eventDate = new Date(myEvent.Year, myEvent.Month - 1, myEvent.Day, 0, 0, 0);
     let today = new Date(); //the current date
     //this is today without the current time
-    let todayStart = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+    let todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
     if (todayStart.valueOf() > eventDate.valueOf()) {
       window.alert("Cannot volunteer for an event in the past.");
       return;
     }
-    //only display events that are happening now or in the future and have space
     var conflict: boolean = false;
     if (this.eventsData[i].VolunteerNeed >= 1) {
       for (var index = 0; index < this.eventsData.length; index++) {
-        if (this.volunteers[index].Deleted == false && i != index) {
+        if (this.volunteers[index].Deleted == false && i != index && this.eventsData[index].Deleted == false) {
           //possible conflict
           var event: Event = this.eventsData[index];
           var myStartTime = new Date(myEvent.Year, myEvent.Month, myEvent.Day, myEvent.StartHour, myEvent.StartMinute);
@@ -235,5 +234,4 @@ export class MyEventsComponent implements OnInit {
       window.alert(err.body.message);
     }); //end of http volunteers/update request
   }
-
 }
