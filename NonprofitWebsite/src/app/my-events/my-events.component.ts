@@ -13,7 +13,7 @@ import { Volunteer } from '../interfaces/Volunteer';
 export class MyEventsComponent implements OnInit {
   wellText: String = "Click an event to see the description.";
   form: FormGroup;
-  eventsData: Array<Event> = new Array<Event>(); //upcoming events that were volunteered for
+  eventsData: Array<Event> = new Array<Event>(); //events that were volunteered for
   volunteers: Array<Volunteer> = new Array <Volunteer>(); //holds status values for the array
 
   get eventsFormArray() {

@@ -198,10 +198,58 @@ export class ViewVolunteerComponent implements OnInit {
         window.alert("Unable to delete user.");
       } else {
         window.alert("Successfully deleted user.");
+        //call cancel on all events. Only future volunteer slots will be cancelled
+        for (var i = 0; i < this.eventsData.length; i++) {
+          this.Cancel(i);
+        }
         this.router.navigate(['/Users']);
       }
     }, err => {
       window.alert(err.error.message);
     });
+  }
+
+  Cancel(i: number) {
+    //this method is called when a volunteer is deleted and we need to cancel future slots.
+    //We must check that the event is in the future. Then, update the volunteers table
+    //and add a slot to the related event. This method should be called by an iterator to
+    //ensure that every future event is cancelled.
+    //date months are zero indexed
+    var myEvent: Event = this.eventsData[i];
+    let eventDate = new Date(myEvent.Year, myEvent.Month - 1, myEvent.Day, 0, 0, 0);
+    let today = new Date(); //the current date
+    //this is today without the current time
+    let todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    if (todayStart.valueOf() > eventDate.valueOf()) {
+      //this is an event in the past, so we do nothing
+      return;
+    }
+    const userId = +(sessionStorage?.getItem("id") || '-1'); //convert to number
+    //we will use body to send data to the server
+    var body = {
+      UserId: userId,
+      EventId: this.volunteers[i].EventID,
+      Deleted: true,
+      VolunteerNeed: this.eventsData[i].VolunteerNeed + 1 //add one back to the slot
+    }
+    //make the requests to the server
+    this.http.post<any>('volunteers/update', body, { observe: "response" }).subscribe(result => {
+      if (result.status != 200) {
+        window.alert(result.body.message + "Unable to update volunteer data.");
+      } else {
+        //successfully updated the volunteers table, so update the event
+        this.http.post<any>('event/volunteer', body, { observe: "response" }).subscribe(result => {
+          if (result.status != 200) {
+            window.alert(result.body.message + "Unable to update event data.");
+          } else {
+            //we have sucessfully cancelled the volunteer slot
+          }
+        }, err => {
+          window.alert(err.body.message);
+        }); //end of http events/volunteer request
+      } //end of else
+    }, err => {
+      window.alert(err.body.message);
+    }); //end of http volunteers/update request
   }
 }

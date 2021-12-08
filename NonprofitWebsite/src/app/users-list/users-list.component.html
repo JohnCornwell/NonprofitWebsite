@@ -21,7 +21,7 @@
                 <button *ngIf="user.UserType == 'Volunteer'" (click)="viewVolunteer(user.UserID)">
                     View Volunteer History
                 </button>
-                <button *ngIf="user.Deleted == false" style="float:right" (click)="delete(user.UserID)">
+                <button *ngIf="user.Deleted == false" style="float:right" (click)="delete(user.UserID, user)">
                     Delete
                 </button>
                 <button *ngIf="user.Deleted == true" style="float:right" (click)="renew(user.UserID)">
