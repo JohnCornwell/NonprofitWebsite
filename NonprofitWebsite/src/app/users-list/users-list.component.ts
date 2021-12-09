@@ -36,8 +36,6 @@ export class UsersListComponent implements OnInit {
         }); //end of iterator
       }
     });
-
-    console.log(this.userList);
   }
 
   viewVolunteer(ID: number){
