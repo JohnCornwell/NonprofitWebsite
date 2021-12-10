@@ -45,7 +45,7 @@ export class UsersListComponent implements OnInit {
   viewDonor(ID: number){
     this.router.navigate(['/Donor/' + ID]);
   }
-
+  
   delete(id: number, user: User): void{
     //this method is called when this user is active and the admin clicks Delete
     var body = {
@@ -64,7 +64,7 @@ export class UsersListComponent implements OnInit {
           this.populateVolunteersAndEvents(user.UserID);
           //now that we have our volunteer slots, cancel all future slots
           for (var i = 0; i < this.eventsData.length; i++) {
-            this.Cancel(i);
+            this.Cancel(i, user.UserID);
           }
         }
         this.router.navigate(['/Home']);
@@ -140,7 +140,7 @@ export class UsersListComponent implements OnInit {
     } //end of for loop
   }
 
-  Cancel(i: number) {
+  Cancel(i: number, userId: number) {
     //this method is called when a volunteer wants to cancel their volunteered slot.
     //We must check that the event is in the future. Then, update the volunteers table
     //and add a slot to the related event
@@ -154,7 +154,6 @@ export class UsersListComponent implements OnInit {
       window.alert("Cannot cancel volunteer slot for an event in the past.");
       return;
     }
-    const userId = +(sessionStorage?.getItem("id") || '-1'); //convert to number
     //we will use body to send data to the server
     var body = {
       UserId: userId,

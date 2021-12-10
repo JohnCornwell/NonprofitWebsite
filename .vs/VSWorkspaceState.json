@@ -5,9 +5,8 @@
     "\\NonprofitWebsite\\src",
     "\\NonprofitWebsite\\src\\app",
     "\\NonprofitWebsite\\src\\app\\my-events",
-    "\\NonprofitWebsite\\src\\app\\users-list",
-    "\\NonprofitWebsite\\src\\app\\view-volunteer"
+    "\\NonprofitWebsite\\src\\app\\users-list"
   ],
-  "SelectedNode": "\\NonprofitWebsite\\src\\app\\view-volunteer\\view-volunteer.component.ts",
+  "SelectedNode": "\\NonprofitWebsite\\src\\app\\users-list\\users-list.component.ts",
   "PreviewInSolutionExplorer": false
 }

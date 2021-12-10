@@ -70,7 +70,8 @@ module.exports = (app) => {
   //event list already covered
 
   app.all('/event/volunteer', (req, res, next) => {
-    if (req.session.User == null || req.session.User.UserType != 'Volunteer') {
+    if (req.session.User == null || req.session.User.UserType == 'Donor') {
+      //admins will need to call volunteer to unregister volunteers being deleted
       res.status(401).send({ message: "Need to be a volunteer for this request." });
     } else {
       next();

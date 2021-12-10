@@ -230,14 +230,14 @@ export class ViewVolunteerComponent implements OnInit {
     let today = new Date(); //the current date
     //this is today without the current time
     let todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-    if (todayStart.valueOf() > eventDate.valueOf()) {
+    if (todayStart.valueOf() > eventDate.valueOf() || myEvent.Deleted) {
       //this is an event in the past, so we do nothing
+      console.log("Here");
       return;
     }
-    const userId = +(sessionStorage?.getItem("id") || '-1'); //convert to number
     //we will use body to send data to the server
     var body = {
-      UserId: userId,
+      UserId: this.myUser.UserID,
       EventId: this.volunteers[i].EventID,
       Deleted: true,
       VolunteerNeed: this.eventsData[i].VolunteerNeed + 1 //add one back to the slot
