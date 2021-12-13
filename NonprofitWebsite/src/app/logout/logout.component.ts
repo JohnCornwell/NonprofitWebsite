@@ -3,6 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserServiceService } from '../user-service.service';
 
+/*
+ * This file implements the logout feature for any logged in user.
+ */
+
 @Component({
   selector: 'app-logout',
   templateUrl: './logout.component.html',

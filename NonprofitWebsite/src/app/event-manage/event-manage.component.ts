@@ -6,6 +6,12 @@ import {
 import { Router } from '@angular/router';
 import { Event } from '../interfaces/Event';
 
+/*
+ * This class is used by an admin to view all non-deleted events in
+ * the database. This page allows an admin to view more info on an event,
+ * add an event, or delete an event.
+ */
+
 @Component({
   selector: 'app-admin-home',
   templateUrl: './event-manage.component.html',

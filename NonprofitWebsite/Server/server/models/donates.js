@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+/* This model is the sequelize representation of the donates table */
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('donates', {
     UserID: {

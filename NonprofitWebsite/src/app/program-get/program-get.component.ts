@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import Event from '../Event';
 
+/*
+ * This is a partially completed page to display info for a
+ * program to any user.
+ */
+
 @Component({
   selector: 'app-program-get',
   templateUrl: './program-get.component.html',

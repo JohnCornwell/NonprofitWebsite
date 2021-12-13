@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+/*
+ * Test component for development purposes used to test functionality
+ * of typescript and html elements.
+ */
+
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',

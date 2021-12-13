@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+/* This model is the sequelize representation of the needs table */
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('needs', {
     EventID: {

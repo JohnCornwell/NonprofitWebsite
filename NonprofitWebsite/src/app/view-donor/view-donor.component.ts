@@ -8,6 +8,12 @@ import { Donates } from '../interfaces/Donates';
 import { Event } from '../interfaces/Event';
 import { User } from '../interfaces/User';
 
+/*
+ * This page is used by an admin to view details about a donor. This page
+ * provided the admin with a detailed report about donations made by the
+ * donor along with functionality to delete or renew the donor.
+ */
+
 @Component({
   selector: 'app-view-donor',
   templateUrl: './view-donor.component.html',

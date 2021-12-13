@@ -4,6 +4,13 @@ import { Component, OnInit } from '@angular/core';
 import { Volunteer } from '../interfaces/Volunteer';
 import { Router } from '@angular/router';
 
+/*
+ * This page is used by a volunteer to view available events to volunteer
+ * for. A volunteer will only see future events with available slots that
+ * they have not already volunteered for. If there is a time conflict, the
+ * volunteer will not be able to volunteer for that event.
+ */
+
 @Component({
   selector: 'app-volunteer',
   templateUrl: './volunteer.component.html',

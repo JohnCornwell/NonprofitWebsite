@@ -6,6 +6,14 @@ import { Event } from '../interfaces/Event';
 import { User } from '../interfaces/User';
 import { Volunteer } from '../interfaces/Volunteer';
 
+/*
+ * This page is used by an admin to view details about a volunteer. This page
+ * provided the admin with a detailed report about volunteer hours for the 
+ * volunteer along with functionality to delete or renew the donor. If the
+ * volunteer is deleted, the future volunteer slots for the volunteer should
+ * be cancelled.
+ */
+
 @Component({
   selector: 'app-view-volunteer',
   templateUrl: './view-volunteer.component.html',
@@ -232,7 +240,6 @@ export class ViewVolunteerComponent implements OnInit {
     let todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
     if (todayStart.valueOf() > eventDate.valueOf() || myEvent.Deleted) {
       //this is an event in the past, so we do nothing
-      console.log("Here");
       return;
     }
     //we will use body to send data to the server

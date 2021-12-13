@@ -5,6 +5,12 @@ import {
 } from '@angular/forms';
 import { Event } from '../interfaces/Event';
 
+/*
+ * This is the firt page displayed on startup. This home page is
+ * used by all users to display events in the database. A user may
+ * click on an event to view its description.
+ */
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

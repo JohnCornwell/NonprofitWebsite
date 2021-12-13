@@ -5,6 +5,12 @@ import { HttpClient } from '@angular/common/http';
 import { Volunteer } from '../interfaces/Volunteer';
 import { Event } from '../interfaces/Event';
 
+/*
+ * This page is used by an admin to view all users in the system. The
+ * admin can use this page to view details about a user, to soft-delete
+ * a user, or to renew a user.
+ */
+
 @Component({
   selector: 'app-users-list',
   templateUrl: './users-list.component.html',
@@ -56,7 +62,6 @@ export class UsersListComponent implements OnInit {
       if (result.status != 200) {
         window.alert("Unable to delete user.");
       } else {
-        window.alert("Successfully deleted user.");
         if (user.UserType == "Volunteer") {
           //we need to get the volunteers table entries and events that this user has volunteered for.
           this.eventsData = new Array<Event>();
@@ -64,9 +69,11 @@ export class UsersListComponent implements OnInit {
           this.populateVolunteersAndEvents(user.UserID);
           //now that we have our volunteer slots, cancel all future slots
           for (var i = 0; i < this.eventsData.length; i++) {
+            console.log("Here")
             this.Cancel(i, user.UserID);
           }
         }
+        window.alert("Successfully deleted user.");
         this.router.navigate(['/Home']);
       }
   }, err => {
@@ -150,8 +157,8 @@ export class UsersListComponent implements OnInit {
     let today = new Date(); //the current date
     //this is today without the current time
     let todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-    if (todayStart.valueOf() > eventDate.valueOf()) {
-      window.alert("Cannot cancel volunteer slot for an event in the past.");
+    if (todayStart.valueOf() > eventDate.valueOf() || myEvent.Deleted) {
+      //we will not delete past volunteer slots or slots on deleted events
       return;
     }
     //we will use body to send data to the server
@@ -172,8 +179,6 @@ export class UsersListComponent implements OnInit {
             window.alert(result.body.message + "Unable to update event data.");
           } else {
             //we have sucessfully cancelled the volunteer slot
-            window.alert("Sucessfully cancelled volunteer slot.")
-            this.router.navigate(["Home"]);
           }
         }, err => {
           window.alert(err.body.message);

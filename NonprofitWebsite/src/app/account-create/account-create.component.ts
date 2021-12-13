@@ -3,6 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+/*
+ * This file is responsible for creating an account for a guest
+ * user. This includes validating that all required fields are
+ * filled. The unique username constraint will be enforced by
+ * the server.
+ */
+
 @Component({
   selector: 'app-account-create',
   templateUrl: './account-create.component.html',

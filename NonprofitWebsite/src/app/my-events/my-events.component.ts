@@ -5,6 +5,14 @@ import { Router } from '@angular/router';
 import { Event } from '../interfaces/Event';
 import { Volunteer } from '../interfaces/Volunteer';
 
+/*
+ * This file implements a page to display all events that were
+ * volunteered for by a logged in volunteer. This page includes
+ * functionality to cancel a slot or volunteer for a slot. If there
+ * is a time conflict, or if the event is in the past, these actions
+ * will not be successful.
+ */
+
 @Component({
   selector: 'app-my-events',
   templateUrl: './my-events.component.html',

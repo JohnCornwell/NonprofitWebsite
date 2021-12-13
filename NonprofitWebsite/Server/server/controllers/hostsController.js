@@ -1,5 +1,9 @@
 const db = require('../models/index');
 const Hosts = db['hosts'];
+/*
+ * This file is responsible for sending SQL queries to the database.
+ * The queries in this file pertain to the hosts table.
+ */
 
 /*The req parameter is the incoming request from the client. The res
  * parameter is the response we're preparing to eventually send back to

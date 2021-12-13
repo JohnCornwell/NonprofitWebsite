@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+/*
+ * This page is displayed when the router cannot fufill a request.
+ */
+
 @Component({
   selector: 'app-page-not-found',
   templateUrl: './page-not-found.component.html',

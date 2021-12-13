@@ -1,9 +1,14 @@
 const db = require('../models/index');
 const User = db['user'];
+/*
+ * This file is responsible for sending SQL queries to the database.
+ * The queries in this file pertain to the user table.
+ */
 
-/*The req parameter is the incoming request from the client. The res
+/* The req parameter is the incoming request from the client. The res
  * parameter is the response we're preparing to eventually send back to
- * the client in response to their request */
+ * the client in response to their request
+ */
 
 function findByUsername (username) {
   return User.findAll({

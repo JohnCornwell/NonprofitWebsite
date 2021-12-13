@@ -7,6 +7,14 @@ import { invalidTimeValidator } from '../validators/timeValidator';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
+/*
+ * This file implements a form for an admin to add a new event to
+ * the database. The event must have a start date after tomorrow,
+ * a start time before its end time, and at least one required
+ * volunteer. The unique event name constraint will be enforced
+ * by the server.
+ */
+
 @Component({
   selector: 'app-event-add',
   templateUrl: './event-add.component.html',

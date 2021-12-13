@@ -8,7 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class UserServiceService {
   /* This service is responsible for recording and broadcasting the
-   * type of user that is logged into the system.
+   * type of user that is logged into the system. This service is used
+   * to update the menu overlay of the client.
    */
 
   private currentTypeSubject: BehaviorSubject<String>;

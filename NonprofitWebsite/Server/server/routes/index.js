@@ -7,7 +7,8 @@ const donatesController = require('../controllers/donatesController');
 const volunteersController = require('../controllers/volunteersController');
 const needsController = require('../controllers/needsController');
 
-/* This is the routing file that describes certain paths to server operations.
+/*
+ * This is the routing file that describes certain paths to server operations.
  * Some of these operations require authentication before they can be accessed.
  * Some of these operations can only be called through specific HTML methods such
  * as GET or POST.

@@ -7,6 +7,11 @@ import { Needs } from '../interfaces/Needs';
 import { Donates } from '../interfaces/Donates';
 import { Event } from '../interfaces/Event';
 
+/*
+ * This file implements a donations page that displays all donations
+ * made by a logged in donor.
+ */
+
 @Component({
   selector: 'app-my-donations',
   templateUrl: './my-donations.component.html',

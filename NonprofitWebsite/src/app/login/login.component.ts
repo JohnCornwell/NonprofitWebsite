@@ -4,6 +4,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserServiceService } from '../user-service.service';
 
+/*
+ * This page is used by a guest user to login to an account.
+ */
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

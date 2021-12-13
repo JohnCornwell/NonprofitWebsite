@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 
+/*
+ * This is an unimplemented file that is meant to allow an
+ * admin to update event details.
+ */
+
 @Component({
   selector: 'app-event-edit',
   templateUrl: './event-edit.component.html',

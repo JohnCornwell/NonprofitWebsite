@@ -1,9 +1,15 @@
 const db = require('../models/index');
 const Volunteers = db['volunteers'];
+/*
+ * This file is responsible for sending SQL queries to the database.
+ * The queries in this file pertain to the  table.volunteers
+ */
 
 /*The req parameter is the incoming request from the client. The res
  * parameter is the response we're preparing to eventually send back to
- * the client in response to their request */
+ * the client in response to their request
+ */
+
 function findByUser(id) {
   return Volunteers.findAll({
     where: {

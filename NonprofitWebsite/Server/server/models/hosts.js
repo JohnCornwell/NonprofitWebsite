@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+/* This model is the sequelize representation of the hosts table */
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('hosts', {
     ProgID: {

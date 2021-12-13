@@ -3,6 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Event } from '../interfaces/Event';
 
+/*
+ * This file is responsible for filling the home screen for a
+ * donor. There is currently no difference between guest home
+ * and donor home.
+ */
+
 @Component({
   selector: 'app-donor-home',
   templateUrl: './donor-home.component.html',
@@ -18,7 +24,6 @@ export class DonorHomeComponent implements OnInit {
   }
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient) {
-    console.log("constructor")
     this.form = this.formBuilder.group({
       SelectEvent: [''],
       events: new FormArray([])
@@ -30,7 +35,6 @@ export class DonorHomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("on init");
     this.http.get<any>("/event/list", { observe: "response" }).subscribe(result => {
       if (result.status != 200) {
         window.alert(result.body.message + "Unable to display event data.");

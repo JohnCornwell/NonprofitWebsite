@@ -18,6 +18,10 @@ function initModels(sequelize) {
   var user = _user(sequelize, DataTypes);
   var volunteers = _volunteers(sequelize, DataTypes);
 
+  /*
+   * This file defines relationships between tables.
+   */
+
   donates.belongsTo(donation, { as: "Donation", foreignKey: "DonationID"});
   donation.hasMany(donates, { as: "donates", foreignKey: "DonationID"});
   needs.belongsTo(donation, { as: "Donation", foreignKey: "DonationID"});
